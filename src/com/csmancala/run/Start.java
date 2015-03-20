@@ -1,6 +1,7 @@
-package com.csmancala.core;
+package com.csmancala.run;
 
 import javax.swing.SwingUtilities;
+
 
 public class Start {
 	
@@ -12,8 +13,13 @@ public class Start {
 			
 			@Override
 			public void run() {
-				
+				gameInstance = new Mancala();
+				gameInstance.start();
 			}
 		});
+	}
+	
+	public static Mancala getMancala() {
+		return gameInstance;
 	}
 }
