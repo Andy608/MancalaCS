@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.csmancala.component.MancalaFrame;
+import com.csmancala.component.MancalaPanel;
 
 public class Mancala implements Runnable {
 
@@ -19,10 +20,10 @@ public class Mancala implements Runnable {
 	int ticks;
 	int frameCount;
 	int fps;
+	double elapsedSeconds;
 	
 	public Mancala() {
-		panelInstance = new JPanel();
-		
+		panelInstance = new MancalaPanel();
 		frameInstance = new MancalaFrame("Mancala!");
 		frameInstance.add(panelInstance);
 	}
@@ -47,7 +48,6 @@ public class Mancala implements Runnable {
 	
 	@Override
 	public void run() {
-		double elapsedSeconds = 0.0D;
 		double currentNanoSeconds = System.nanoTime();
 		double newNanoSeconds;
 		final float LAG_CAP = 0.2f;
@@ -84,7 +84,12 @@ public class Mancala implements Runnable {
 	
 	public void renderGame() {
 		frameCount++;
+		panelInstance.repaint();
 		
 		//we will call methods in here that will be necessary to draw every frame.
+	}
+	
+	public double getDeltaTime() {
+		return elapsedSeconds;
 	}
 }
