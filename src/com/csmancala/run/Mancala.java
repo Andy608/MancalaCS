@@ -22,6 +22,7 @@ public class Mancala implements Runnable {
 	
 	public Mancala() {
 		panelInstance = new JPanel();
+		
 		frameInstance = new MancalaFrame("Mancala!");
 		frameInstance.add(panelInstance);
 	}
