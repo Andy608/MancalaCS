@@ -3,7 +3,7 @@ package com.csmancala.run;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.csmancala.component.MFrame;
+import com.csmancala.component.MancalaFrame;
 
 public class Mancala implements Runnable {
 
@@ -22,7 +22,7 @@ public class Mancala implements Runnable {
 	
 	public Mancala() {
 		panelInstance = new JPanel();
-		frameInstance = new MFrame("Mancala!");
+		frameInstance = new MancalaFrame("Mancala!");
 		frameInstance.add(panelInstance);
 	}
 	
