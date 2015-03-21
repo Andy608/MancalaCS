@@ -20,10 +20,11 @@ public class FileSystem {
 	private static GraphicsDevice gd = ge.getDefaultScreenDevice();
 	private static GraphicsConfiguration gc = gd.getDefaultConfiguration();
 	private static ClassLoader classLoader = FileSystem.class.getClassLoader();
+	private static String separator = File.separator;
 	
 	public static String getClassLoaderResourceDirectory(String parent, String fileName) {
 		if (fileName != null && !fileName.isEmpty()) {
-			return parent + "/" + fileName;
+			return parent + separator + fileName;
 		}
 		else {
 			return parent;
@@ -33,7 +34,7 @@ public class FileSystem {
 	public static File getClassLoaderResourceFile(String directory, String fileName) {
 		URL url = null;
 		File f = null;
-		url = classLoader.getResource(directory + "/" + fileName);
+		url = classLoader.getResource(directory + separator + fileName);
 		try {
 			f = new File(url.toURI());
 		} catch (URISyntaxException e) {
