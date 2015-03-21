@@ -2,8 +2,6 @@ package com.csmancala.run;
 
 import javax.swing.SwingUtilities;
 
-import com.csmancala.core.Goal;
-
 
 public class Start {
 	
