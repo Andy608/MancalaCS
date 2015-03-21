@@ -14,7 +14,7 @@ public class ResourceLoader {
 			woodenBackground = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "wooden_background.png");
 		}
 		else {
-			System.out.println("Resources can only be loaded before the game starts.");
+			System.out.println("Resources can only be loaded before the game starts. Derp");
 		}
 	}
 }

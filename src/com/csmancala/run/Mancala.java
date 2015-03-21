@@ -9,7 +9,7 @@ import com.csmancala.component.MancalaPanel;
 public class Mancala implements Runnable {
 
 	protected JFrame frameInstance;
-	protected JPanel panelInstance;
+	protected JPanel mainPanel;
 	
 	private Thread mancalaThread;
 	private static boolean isRunning;
@@ -23,9 +23,10 @@ public class Mancala implements Runnable {
 	double elapsedSeconds;
 	
 	public Mancala() {
-		panelInstance = new MancalaPanel();
+		mainPanel = new MancalaPanel();
+		
 		frameInstance = new MancalaFrame("Mancala!");
-		frameInstance.add(panelInstance);
+		frameInstance.add(mainPanel);
 	}
 	
 	public synchronized void start() {
@@ -84,7 +85,7 @@ public class Mancala implements Runnable {
 	
 	public void renderGame() {
 		frameCount++;
-		panelInstance.repaint();
+		mainPanel.repaint();
 		
 		//we will call methods in here that will be necessary to draw every frame.
 	}
