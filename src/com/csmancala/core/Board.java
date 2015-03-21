@@ -19,8 +19,20 @@ public class Board {
 		// alot to do here
 	}
 	
-	private boolean willLandInGoal() {
-		return true; // Just to keep it error free i added a return statement
+	private int willLandInGoal(int r, int c) {
+		
+		if(r == 0 && c == 0) {
+			if(player1.getHandAmount() == 1){
+				return 1;
+			}
+		}
+		else if(r == 1 && c == 5) {
+			if(player2.getHandAmount() == 1){
+				return 2;
+			}
+		}
+		
+		return 0;
 	}
 	
 	private boolean willLandInEmptyPit(int r, int c) {
@@ -28,7 +40,7 @@ public class Board {
 	}
 	
 	private void pointsGained(Player p, int pointValue) {
-		//add points to player
+		p.getGoal().setMoreStones(pointValue);
 	}
 	
 	public int winStatus() {

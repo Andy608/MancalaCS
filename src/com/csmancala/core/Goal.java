@@ -25,4 +25,10 @@ public class Goal {
 	public int getStoneAmount() {
 		return stones.size();
 	}
+	
+	public void setMoreStones(int amountToAdd) {
+		for(int i = 0; i < amountToAdd; i++) {
+			stones.add(new Stone());
+		}
+	}
 }
