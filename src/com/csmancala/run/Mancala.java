@@ -92,4 +92,8 @@ public class Mancala implements Runnable {
 	public double getDeltaTime() {
 		return elapsedSeconds;
 	}
+
+	public boolean isRunning() {
+		return isRunning;
+	}
 }
