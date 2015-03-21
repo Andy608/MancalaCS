@@ -87,4 +87,8 @@ public class Mancala implements Runnable {
 		
 		//we will call methods in here that will be necessary to draw every frame.
 	}
+	
+	public boolean isRunning() {
+		return this.isRunning;
+	}
 }
