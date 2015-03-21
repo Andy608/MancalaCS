@@ -11,7 +11,7 @@ public class ResourceLoader {
 	
 	public static void loadResources() {
 		if (Start.getMancala() == null || !Start.getMancala().isRunning()) {
-			woodenBackground = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "wooden_background.png");
+			woodenBackground = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "background.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");

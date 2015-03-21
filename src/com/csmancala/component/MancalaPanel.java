@@ -1,6 +1,5 @@
 package com.csmancala.component;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -24,23 +23,24 @@ public class MancalaPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
+		paintBackground(g2D);
+	}
+	
+	private void paintBackground(Graphics2D g2D) {
 		int bgWidth = ResourceLoader.woodenBackground.getWidth();
 		int bgHeight = ResourceLoader.woodenBackground.getHeight();
 		
-		if (bgWidth < this.getWidth()) {
-			for (int x = 0; x <= (this.getWidth() / bgWidth); x++) {
-				if (bgHeight < this.getHeight()) {
-					g2D.drawImage(ResourceLoader.woodenBackground, x * bgWidth, 0, bgWidth, this.getHeight(), null);
-				}
-				else {
-					g2D.drawImage(ResourceLoader.woodenBackground, x * bgWidth, 0, bgWidth, bgHeight, null);
-				}
-			}
+		if (bgWidth < this.getWidth() && bgHeight < this.getHeight()) {
+			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, this.getWidth(), this.getHeight(), null);
+		}
+		else if (bgWidth < this.getWidth()) {
+			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, this.getWidth(), bgHeight, null);
+		}
+		else if (bgHeight < this.getHeight()) {
+			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, bgWidth, this.getHeight(), null);
 		}
 		else {
 			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, bgWidth, bgHeight, null);
 		}
-		
-		g2D.setColor(Color.BLACK);
 	}
 }
