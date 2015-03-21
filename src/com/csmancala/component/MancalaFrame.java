@@ -12,14 +12,14 @@ import com.csmancala.util.MonitorSpecs;
 /**
  * Feel free to change what you need.
  */
-public class MFrame extends JFrame {
+public class MancalaFrame extends JFrame {
 
 	private static final long serialVersionUID = -6158257631658504764L;
 	
 	private static Dimension minimumSize = new Dimension(MonitorSpecs.getDisplay().getWidth() / 4, MonitorSpecs.getDisplay().getHeight() / 4);
 	private static Dimension maximumSize = new Dimension(MonitorSpecs.getDisplay().getWidth(), MonitorSpecs.getDisplay().getHeight());
 
-	public MFrame(String title) {
+	public MancalaFrame(String title) {
 		super.setTitle(title);
 		super.setMinimumSize(minimumSize);
 		super.setMaximumSize(maximumSize);
