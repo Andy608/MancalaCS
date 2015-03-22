@@ -88,6 +88,44 @@ public class Board {
 		return currentSlotLocation[1];
 	}
 	
+	
+	
+	public void makeMove(int r, int c) {
+		// alot to do here
+	}
+	
+	private int willLandInGoal(int r, int c) {
+		
+		if(r == 0 && c == 0) {
+			if(player1.getHandAmount() == 1){
+				return 1;
+			}
+		}
+		else if(r == 1 && c == 5) {
+			if(player2.getHandAmount() == 1){
+				return 2;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private boolean willLandInEmptyPit(int r, int c) {
+		return true;
+	}
+	
+	public int winStatus() {
+		/**
+		 * return -1 = tie
+		 * return 0 = game not complete
+		 * return 1 = player 1 wins
+		 * return 2 = player 2 wins
+		 */
+		return 0;
+	}
+	
+	
+	
 	/**
 	 * @return the player1 object.
 	 */
