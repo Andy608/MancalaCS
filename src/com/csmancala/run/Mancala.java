@@ -1,15 +1,15 @@
 package com.csmancala.run;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import com.csmancala.component.MancalaFrame;
 import com.csmancala.component.MancalaPanel;
+import com.csmancala.core.Board;
 
 public class Mancala implements Runnable {
 
-	protected JFrame frameInstance;
-	protected JPanel mainPanel;
+	protected MancalaFrame frameInstance;
+	protected MancalaPanel mainPanel;
+	
+	private Board mancalaBoard;
 	
 	private Thread mancalaThread;
 	private static boolean isRunning;
@@ -23,6 +23,7 @@ public class Mancala implements Runnable {
 	double elapsedSeconds;
 	
 	public Mancala() {
+		initBoard();
 		mainPanel = new MancalaPanel();
 		
 		frameInstance = new MancalaFrame("Mancala!");
@@ -78,6 +79,7 @@ public class Mancala implements Runnable {
 		if (ticks % 60 == 0) {
 			fps = frameCount;
 			frameCount = 0;
+			
 			System.out.println("Ticks: " + ticks + " FPS: " + fps);
 			ticks = 0;
 		}
@@ -85,9 +87,24 @@ public class Mancala implements Runnable {
 	
 	public void renderGame() {
 		frameCount++;
-		mainPanel.repaint();
 		
+		mainPanel.repaint();
 		//we will call methods in here that will be necessary to draw every frame.
+	}
+	
+	public void initBoard() {
+		mancalaBoard = new Board("Bob", "Jeff");
+		
+		for (int i = 0; i < 20; i++) {
+			System.out.println(mancalaBoard.getCurrentSlotX() + ", " + mancalaBoard.getCurrentSlotY());
+			mancalaBoard.advanceCurrentSlot();
+		}
+		
+		System.out.println(mancalaBoard);
+	}
+	
+	public Board getBoard() {
+		return mancalaBoard;
 	}
 	
 	public double getDeltaTime() {
@@ -96,5 +113,9 @@ public class Mancala implements Runnable {
 
 	public boolean isRunning() {
 		return isRunning;
+	}
+	
+	public MancalaPanel getMainPanel() {
+		return mainPanel;
 	}
 }

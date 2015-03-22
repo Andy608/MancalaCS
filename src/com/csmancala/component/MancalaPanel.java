@@ -2,10 +2,8 @@ package com.csmancala.component;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.JPanel;
-
-import com.csmancala.file.ResourceLoader;
+import com.csmancala.core.RenderGraphics;
 
 public class MancalaPanel extends JPanel {
 
@@ -23,24 +21,8 @@ public class MancalaPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2D = (Graphics2D) g;
-		paintBackground(g2D);
-	}
-	
-	private void paintBackground(Graphics2D g2D) {
-		int bgWidth = ResourceLoader.woodenBackground.getWidth();
-		int bgHeight = ResourceLoader.woodenBackground.getHeight();
 		
-		if (bgWidth < this.getWidth() && bgHeight < this.getHeight()) {
-			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, this.getWidth(), this.getHeight(), null);
-		}
-		else if (bgWidth < this.getWidth()) {
-			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, this.getWidth(), bgHeight, null);
-		}
-		else if (bgHeight < this.getHeight()) {
-			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, bgWidth, this.getHeight(), null);
-		}
-		else {
-			g2D.drawImage(ResourceLoader.woodenBackground, 0, 0, bgWidth, bgHeight, null);
-		}
+		RenderGraphics.paintBackground(g2D);
+		RenderGraphics.paintMancalaBoard(g2D);
 	}
 }

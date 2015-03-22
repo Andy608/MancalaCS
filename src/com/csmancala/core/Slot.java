@@ -3,19 +3,26 @@ package com.csmancala.core;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 
-public class Pit extends JButton {
+public class Slot extends JButton {
 	private static final long serialVersionUID = 824551522813339680L;
 	
-	protected BufferedImage pitImage;
+	protected BufferedImage slotImage;
 	protected List<Stone> stones;
 	
-	public Pit() {
+	public Slot() {
 		super.setEnabled(false);
 		this.addListeners();
+		stones = new ArrayList<>();
+	}
+	
+	public Slot(Stone... defaultStones) {
+		this();
+		addStones(defaultStones);
 	}
 	
 	private void addListeners() {
@@ -46,5 +53,20 @@ public class Pit extends JButton {
 	 */
 	public int getStoneCount() {
 		return stones.size();
+	}
+	
+	/**
+	 * Adds stones to the desired pile.
+	 * @param s is an array of stones that will be added to the pile.
+	 */
+	public void addStones(Stone... s) {
+		for (Stone stone : s) {
+			stones.add(stone);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Stones in Pile: " + stones.size();
 	}
 }

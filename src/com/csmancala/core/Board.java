@@ -1,44 +1,91 @@
 package com.csmancala.core;
 
+
 public class Board {
-	
+
 	//The total number of stones on the board.
-	public static final int STONE_AMOUNT = 50;
+	public static final int STONE_AMOUNT = 48;
 	
-	private static final int PIT_WIDTH = 6;
+	private static final int PIT_WIDTH = 8;
 	private static final int PIT_HEIGHT = 2;
-	private Pit boardArray[][];
+	
 	private Player player1;
 	private Player player2;
 	
-	public Board(Pit myBoardArray[][]) {
-		this.boardArray = new Pit[PIT_WIDTH][PIT_HEIGHT];
+	private Slot slotArray[][];
+	private int[] currentSlotLocation;
+	
+	public Board(String player1Name, String player2Name) {
+		initPlayers(player1Name, player2Name);
+		initSlots();
+		initCurrentSlotLocation();
 	}
 	
-	public void makeMove(int r, int c) {
-		// alot to do here
+	private void initSlots() {
+		slotArray = new Slot[PIT_WIDTH][PIT_HEIGHT];
+		
+		for (int y = 0; y < slotArray[0].length; y++) {
+			for (int x = 0; x < slotArray.length; x++) {
+				
+				if (x == 0 && y == 0) {
+					slotArray[x][y] = player1.getGoal();
+				}
+				else if (x == 7 && y == 1) {
+					slotArray[x][y] = player2.getGoal();
+				}
+				else if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					slotArray[x][y] = new Slot(new Stone[4]);
+				}
+			}
+		}
 	}
 	
-	private boolean willLandInGoal() {
-		return true; // Just to keep it error free i added a return statement
+	private void initCurrentSlotLocation() {
+		currentSlotLocation = new int[2];
 	}
 	
-	private boolean willLandInEmptyPit(int r, int c) {
-		return true;
+	private void initPlayers(String p1Name, String p2Name) {
+		player1 = new Player(p1Name);
+		player2 = new Player(p2Name);
 	}
 	
-	private void pointsGained(Player p, int pointValue) {
-		//add points to player
+	/**
+	 * Moves the players hand forward one on the board.
+	 * Loops around the array and jumps over the extra goal spaces.
+	 */
+	public void advanceCurrentSlot() {
+		
+		if (currentSlotLocation[0] == 0 && currentSlotLocation[1] == 0) {
+			currentSlotLocation[0]++;
+			currentSlotLocation[1]++;
+		}
+		else if (currentSlotLocation[0] == 7 && currentSlotLocation[1] == 1) {
+			currentSlotLocation[0]--;
+			currentSlotLocation[1]--;
+		}
+		else if (currentSlotLocation[1] % 2 == 0 && currentSlotLocation[0] > 0 && currentSlotLocation[0] < slotArray.length) {
+			currentSlotLocation[0]--;
+		}
+		else if (currentSlotLocation[1] % 2 == 1 && currentSlotLocation[0] > 0 && currentSlotLocation[0] < slotArray.length - 1) {
+			currentSlotLocation[0]++;
+		}
 	}
 	
-	public int winStatus() {
-		/**
-		 * return -1 = tie
-		 * return 0 = game not complete
-		 * return 1 = player 1 wins
-		 * return 2 = player 2 wins
-		 */
-		return 0;
+	public void setCurrentSlot(int x, int y) {
+		currentSlotLocation[0] = x;
+		currentSlotLocation[1] = y;
+	}
+	
+	public Slot[][] getSlotArray() {
+		return slotArray;
+	}
+	
+	public int getCurrentSlotX() {
+		return currentSlotLocation[0];
+	}
+	
+	public int getCurrentSlotY() {
+		return currentSlotLocation[1];
 	}
 	
 	/**
@@ -53,5 +100,18 @@ public class Board {
 	 */
 	public Player getPlayer2() {
 		return player2;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder string = new StringBuilder();
+		
+		for (int y = 0; y < slotArray[0].length; y++) {
+			for (int x = 0; x < slotArray.length; x++) {
+				string.append(slotArray[x][y] + " ");
+			}
+			string.append("\n");
+		}
+		return string.toString();
 	}
 }
