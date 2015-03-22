@@ -34,23 +34,56 @@ public class RenderGraphics {
 	private static int startY;
 	private static int boardWidth = ResourceLoader.MANCALA_BOARD.getWidth();
 	private static int boardHeight = ResourceLoader.MANCALA_BOARD.getHeight();
+	private static double boardRatio = (double)boardWidth / (double)boardHeight;
+	private static double screenImageRatio = (double)1920 / (double)boardWidth;
+	
+	private static double scaledX, maxScaledX;
+	private static double scaledY, maxScaledY;
 	
 	public static void paintMancalaBoard(Graphics2D g2D) {
 		paintMancalaBoardShadow(g2D);
 		
-		startX = (mainPanel.getWidth() - boardWidth) / 2;
-		startY = (mainPanel.getHeight() - boardHeight) / 2;
+		scaledX = (double)mainPanel.getWidth() / (double)screenImageRatio;
+		scaledY = (double)scaledX / (double)boardRatio;
 		
-		g2D.drawImage(ResourceLoader.MANCALA_BOARD, startX, startY, null);
+		if (scaledY < mainPanel.getHeight() * 0.8f && scaledX < mainPanel.getWidth() * 0.8f) {
+			startX = (int)(mainPanel.getWidth() - scaledX) / 2;
+			startY = (int)(mainPanel.getHeight() - scaledY) / 2;
+			
+			g2D.drawImage(ResourceLoader.MANCALA_BOARD, startX, startY, (int)scaledX, (int)scaledY, null);
+			maxScaledX = scaledX;
+			maxScaledY = scaledY;
+		}
+		else {
+			startX = (int)(mainPanel.getWidth() - maxScaledX) / 2;
+			startY = (int)(mainPanel.getHeight() - maxScaledY) / 2;
+			g2D.drawImage(ResourceLoader.MANCALA_BOARD, startX, startY, (int)maxScaledX, (int)maxScaledY, null);
+		}
 	}
 	
-	private static int boardShadowWidth = ResourceLoader.MANCALA_SHADOW.getWidth();
+	private static double shadowRatio = (double)boardWidth / (double)ResourceLoader.MANCALA_SHADOW.getHeight();
+	private static double maxScaledHeight;
 	
 	private static void paintMancalaBoardShadow(Graphics2D g2D) {
 		
-		startX = (mainPanel.getWidth() - boardShadowWidth) / 2;
-		startY = (mainPanel.getHeight() - boardHeight) / 2;
+		scaledX = (double)mainPanel.getWidth() / (double)screenImageRatio;
+		scaledY = (double)scaledX / (double)boardRatio;
 		
-		g2D.drawImage(ResourceLoader.MANCALA_SHADOW, startX, startY, null);
+		if (scaledY < mainPanel.getHeight() * 0.8f && scaledX < mainPanel.getWidth() * 0.8f) {
+			startX = (int)(mainPanel.getWidth() - scaledX) / 2;
+			startY = (int)(mainPanel.getHeight() - scaledY) / 2;
+			
+			maxScaledY = scaledY;
+			scaledY = (double)scaledX / (double)shadowRatio;
+			
+			g2D.drawImage(ResourceLoader.MANCALA_SHADOW, startX, startY, (int)scaledX, (int)scaledY, null);
+			maxScaledX = scaledX;
+			maxScaledHeight = scaledY;
+		}
+		else {
+			startX = (int)(mainPanel.getWidth() - maxScaledX) / 2;
+			startY = (int)(mainPanel.getHeight() - maxScaledY) / 2;
+			g2D.drawImage(ResourceLoader.MANCALA_SHADOW, startX, startY, (int)maxScaledX, (int)maxScaledHeight, null);
+		}
 	}
 }
