@@ -2,6 +2,8 @@ package com.csmancala.core;
 
 import java.awt.Graphics2D;
 
+import javax.swing.JPanel;
+
 import com.csmancala.component.MancalaPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
@@ -12,16 +14,16 @@ public class RenderGraphics {
 	
 	private static int backgroundWidth = ResourceLoader.TABLE_BACKGROUND.getWidth();
 	private static int backgroundHeight = ResourceLoader.TABLE_BACKGROUND.getHeight();
-	public static void paintBackground(Graphics2D g2D) {
+	public static void paintBackground(JPanel panel, Graphics2D g2D) {
 		
-		if (backgroundWidth < mainPanel.getWidth() && backgroundHeight < mainPanel.getHeight()) {
-			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, mainPanel.getWidth(), mainPanel.getHeight(), null);
+		if (backgroundWidth < panel.getWidth() && backgroundHeight < panel.getHeight()) {
+			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, panel.getWidth(), panel.getHeight(), null);
 		}
-		else if (backgroundWidth < mainPanel.getWidth()) {
-			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, mainPanel.getWidth(), backgroundHeight, null);
+		else if (backgroundWidth < panel.getWidth()) {
+			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, panel.getWidth(), backgroundHeight, null);
 		}
-		else if (backgroundHeight < mainPanel.getHeight()) {
-			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, backgroundWidth, mainPanel.getHeight(), null);
+		else if (backgroundHeight < panel.getHeight()) {
+			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, backgroundWidth, panel.getHeight(), null);
 		}
 		else {
 			g2D.drawImage(ResourceLoader.TABLE_BACKGROUND, 0, 0, backgroundWidth, backgroundHeight, null);

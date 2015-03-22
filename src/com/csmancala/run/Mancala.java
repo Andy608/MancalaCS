@@ -1,5 +1,6 @@
 package com.csmancala.run;
 
+import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
 import com.csmancala.component.MancalaPanel;
 import com.csmancala.core.Board;
@@ -7,7 +8,8 @@ import com.csmancala.core.Board;
 public class Mancala implements Runnable {
 
 	protected MancalaFrame frameInstance;
-	protected MancalaPanel mainPanel;
+	protected MainMenuPanel menuPanel;
+	protected MancalaPanel gamePanel;
 	
 	private Board mancalaBoard;
 	
@@ -24,10 +26,11 @@ public class Mancala implements Runnable {
 	
 	public Mancala() {
 		initBoard();
-		mainPanel = new MancalaPanel();
+//		gamePanel = new MancalaPanel();
+		menuPanel = new MainMenuPanel();
 		
 		frameInstance = new MancalaFrame("Mancala!");
-		frameInstance.add(mainPanel);
+		frameInstance.add(menuPanel);
 	}
 	
 	public synchronized void start() {
@@ -88,7 +91,7 @@ public class Mancala implements Runnable {
 	public void renderGame() {
 		frameCount++;
 		
-		mainPanel.repaint();
+		menuPanel.repaint();
 		//we will call methods in here that will be necessary to draw every frame.
 	}
 	
@@ -116,6 +119,6 @@ public class Mancala implements Runnable {
 	}
 	
 	public MancalaPanel getMainPanel() {
-		return mainPanel;
+		return gamePanel;
 	}
 }

@@ -18,11 +18,11 @@ public class MancalaPanel extends JPanel {
 	 * It is called in the Mancala class every frame to force refresh the display.
 	 */
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
 		
-		RenderGraphics.paintBackground(g2D);
+		RenderGraphics.paintBackground(this, g2D);
 		RenderGraphics.paintMancalaBoard(g2D);
 	}
 }
