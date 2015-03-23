@@ -116,16 +116,9 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	}
 	
 	private void executePlayAction() {
-		//PLEASE FIX THIS SO THE PLAYER CAN EXIT IF THEY WANT TO.
-		////////////////////////
-		while(player1Name == null || player1Name.equals("")) {
-			player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
-		}
 		
-		while(player2Name == null || player2Name.equals("")) {
-			player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
-		}
-		//////////////////////////
+		player1Name = getPlayer1NameInput();	
+		player2Name = getPlayer2NameInput();
 		
 		Start.getMancala().initBoard(player1Name, player2Name);
 		Start.getMancala().startGame();
@@ -141,6 +134,28 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		rulesButton.addActionListener(this);
 		creditsButton.addActionListener(this);
 		quitButton.addActionListener(this);
+	}
+	
+	public String getPlayer1NameInput(){
+		while(player1Name == null || player2Name.equals("")) {
+			player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
+			
+			if(player2Name != null && !player2Name.equals("")){
+				return player2Name;
+			}
+		}
+		return ""; //This should never be reachable
+	}
+	
+	public String getPlayer2NameInput(){
+		while(player2Name == null || player2Name.equals("")) {
+			player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
+			
+			if(player2Name != null && !player2Name.equals("")){
+				return player2Name;
+			}
+		}
+		return ""; //This should never be reachable
 	}
 	
 	public void setPlayer1Name(String name) {
