@@ -136,22 +136,22 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		quitButton.addActionListener(this);
 	}
 	
-	public String getPlayer1NameInput(){
-		while(player1Name == null || player2Name.equals("")) {
+	public String getPlayer1NameInput() {
+		while (player1Name == null || player1Name.equals("")) {
 			player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
 			
-			if(player2Name != null && !player2Name.equals("")){
+			if (player2Name != null && !player2Name.equals("")) {
 				return player2Name;
 			}
 		}
 		return ""; //This should never be reachable
 	}
 	
-	public String getPlayer2NameInput(){
-		while(player2Name == null || player2Name.equals("")) {
+	public String getPlayer2NameInput() {
+		while (player2Name == null || player2Name.equals("")) {
 			player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
 			
-			if(player2Name != null && !player2Name.equals("")){
+			if (player2Name != null && !player2Name.equals("")) {
 				return player2Name;
 			}
 		}
