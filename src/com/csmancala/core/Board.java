@@ -83,6 +83,25 @@ public class Board {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public boolean isSideEmpty(Player currentPlayer) {
+		
+		int y;
+		
+		if (currentPlayer.equals(player1)) y = 0;
+		else y = 1;
+		
+		for (int x = 1; x < slotArray.length - 1; x++) {
+			if (!slotArray[x][y].getStones().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * Adds a random stone from the player's hand to the new slot and removes a stone from the player's hand.
 	 */
 	private void addStoneToNewPile(Player currentPlayer) {
