@@ -4,13 +4,13 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import com.csmancala.component.MancalaPanel;
+import com.csmancala.component.GamePanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 
 public class RenderGraphics {
 
-	private static MancalaPanel mainPanel = Start.getMancala().getMainPanel();
+	private static GamePanel mainPanel = Start.getMancala().getMainPanel();
 	
 	private static int backgroundWidth = ResourceLoader.TABLE_BACKGROUND.getWidth();
 	private static int backgroundHeight = ResourceLoader.TABLE_BACKGROUND.getHeight();

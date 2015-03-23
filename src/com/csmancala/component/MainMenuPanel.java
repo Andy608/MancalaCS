@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
+import com.csmancala.run.Start;
 
 public class MainMenuPanel extends JPanel implements ActionListener {
 
@@ -45,6 +45,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	}
 	
 	private void addGridAndComponents() {
+		this.addListeners();
 		this.setLayout(new GridLayout(5, 3));
 		this.add(Box.createGlue());
 		mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, 72));
@@ -52,7 +53,6 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		this.add(mancalaLogo);
 		this.add(Box.createGlue());
 		
-		playButton.addActionListener(this);
 		this.add(playButton);
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
@@ -77,14 +77,48 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	public String getPlayer2Name(){
 		return player2Name;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == playButton){
-			player1Name = JOptionPane.showInputDialog("Player 1 Name: ");
-			player2Name = JOptionPane.showInputDialog("Player 2 Name: ");
-			
-			Board board = new Board(player1Name, player2Name);
-			
+		if(e.getSource() == playButton) {
+			executePlayAction();
 		}
+		else if (e.getSource() == rulesButton) {
+			System.out.println("lol rules.");
+		}
+		else if (e.getSource() == creditsButton) {
+			System.out.println("lol credits.");
+		}
+		else if (e.getSource() == quitButton) {
+			executeQuitAction();
+		}
+	}
+	
+	private void executePlayAction() {
+		//PLEASE FIX THIS SO THE PLAYER CAN EXIT IF THEY WANT TO.
+		////////////////////////
+		while(player1Name == null || player1Name.equals("")) {
+			player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
+		}
+		
+		while(player2Name == null || player2Name.equals("")) {
+			player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
+		}
+		//////////////////////////
+		
+		Start.getMancala().initBoard(player1Name, player2Name);
+		Start.getMancala().startGame();
+	}
+	
+	private void executeQuitAction() {
+		Start.getMancala().stop();
+		System.exit(0);
+	}
+	
+	private void addListeners() {
+		playButton.addActionListener(this);
+		rulesButton.addActionListener(this);
+		creditsButton.addActionListener(this);
+		quitButton.addActionListener(this);
 	}
 }

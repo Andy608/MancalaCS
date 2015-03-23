@@ -7,11 +7,11 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 import com.csmancala.core.RenderGraphics;
 
-public class MancalaPanel extends JPanel {
+public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = 6954435685287527912L;
 
-	public MancalaPanel() {
+	public GamePanel() {
 		super();
 	}
 	

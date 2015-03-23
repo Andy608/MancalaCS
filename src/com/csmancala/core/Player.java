@@ -48,4 +48,13 @@ public class Player {
 	public Goal getGoal() {
 		return playerGoal;
 	}
+	
+	public void setHand(List<Stone> stones) {
+		currentHand = stones;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

@@ -37,7 +37,6 @@ public class MancalaFrame extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				Start.getMancala().stop();
-				System.out.println("Goodbye!");
 			}
 		});
 

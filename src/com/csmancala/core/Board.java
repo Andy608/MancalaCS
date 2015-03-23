@@ -1,5 +1,7 @@
 package com.csmancala.core;
 
+import java.util.Random;
+
 
 public class Board {
 
@@ -8,6 +10,8 @@ public class Board {
 	
 	private static final int PIT_WIDTH = 8;
 	private static final int PIT_HEIGHT = 2;
+	
+	private static Random rand = new Random();
 	
 	private Player player1;
 	private Player player2;
@@ -49,11 +53,16 @@ public class Board {
 		player2 = new Player(p2Name);
 	}
 	
+	public void pickUpStones(Player currentPlayer) {
+		currentPlayer.setHand(slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones());
+		slotArray[currentSlotLocation[0]][currentSlotLocation[1]] = null;
+	}
+	
 	/**
 	 * Moves the players hand forward one on the board.
 	 * Loops around the array and jumps over the extra goal spaces.
 	 */
-	public void advanceCurrentSlot() {
+	public void advanceSlot(Player currentPlayer) {
 		
 		if (currentSlotLocation[0] == 0 && currentSlotLocation[1] == 0) {
 			currentSlotLocation[0]++;
@@ -69,6 +78,19 @@ public class Board {
 		else if (currentSlotLocation[1] % 2 == 1 && currentSlotLocation[0] > 0 && currentSlotLocation[0] < slotArray.length - 1) {
 			currentSlotLocation[0]++;
 		}
+		
+		addStoneToNewPile(currentPlayer);
+	}
+	
+	/**
+	 * Adds a random stone from the player's hand to the new slot and removes a stone from the player's hand.
+	 */
+	private void addStoneToNewPile(Player currentPlayer) {
+		
+		int stoneIndex = rand.nextInt(currentPlayer.getHandAmount());
+		
+		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentPlayer.getHand().get(stoneIndex));
+		currentPlayer.getHand().remove(stoneIndex);
 	}
 	
 	public void setCurrentSlot(int x, int y) {
@@ -87,44 +109,6 @@ public class Board {
 	public int getCurrentSlotY() {
 		return currentSlotLocation[1];
 	}
-	
-	
-	
-	public void makeMove(int r, int c) {
-		// alot to do here
-	}
-	
-	private int willLandInGoal(int r, int c) {
-		
-		if(r == 0 && c == 0) {
-			if(player1.getHandAmount() == 1){
-				return 1;
-			}
-		}
-		else if(r == 1 && c == 5) {
-			if(player2.getHandAmount() == 1){
-				return 2;
-			}
-		}
-		
-		return 0;
-	}
-	
-	private boolean willLandInEmptyPit(int r, int c) {
-		return true;
-	}
-	
-	public int winStatus() {
-		/**
-		 * return -1 = tie
-		 * return 0 = game not complete
-		 * return 1 = player 1 wins
-		 * return 2 = player 2 wins
-		 */
-		return 0;
-	}
-	
-	
 	
 	/**
 	 * @return the player1 object.

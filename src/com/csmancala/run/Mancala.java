@@ -1,17 +1,25 @@
 package com.csmancala.run;
 
+import java.util.Random;
+
+import javax.swing.JPanel;
+
+import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
-import com.csmancala.component.MancalaPanel;
 import com.csmancala.core.Board;
+import com.csmancala.core.Player;
 
 public class Mancala implements Runnable {
 
 	protected MancalaFrame frameInstance;
 	protected MainMenuPanel menuPanel;
-	protected MancalaPanel gamePanel;
+	protected GamePanel gamePanel;
+	protected JPanel displayedPanel;
 	
 	private Board mancalaBoard;
+	
+	private static Random rand = new Random();
 	
 	private Thread mancalaThread;
 	private static boolean isRunning;
@@ -25,10 +33,7 @@ public class Mancala implements Runnable {
 	double elapsedSeconds;
 	
 	public Mancala() {
-		initBoard();
-//		gamePanel = new MancalaPanel();
-		menuPanel = new MainMenuPanel();
-		
+		initPanels();
 		frameInstance = new MancalaFrame("Mancala!");
 		frameInstance.add(menuPanel);
 	}
@@ -45,6 +50,7 @@ public class Mancala implements Runnable {
 		isRunning = false;
 		try {
 			mancalaThread.join();
+			System.out.println("Goodbye!");
 		} catch(InterruptedException e) {
 			System.out.println("THREAD WAS INTERUPTED WHEN TRYING TO END. :(");
 			e.printStackTrace();
@@ -90,20 +96,65 @@ public class Mancala implements Runnable {
 	
 	public void renderGame() {
 		frameCount++;
-		
-		menuPanel.repaint();
+		refreshPanel();
 		//we will call methods in here that will be necessary to draw every frame.
 	}
 	
-	public void initBoard() {
-		mancalaBoard = new Board("Bob", "Jeff");
+	private void refreshPanel() {
+		displayedPanel.revalidate();
+		displayedPanel.repaint();
+	}
+	
+	private void initPanels() {
+		gamePanel = new GamePanel();
+		menuPanel = new MainMenuPanel();
+		displayedPanel = menuPanel;
+	}
+	
+	public void initBoard(String p1Name, String p2Name) {
+		mancalaBoard = new Board(p1Name, p2Name);
+	}
+	
+	public void startGame() {
+		frameInstance.remove(menuPanel);
+		frameInstance.add(gamePanel);
+		displayedPanel = gamePanel;
 		
-		for (int i = 0; i < 20; i++) {
-			System.out.println(mancalaBoard.getCurrentSlotX() + ", " + mancalaBoard.getCurrentSlotY());
-			mancalaBoard.advanceCurrentSlot();
+		Player player = pickStartingPlayer();
+		
+		System.out.println("STARTING PLAYER: " + player);
+		
+		while(checkForWinner()) {
+			
 		}
 		
+		//PLAYER PICKS BUTTON
+		
+//		if (player.getHand.isEmpty()) {
+//		}
+		
 		System.out.println(mancalaBoard);
+	}
+	
+	private Player pickStartingPlayer() {
+		
+		int r = rand.nextInt(2);
+		
+		switch (r) {
+		case 0:  return mancalaBoard.getPlayer1();
+		default: return mancalaBoard.getPlayer2();
+		}
+	}
+	
+	private boolean checkForWinner() {
+		
+		for (int x = 1; x < mancalaBoard.getSlotArray().length - 1; x++) {
+			if (mancalaBoard.getSlotArray()[x][0].getStones().isEmpty()) {
+				
+			}
+		}
+		
+		return true;
 	}
 	
 	public Board getBoard() {
@@ -118,7 +169,7 @@ public class Mancala implements Runnable {
 		return isRunning;
 	}
 	
-	public MancalaPanel getMainPanel() {
+	public GamePanel getMainPanel() {
 		return gamePanel;
 	}
 }
