@@ -142,4 +142,12 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		creditsButton.addActionListener(this);
 		quitButton.addActionListener(this);
 	}
+	
+	public void setPlayer1Name(String name) {
+		player1Name = name;
+	}
+	
+	public void setPlayer2Name(String name) {
+		player2Name = name;
+	}
 }

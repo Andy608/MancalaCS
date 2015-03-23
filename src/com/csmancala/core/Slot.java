@@ -51,7 +51,7 @@ public class Slot extends JButton {
 	 * Returns an integer value of how many stones are in the goal.
 	 * @return how many stones are in the goal.
 	 */
-	public int getStoneCount() {
+	public int getStoneAmount() {
 		return stones.size();
 	}
 	

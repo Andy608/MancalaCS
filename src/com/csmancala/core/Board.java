@@ -54,8 +54,11 @@ public class Board {
 	}
 	
 	public void pickUpStones(Player currentPlayer) {
-		currentPlayer.setHand(slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones());
-		slotArray[currentSlotLocation[0]][currentSlotLocation[1]] = null;
+		
+		if (slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStoneAmount() > 0) {
+			currentPlayer.setHand(slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones());
+			slotArray[currentSlotLocation[0]][currentSlotLocation[1]] = null;
+		}
 	}
 	
 	/**
@@ -82,10 +85,6 @@ public class Board {
 		addStoneToNewPile(currentPlayer);
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean isSideEmpty(Player currentPlayer) {
 		
 		int y;
@@ -110,6 +109,17 @@ public class Board {
 		
 		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentPlayer.getHand().get(stoneIndex));
 		currentPlayer.getHand().remove(stoneIndex);
+	}
+	
+	public boolean isInGoal(Player currentPlayer) {
+		
+		if ((currentPlayer.equals(player1) && currentSlotLocation[0] == 0 && currentSlotLocation[1] == 0) ||
+				(currentPlayer.equals(player2) && currentSlotLocation[0] == 7 && currentSlotLocation[1] == 1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void setCurrentSlot(int x, int y) {
