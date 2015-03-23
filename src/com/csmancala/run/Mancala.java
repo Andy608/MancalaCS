@@ -1,5 +1,6 @@
 package com.csmancala.run;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -9,6 +10,7 @@ import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
 import com.csmancala.core.Board;
 import com.csmancala.core.Player;
+import com.csmancala.core.Stone;
 
 public class Mancala implements Runnable {
 
@@ -18,6 +20,7 @@ public class Mancala implements Runnable {
 	protected JPanel displayedPanel;
 	
 	private Board mancalaBoard;
+	private Player currentPlayer;
 	
 	private static Random rand = new Random();
 	
@@ -120,13 +123,13 @@ public class Mancala implements Runnable {
 		frameInstance.add(gamePanel);
 		displayedPanel = gamePanel;
 		
-		Player player = pickStartingPlayer();
+		currentPlayer = pickStartingPlayer();
 		
-		System.out.println("STARTING PLAYER: " + player);
+		System.out.println("STARTING PLAYER: " + currentPlayer);
 		
-		while(checkForWinner()) {
-			
-		}
+//		while(continueGame()) {
+//			
+//		}
 		
 		//PLAYER PICKS BUTTON
 		
@@ -146,15 +149,40 @@ public class Mancala implements Runnable {
 		}
 	}
 	
-	private boolean checkForWinner() {
+	private boolean continueGame() {
+		return checkIfSideIsEmpty();
+	}
+	
+	private boolean checkIfSideIsEmpty() {
 		
-		for (int x = 1; x < mancalaBoard.getSlotArray().length - 1; x++) {
-			if (mancalaBoard.getSlotArray()[x][0].getStones().isEmpty()) {
-				
-			}
+		boolean isEmpty = false;
+		if (mancalaBoard.isSideEmpty(mancalaBoard.getPlayer1())) {
+			currentPlayer = mancalaBoard.getPlayer1();
+			isEmpty = true;
+		}
+		else if (mancalaBoard.isSideEmpty(mancalaBoard.getPlayer2())) {
+			currentPlayer = mancalaBoard.getPlayer2();
+			isEmpty = true;
 		}
 		
-		return true;
+		if (isEmpty) {
+			int y;
+			//Set the y to the opposite player's side so they can collect their stones.
+			if (currentPlayer.equals(mancalaBoard.getPlayer1())) y = 1;
+			else y = 0;
+			
+			for (int x = 1; x < mancalaBoard.getSlotArray().length - 1; x++) {
+				mancalaBoard.pickUpStones(currentPlayer);
+				
+				for (int i = 0; i < currentPlayer.getHandAmount(); i++) {
+					currentPlayer.getGoal().getStones().add(currentPlayer.getHand().get(i));
+					currentPlayer.getHand().remove(i);
+					System.out.println("Player hand amount: " + currentPlayer.getHandAmount());
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	public Board getBoard() {
