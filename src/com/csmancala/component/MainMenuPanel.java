@@ -46,14 +46,27 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	private void addGridAndComponents() {
 		this.addListeners();
-		this.setLayout(new GridLayout(5, 3));
+		this.setLayout(new GridLayout(10, 3));
+		
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		
 		this.add(Box.createGlue());
 		mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, 72));
 		mancalaLogo.setHorizontalAlignment(JLabel.CENTER);
 		this.add(mancalaLogo);
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		
 		this.add(playButton);
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		
+		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
@@ -61,7 +74,15 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		
 		this.add(creditsButton);
+		this.add(Box.createGlue());
+		this.add(Box.createGlue());
+		
+		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
