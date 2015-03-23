@@ -11,8 +11,10 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
 
 public class MainMenuPanel extends JPanel implements ActionListener {
@@ -24,6 +26,9 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	private JButton rulesButton = new JButton("Rules");
 	private JButton creditsButton = new JButton("Credits");
 	private JButton quitButton = new JButton("Quit");
+	
+	private String player1Name;
+	private String player2Name;
 	
 	public MainMenuPanel() {
 		super();
@@ -47,6 +52,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		this.add(mancalaLogo);
 		this.add(Box.createGlue());
 		
+		playButton.addActionListener(this);
 		this.add(playButton);
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
@@ -64,8 +70,21 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		this.add(Box.createGlue());
 	}
 
+	public String getPlayer1Name(){
+		return player1Name;
+	}
+	
+	public String getPlayer2Name(){
+		return player2Name;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == playButton){
+			player1Name = JOptionPane.showInputDialog("Player 1 Name: ");
+			player2Name = JOptionPane.showInputDialog("Player 2 Name: ");
+			
+			Board board = new Board(player1Name, player2Name);
+			
+		}
 	}
 }
