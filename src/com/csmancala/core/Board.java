@@ -143,8 +143,6 @@ public class Board {
 		return player2;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
