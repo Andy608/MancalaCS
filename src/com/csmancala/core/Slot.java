@@ -1,7 +1,5 @@
 package com.csmancala.core;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,28 +14,12 @@ public class Slot extends JButton {
 	
 	public Slot() {
 		super.setEnabled(false);
-		this.addListeners();
 		stones = new ArrayList<>();
 	}
 	
 	public Slot(Stone... defaultStones) {
 		this();
 		addStones(defaultStones);
-	}
-	
-	private void addListeners() {
-		super.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				//TODO:ADD HIGHLIGHT AROUND EDGE.
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				//TODO:REMOVE HIGHLIGHT AROUND EDGE.
-			}
-		});
 	}
 	
 	/**

@@ -38,7 +38,14 @@ public class Board {
 					slotArray[x][y] = player2.getGoal();
 				}
 				else if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+//					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
+//						/**/	System.out.println("ADDING STONE");
+//						slotArray[x][y] = new Slot(new Stone[1]);
 					slotArray[x][y] = new Slot(new Stone[4]);
+//						/**/}
+//					/**/else {
+//						/**/	slotArray[x][y] = new Slot();
+//						/**/}
 				}
 			}
 		}
@@ -93,7 +100,16 @@ public class Board {
 			currentSlotLocation[0]++;
 		}
 		
+		System.out.println("Advancing to slot " + currentSlotLocation[0] + ", " + currentSlotLocation[1]);
 		addStoneToNewPile(currentPlayer);
+	}
+	
+	public boolean isCorrectSide(Player currentPlayer) {
+		
+		if ((currentPlayer.equals(player1) && currentSlotLocation[1] == 1) || (currentPlayer.equals(player2) && currentSlotLocation[1] == 0)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isSideEmpty(Player currentPlayer) {
@@ -104,9 +120,7 @@ public class Board {
 		else y = 1;
 		
 		for (int x = 1; x < slotArray.length - 1; x++) {
-			if (!slotArray[x][y]
-					.getStones()
-					.isEmpty()) {
+			if (!slotArray[x][y].getStones().isEmpty()) {
 				return false;
 			}
 		}
@@ -121,7 +135,9 @@ public class Board {
 		int stoneIndex = rand.nextInt(currentPlayer.getHandAmount());
 		
 		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentPlayer.getHand().get(stoneIndex));
+		System.out.println(currentSlotLocation[0] + ", " + currentSlotLocation[1] + ": " + slotArray[currentSlotLocation[0]][currentSlotLocation[1]]);
 		currentPlayer.getHand().remove(stoneIndex);
+		System.out.println("Stones in hand: " + currentPlayer.getHandAmount());
 	}
 	
 	public boolean isInGoal(Player currentPlayer) {
@@ -132,6 +148,28 @@ public class Board {
 		}
 		else {
 			return false;
+		}
+	}
+	
+	public void captureStones(Player currentPlayer) {
+		System.out.println("CAPTURE!!");
+		int y = 0;
+		if (currentSlotLocation[1] == 0) y = 1;
+		
+		int[] oppositeSlot = new int[] { currentSlotLocation[0], y };
+		
+		//Add stone from current slot to currentPlayers hand (for gameloop delay purposes when displaying), and then to currentPlayers goal
+		//Add all the stones in the opposite pile, add them to the players goal
+		for (int i = 0; i < 2; i++) {
+			pickUpStones(currentPlayer);
+			
+			if (currentPlayer.equals(player1)) setCurrentSlot(0, 0);
+			else setCurrentSlot(7, 1);
+			
+			addStoneToNewPile(currentPlayer);
+			
+			if (i == 0)
+				setCurrentSlot(oppositeSlot[0], oppositeSlot[1]);
 		}
 	}
 	

@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +22,8 @@ public class RulesPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 695443524538627912L;
 	
-	private JLabel mancalaLogo = new JLabel("Mancala");
+	private JPanel instructionsPanel;
+	private JLabel mancalaLogo = new JLabel("Mancala FIX ME!!!");
 	private JLabel instructionsLabel = new JLabel(new ImageIcon(ResourceLoader.MANCALA_INSTRUCTIONS));
 	private JButton returnButton = new JButton("Return to Main Menu");
 	
@@ -42,14 +42,20 @@ public class RulesPanel extends JPanel implements ActionListener {
 	}
 	
 	public void setupInstructions() {
+		
+		//PLEASE MAKE THE NEW RULES IMAGE OVERLAY THE BACKGROUND. PLEASE ADD THE BUTTON AND TITLE BACK ON OVER THE PANEL ASWELL!!
+		this.instructionsPanel = new JPanel();
+		this.instructionsPanel.add(instructionsLabel);
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, 72));
 		mancalaLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.add(mancalaLogo);
-//		instructionsLabel.setHorizontalAlignment(JLabel.CENTER);
-		this.add(instructionsLabel);
+////		instructionsLabel.setHorizontalAlignment(JLabel.CENTER);
+//		this.add(instructionsLabel);
 		returnButton.addActionListener(this);
 		this.add(returnButton);
+		this.add(instructionsPanel);
 	}
 	
 	@Override

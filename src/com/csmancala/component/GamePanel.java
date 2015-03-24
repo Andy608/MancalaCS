@@ -1,17 +1,22 @@
 package com.csmancala.component;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
@@ -94,9 +99,30 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	@Override
-	public Component add(Component c) {
-		 if (c instanceof JButton) {
+	public Component add(final Component c) {
+		 if (c instanceof JButton && c != this.player1Goal && c != this.player2Goal) {
 			 ((JButton) c).addActionListener(this);
+			 c.addMouseListener(new MouseAdapter() {
+
+				 @Override
+				 public void mouseEntered(MouseEvent e) {
+					 ((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND));
+					 c.setSize(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth(), ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight());
+					 c.setCursor(ResourceLoader.CURSOR_OPEN_HAND);
+				 }
+
+				 @Override
+				 public void mouseExited(MouseEvent e) {
+					 ((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+					 c.setSize(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight());
+					 c.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				 }
+				 
+				 @Override
+				 public void mousePressed(MouseEvent e) {
+					 c.setCursor(ResourceLoader.CURSOR_GRABBING_HAND);
+				 }
+			 });
 		 }
 		 return super.add(c);
 	}
@@ -124,7 +150,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("CLICKED");
+		
 		if (e.getSource() == topSlot1) {
 			Start.getMancala().getBoard().setCurrentSlot(1, 0);
 		}
@@ -161,6 +187,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		else if (e.getSource() == bottomSlot6) {
 			Start.getMancala().getBoard().setCurrentSlot(6, 1);
 		}
+		
+		Board logBoard = Start.getMancala().getBoard();
+		int x = logBoard.getCurrentSlotX(), y = logBoard.getCurrentSlotY();
+		System.out.println("Clicked Slot: " + x + ", " + y + " | Pits in slot: " + logBoard.getSlotArray()[x][y].getStoneAmount());
 		Start.getMancala().progressGame();
 	}
 	

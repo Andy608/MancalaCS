@@ -10,6 +10,7 @@ import com.csmancala.component.MancalaFrame;
 import com.csmancala.component.RulesPanel;
 import com.csmancala.core.Board;
 import com.csmancala.core.Player;
+import com.csmancala.core.Slot;
 
 public class Mancala implements Runnable {
 
@@ -142,7 +143,7 @@ public class Mancala implements Runnable {
 	public void progressGame() {
 		if (continueGame()) {
 			playerTurn();
-			System.out.println(mancalaBoard);
+//			System.out.println(mancalaBoard);
 		}
 		else {
 			endGame();
@@ -150,15 +151,18 @@ public class Mancala implements Runnable {
 	}
 	
 	public void endGame() {
+		
 		if (compareGoals() == null) {
-			System.out.println("TIE!");
 			//TODO: call methods to display tie message!
+			System.out.println("It's a tie!");
 		}
 		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
 			//TODO: call methods to display player1 winning message!
+			System.out.println(mancalaBoard.getPlayer1() + " Wins!");
 		}
 		else {
 			//TODO: call methods to display player2 winning message!
+			System.out.println(mancalaBoard.getPlayer2() + " Wins!");
 		}
 		
 		resetGame();
@@ -176,54 +180,97 @@ public class Mancala implements Runnable {
 		displayedPanel = menuPanel;
 	}
 	
+	//Never call this method unless it is from the button listeners!
 	private void playerTurn() {
-		//PLAYER PICKS BUTTON (THE ACTIONLISTENER METHOD FOR THE BUTTON SETS THE CURRENTLOCATION TO THAT INDEX
-		//BUTTON ADD STONES TO THE PLAYERS HAND THAT WAS IN THAT PILE AND SETS PILE TO NULL BY CALLING THE PICKUP BOARD FUNCTION
 		
-		if (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() > 0) {
-			mancalaBoard.pickUpStones(currentPlayer);
-			System.out.println(currentPlayer + " picked up " + currentPlayer.getHandAmount() + " stones.");
-		}
-		else {
-			System.out.println(currentPlayer + ": Invalid move, go again!");
+		Slot[][] slotArray = mancalaBoard.getSlotArray();
+		
+		//Pick up stones from a pile.
+			//If there are no stones in the pile, or chosen a pile on the wrong side, then display message telling them to go again and return (Does not switch the player).
+		if (slotArray[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() <= 0) {
+			System.out.println("There's no stones in that pile! Pick another one.");
 			return;
 		}
-		
-		int initialHandAmount = currentPlayer.getHandAmount();
-		for (int i = 0; i < initialHandAmount; i++) {
-			
-			if (currentPlayer.getHandAmount() > 0) {
-				mancalaBoard.advanceSlot(currentPlayer);
-			}
-			//CHECK TO SEE IF THIS SHOULD BE - 1 OR NOT
-			if ((i == initialHandAmount - 1) && (mancalaBoard.isInGoal(currentPlayer))) {
-				if (continueGame()) {
-					playerTurn();
-				}
-				else {
-					//SEE IF THIS ENDS THE GAME
-					System.out.println("THIS SHOULD END THE GAME!");
-					return;
-				}
-			}
-			//CHECK TO SEE IF THIS SHOULD BE - 1 OR NOT
-			else if ((i == initialHandAmount - 1) && (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() == 0)) {
-				
-				//ADD STONE AND STONES ACROSS INTO CURRENT PLAYER'S PILE
-				for (int y = 0; y < mancalaBoard.getSlotArray()[0].length; y++) {
-					currentPlayer.setHand(mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][y].getStones());
-					
-					for (int k = 0; k < currentPlayer.getHandAmount(); k++) {
-						currentPlayer.getGoal().getStones().add(currentPlayer.getHand().get(k));
-						currentPlayer.getHand().remove(i);
-						System.out.println("Player hand amount: " + currentPlayer.getHandAmount());
-					}
-				}
-			}
-			else {
-				switchPlayers();
-			}
+		else if (mancalaBoard.isCorrectSide(currentPlayer)) {
+			System.out.println("YO BUB, YOU TRYIN'A BREAK THE GAME? PLEASE PICK AGAIN.");
+			return;
 		}
+		else {
+			mancalaBoard.pickUpStones(currentPlayer);
+			System.out.println("Picking up stones!");
+		}
+		
+		//while there are still stones in the players hand, continue to remove a stone from the players hand and place it in the next spot.
+		while (currentPlayer.getHandAmount() > 0) {
+			mancalaBoard.advanceSlot(currentPlayer);
+			System.out.println(currentPlayer + "'s Hand: " + currentPlayer.getHandAmount());
+		}
+		
+		//if the current slot is equal to the players goal, then return.
+		//else if the current slot is empty and on the current players then add the stone in the current spot and the stones in the pile across from the current spot.
+		if (mancalaBoard.isInGoal(currentPlayer)) {
+			if (!continueGame()) {
+				endGame();
+				return;
+			}
+			
+			//Display saying the player can go again.
+			System.out.println("Goal! Go again!");
+			return;
+		}
+		else if (mancalaBoard.isCorrectSide(currentPlayer) && slotArray[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() == 0) {
+			//THIS NEEDS TO BE TESTED!
+			mancalaBoard.captureStones(currentPlayer);
+		}
+		
+		//call switchplayer
+		switchPlayers();
+		
+//		if (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() > 0) {
+//			mancalaBoard.pickUpStones(currentPlayer);
+//			System.out.println(currentPlayer + " picked up " + currentPlayer.getHandAmount() + " stones.");
+//		}
+//		else {
+//			System.out.println(currentPlayer + ": Invalid move, go again!");
+//			return;
+//		}
+//		
+//		int initialHandAmount = currentPlayer.getHandAmount();
+//		for (int i = 0; i < initialHandAmount; i++) {
+//			
+//			System.out.println(currentPlayer.getHandAmount());
+//			if (currentPlayer.getHandAmount() > 0) {
+//				mancalaBoard.advanceSlot(currentPlayer);
+//			}
+//			else if ((i == initialHandAmount - 1) && (mancalaBoard.isInGoal(currentPlayer))) {
+//				if (continueGame()) {
+//					playerTurn();
+//					break;
+//				}
+//				else {
+//					//SEE IF THIS ENDS THE GAME
+//					System.out.println("THIS SHOULD END THE GAME!");
+//					return;
+//				}
+//			}
+//			else if ((i == initialHandAmount - 1) && (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() == 0)) {
+//				
+//				//ADD STONE AND STONES ACROSS INTO CURRENT PLAYER'S PILE
+//				for (int y = 0; y < mancalaBoard.getSlotArray()[0].length; y++) {
+//					currentPlayer.setHand(mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][y].getStones());
+//					
+//					for (int k = 0; k < currentPlayer.getHandAmount(); k++) {
+//						currentPlayer.getGoal().getStones().add(currentPlayer.getHand().get(k));
+//						currentPlayer.getHand().remove(i);
+//						System.out.println("Player hand amount: " + currentPlayer.getHandAmount());
+//					}
+//				}
+//			}
+//			else {
+//				switchPlayers();
+//				break;
+//			}
+//		}
 	}
 	
 	private void switchPlayers() {
@@ -234,6 +281,7 @@ public class Mancala implements Runnable {
 		else {
 			currentPlayer = mancalaBoard.getPlayer1();
 		}
+		System.out.println("SWITCHING PLAYERS! PLAYER IS NOW : " + currentPlayer);
 	}
 	
 	private boolean continueGame() {
@@ -256,7 +304,7 @@ public class Mancala implements Runnable {
 			addStonesToOpponent();
 		}
 		
-		System.out.println("isEmpty = " + isEmpty);
+//		System.out.println("isEmpty = " + isEmpty);
 		return isEmpty;
 	}
 	
