@@ -124,7 +124,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("HYIOUYTR");
+		System.out.println("CLICKED");
 		if (e.getSource() == topSlot1) {
 			Start.getMancala().getBoard().setCurrentSlot(1, 0);
 		}
@@ -161,6 +161,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		else if (e.getSource() == bottomSlot6) {
 			Start.getMancala().getBoard().setCurrentSlot(6, 1);
 		}
+		Start.getMancala().progressGame();
 	}
 	
 	public JButton getPlayer1Goal() {

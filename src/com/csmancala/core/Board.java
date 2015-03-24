@@ -20,9 +20,9 @@ public class Board {
 	private int[] currentSlotLocation;
 	
 	public Board(String player1Name, String player2Name) {
+		initCurrentSlotLocation();
 		initPlayers(player1Name, player2Name);
 		initSlots();
-		initCurrentSlotLocation();
 	}
 	
 	private void initSlots() {
@@ -56,8 +56,7 @@ public class Board {
 	public void pickUpStones(Player currentPlayer) {
 		
 		if (slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStoneAmount() > 0) {
-			currentPlayer.setHand(slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones());
-			slotArray[currentSlotLocation[0]][currentSlotLocation[1]] = null;
+			currentPlayer.setHand(slotArray[currentSlotLocation[0]][currentSlotLocation[1]].clearStones());
 		}
 	}
 	
@@ -67,7 +66,19 @@ public class Board {
 	 */
 	public void advanceSlot(Player currentPlayer) {
 		
-		if (currentSlotLocation[0] == 0 && currentSlotLocation[1] == 0) {
+		if (currentSlotLocation[0] == 1 && currentSlotLocation[1] == 0 && currentPlayer.equals(player1)) {
+			currentSlotLocation[0]--;
+		}
+		else if (currentSlotLocation[0] == 1 && currentSlotLocation[1] == 0 && currentPlayer.equals(player2)) {
+			currentSlotLocation[1]++;
+		}
+		else if (currentSlotLocation[0] == 6 && currentSlotLocation[1] == 1 && currentPlayer.equals(player2)) {
+			currentSlotLocation[0]++;
+		}
+		else if (currentSlotLocation[0] == 6 && currentSlotLocation[1] == 1 && currentPlayer.equals(player1)) {
+			currentSlotLocation[1]--;
+		}
+		else if (currentSlotLocation[0] == 0 && currentSlotLocation[1] == 0) {
 			currentSlotLocation[0]++;
 			currentSlotLocation[1]++;
 		}
@@ -93,7 +104,9 @@ public class Board {
 		else y = 1;
 		
 		for (int x = 1; x < slotArray.length - 1; x++) {
-			if (!slotArray[x][y].getStones().isEmpty()) {
+			if (!slotArray[x][y]
+					.getStones()
+					.isEmpty()) {
 				return false;
 			}
 		}

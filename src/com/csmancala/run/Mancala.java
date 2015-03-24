@@ -137,12 +137,19 @@ public class Mancala implements Runnable {
 		currentPlayer = pickStartingPlayer();
 		
 		System.out.println("STARTING PLAYER: " + currentPlayer);
-		
-		//CURRENTLY WORKING ON THIS PLEASE LEAVE ALL LOGIC ALONE
-		while (continueGame()) {
+	}
+	
+	public void progressGame() {
+		if (continueGame()) {
 			playerTurn();
+			System.out.println(mancalaBoard);
 		}
-		
+		else {
+			endGame();
+		}
+	}
+	
+	public void endGame() {
 		if (compareGoals() == null) {
 			System.out.println("TIE!");
 			//TODO: call methods to display tie message!
@@ -155,7 +162,6 @@ public class Mancala implements Runnable {
 		}
 		
 		resetGame();
-		System.out.println(mancalaBoard);
 	}
 	
 	public void openRules() {
@@ -173,6 +179,7 @@ public class Mancala implements Runnable {
 	private void playerTurn() {
 		//PLAYER PICKS BUTTON (THE ACTIONLISTENER METHOD FOR THE BUTTON SETS THE CURRENTLOCATION TO THAT INDEX
 		//BUTTON ADD STONES TO THE PLAYERS HAND THAT WAS IN THAT PILE AND SETS PILE TO NULL BY CALLING THE PICKUP BOARD FUNCTION
+		
 		if (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() > 0) {
 			mancalaBoard.pickUpStones(currentPlayer);
 			System.out.println(currentPlayer + " picked up " + currentPlayer.getHandAmount() + " stones.");
@@ -185,8 +192,9 @@ public class Mancala implements Runnable {
 		int initialHandAmount = currentPlayer.getHandAmount();
 		for (int i = 0; i < initialHandAmount; i++) {
 			
-			mancalaBoard.advanceSlot(currentPlayer);
-			
+			if (currentPlayer.getHandAmount() > 0) {
+				mancalaBoard.advanceSlot(currentPlayer);
+			}
 			//CHECK TO SEE IF THIS SHOULD BE - 1 OR NOT
 			if ((i == initialHandAmount - 1) && (mancalaBoard.isInGoal(currentPlayer))) {
 				if (continueGame()) {
@@ -293,7 +301,6 @@ public class Mancala implements Runnable {
 		else {
 			return mancalaBoard.getPlayer1();
 		}
-		
 	}
 	
 	private void resetGame() {
