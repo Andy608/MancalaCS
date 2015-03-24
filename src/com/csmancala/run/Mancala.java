@@ -101,7 +101,7 @@ public class Mancala implements Runnable {
 		//we will call methods in here that will be necessary to draw every frame.
 	}
 	
-	private void refreshPanel() {
+	public void refreshPanel() {
 		displayedPanel.revalidate();
 		displayedPanel.repaint();
 	}
@@ -158,6 +158,12 @@ public class Mancala implements Runnable {
 	private void playerTurn() {
 		//PLAYER PICKS BUTTON (THE ACTIONLISTENER METHOD FOR THE BUTTON SETS THE CURRENTLOCATION TO THAT INDEX
 		//BUTTON ADD STONES TO THE PLAYERS HAND THAT WAS IN THAT PILE AND SETS PILE TO NULL BY CALLING THE PICKUP BOARD FUNCTION
+		if (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() > 0) {
+			mancalaBoard.pickUpStones(currentPlayer);
+		}
+		else {
+			playerTurn();
+		}
 		
 		int initialHandAmount = currentPlayer.getHandAmount();
 		for (int i = 0; i < initialHandAmount; i++) {
@@ -294,7 +300,11 @@ public class Mancala implements Runnable {
 		return isRunning;
 	}
 	
-	public GamePanel getMainPanel() {
+	public GamePanel getGamePanel() {
 		return gamePanel;
+	}
+	
+	public MainMenuPanel getMenuPanel() {
+		return menuPanel;
 	}
 }
