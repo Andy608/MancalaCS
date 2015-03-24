@@ -140,19 +140,19 @@ public class Mancala implements Runnable {
 //			playerTurn();
 //		}
 		
-		if (compareGoals() == null) {
-			System.out.println("TIE!");
-			//TODO: call methods to display tie message!
-		}
-		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
-			//TODO: call methods to display player1 winning message!
-		}
-		else {
-			//TODO: call methods to display player2 winning message!
-		}
-		
-		resetGame();
-		System.out.println(mancalaBoard);
+//		if (compareGoals() == null) {
+//			System.out.println("TIE!");
+//			//TODO: call methods to display tie message!
+//		}
+//		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
+//			//TODO: call methods to display player1 winning message!
+//		}
+//		else {
+//			//TODO: call methods to display player2 winning message!
+//		}
+//		
+//		resetGame();
+//		System.out.println(mancalaBoard);
 	}
 	
 	private void playerTurn() {

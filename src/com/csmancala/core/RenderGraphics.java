@@ -46,7 +46,7 @@ public class RenderGraphics {
 		scaledX = (double)mainPanel.getWidth() / (double)screenImageRatio;
 		scaledY = (double)scaledX / (double)boardRatio;
 		
-		if (scaledY < mainPanel.getHeight() * 0.8f && scaledX < mainPanel.getWidth() * 0.8f) {
+		if (scaledY < mainPanel.getHeight() * 0.9f && scaledX < mainPanel.getWidth() * 0.9f) {
 			startX = (int)(mainPanel.getWidth() - scaledX) / 2;
 			startY = (int)(mainPanel.getHeight() - scaledY) / 2;
 			
