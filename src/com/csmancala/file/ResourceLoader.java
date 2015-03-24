@@ -39,10 +39,10 @@ public class ResourceLoader {
 	public static void loadResources() {
 		if (Start.getMancala() == null || !Start.getMancala().isRunning()) {
 			TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "table_background.png");
-			GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "goal_background.png");
-			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "slot_background.png");
-			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_board_concept.png");
-			MANCALA_SHADOW = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_board_shadow.png");
+			GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_goal.png");
+			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_slot.png");
+			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_board_full.png");
+			MANCALA_SHADOW = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_shadow.png");
 			MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_instructions.png");
 		}
 		else {

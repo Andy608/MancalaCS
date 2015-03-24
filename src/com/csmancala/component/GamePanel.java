@@ -2,6 +2,7 @@ package com.csmancala.component;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,26 +13,27 @@ import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.file.ResourceLoader;
+import com.csmancala.run.Start;
 
 public class GamePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6954435685287527912L;
 
-	private JPanel boardPanel = new JPanel();
-	private JButton goalPlayer1 = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
-	private JButton top1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton top2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton top3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton top4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton top5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton top6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton bottom6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	private JButton goalPlayer2 = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
+	public JButton player1Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
+	public JButton topSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton topSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton topSlot3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton topSlot4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton topSlot5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton topSlot6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	
+	public JButton player2Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
+	public JButton bottomSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton bottomSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton bottomSlot3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton bottomSlot4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton bottomSlot5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	public JButton bottomSlot6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	
 	public GamePanel() {
 		super();
@@ -40,18 +42,21 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private void setupSlots() {
 		
-		this.removeButtonBackground(goalPlayer1);
-		goalPlayer1.setBounds(0, 0, ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight());
-		this.add(goalPlayer1);
+//		setAlpha(player1Goal);
+//		setAlpha(player2Goal);
 		
+//		RenderGraphics.paintMancalaSlots();
+//		this.player1Goal.setPreferredSize(new Dimension(40, 40));
 		
+		this.add(player1Goal);
+		this.add(player2Goal);
 	}
 	
-	private void removeButtonBackground(JButton button) {
-		button.setBorderPainted(false);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setOpaque(false);
+	private void setAlpha(JButton b) {
+		b.setBorderPainted(false);
+		b.setContentAreaFilled(false);
+		b.setFocusPainted(false);
+		b.setOpaque(false);
 	}
 	
 	/**
@@ -71,5 +76,45 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if (e.getSource() == topSlot1) {
+			Start.getMancala().getBoard().setCurrentSlot(1, 0);
+		}
+		else if (e.getSource() == topSlot2) {
+			Start.getMancala().getBoard().setCurrentSlot(2, 0);
+		}
+		else if (e.getSource() == topSlot3) {
+			Start.getMancala().getBoard().setCurrentSlot(3, 0);
+		}
+		else if (e.getSource() == topSlot4) {
+			Start.getMancala().getBoard().setCurrentSlot(4, 0);
+		}
+		else if (e.getSource() == topSlot5) {
+			Start.getMancala().getBoard().setCurrentSlot(5, 0);
+		}
+		else if (e.getSource() == topSlot6) {
+			Start.getMancala().getBoard().setCurrentSlot(6, 0);
+		}
+		else if (e.getSource() == bottomSlot1) {
+			Start.getMancala().getBoard().setCurrentSlot(1, 1);
+		}
+		else if (e.getSource() == bottomSlot2) {
+			Start.getMancala().getBoard().setCurrentSlot(2, 1);
+		}
+		else if (e.getSource() == bottomSlot3) {
+			Start.getMancala().getBoard().setCurrentSlot(3, 1);
+		}
+		else if (e.getSource() == bottomSlot4) {
+			Start.getMancala().getBoard().setCurrentSlot(4, 1);
+		}
+		else if (e.getSource() == bottomSlot5) {
+			Start.getMancala().getBoard().setCurrentSlot(5, 1);
+		}
+		else if (e.getSource() == bottomSlot6) {
+			Start.getMancala().getBoard().setCurrentSlot(6, 1);
+		}
+	}
+	
+	public JButton getPlayer1Goal() {
+		return player1Goal;
 	}
 }
