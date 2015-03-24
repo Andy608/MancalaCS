@@ -105,7 +105,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			executePlayAction();
 		}
 		else if (e.getSource() == rulesButton) {
-			System.out.println("lol rules.");
+			this.executeRulesAction();
 		}
 		else if (e.getSource() == creditsButton) {
 			System.out.println("lol credits.");
@@ -117,11 +117,22 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	private void executePlayAction() {
 		
-		player1Name = getPlayer1NameInput();	
+		player1Name = getPlayer1NameInput();
+		if (player1Name == null) {
+			return;
+		}
+		
 		player2Name = getPlayer2NameInput();
+		if (player2Name == null) {
+			return;
+		}
 		
 		Start.getMancala().initBoard(player1Name, player2Name);
 		Start.getMancala().startGame();
+	}
+	
+	private void executeRulesAction() {
+		Start.getMancala().openRules();
 	}
 	
 	private void executeQuitAction() {
@@ -137,25 +148,21 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	}
 	
 	public String getPlayer1NameInput() {
-		while (player1Name == null || player1Name.equals("")) {
-			player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
-			
-			if (player2Name != null && !player2Name.equals("")) {
-				return player2Name;
-			}
+		player1Name = JOptionPane.showInputDialog("Player 1's Name: ");
+		if (player1Name != null && !player1Name.isEmpty()) {
+			return player1Name;
 		}
-		return ""; //This should never be reachable
+		Start.getMancala().returnToMenu();
+		return null;
 	}
 	
 	public String getPlayer2NameInput() {
-		while (player2Name == null || player2Name.equals("")) {
-			player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
-			
-			if (player2Name != null && !player2Name.equals("")) {
-				return player2Name;
-			}
+		player2Name = JOptionPane.showInputDialog("Player 2's Name: ");
+		if (player2Name != null && !player2Name.isEmpty()) {
+			return player2Name;
 		}
-		return ""; //This should never be reachable
+		Start.getMancala().returnToMenu();
+		return null;
 	}
 	
 	public void setPlayer1Name(String name) {

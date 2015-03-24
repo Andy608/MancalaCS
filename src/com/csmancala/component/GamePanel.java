@@ -17,7 +17,21 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6954435685287527912L;
 
-	private JButton goalLeft = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
+	private JPanel boardPanel = new JPanel();
+	private JButton goalPlayer1 = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
+	private JButton top1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton top2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton top3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton top4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton top5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton top6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton bottom6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+	private JButton goalPlayer2 = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
 	
 	public GamePanel() {
 		super();
@@ -26,12 +40,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	private void setupSlots() {
 		
-		goalLeft.setBorderPainted(false);
-		goalLeft.setContentAreaFilled(false);
-		goalLeft.setFocusPainted(false);
-		goalLeft.setOpaque(false);
-		goalLeft.setBounds(0, 0, ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight());
-		this.add(goalLeft);
+		this.removeButtonBackground(goalPlayer1);
+		goalPlayer1.setBounds(0, 0, ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight());
+		this.add(goalPlayer1);
+		
+		
+	}
+	
+	private void removeButtonBackground(JButton button) {
+		button.setBorderPainted(false);
+		button.setContentAreaFilled(false);
+		button.setFocusPainted(false);
+		button.setOpaque(false);
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
+import com.csmancala.component.RulesPanel;
 import com.csmancala.core.Board;
 import com.csmancala.core.Player;
 
@@ -15,6 +16,7 @@ public class Mancala implements Runnable {
 	protected MancalaFrame frameInstance;
 	protected MainMenuPanel menuPanel;
 	protected GamePanel gamePanel;
+	protected RulesPanel rulesPanel;
 	protected JPanel displayedPanel;
 	
 	private Board mancalaBoard;
@@ -108,6 +110,7 @@ public class Mancala implements Runnable {
 	
 	private void initPanels() {
 		gamePanel = new GamePanel();
+		rulesPanel = new RulesPanel();
 		menuPanel = new MainMenuPanel();
 		displayedPanel = menuPanel;
 	}
@@ -153,6 +156,18 @@ public class Mancala implements Runnable {
 //		
 //		resetGame();
 //		System.out.println(mancalaBoard);
+	}
+	
+	public void openRules() {
+		frameInstance.remove(menuPanel);
+		frameInstance.add(rulesPanel);
+		displayedPanel = rulesPanel;
+	}
+	
+	public void returnToMenu() {
+		frameInstance.remove(displayedPanel);
+		frameInstance.add(menuPanel);
+		displayedPanel = menuPanel;
 	}
 	
 	private void playerTurn() {
