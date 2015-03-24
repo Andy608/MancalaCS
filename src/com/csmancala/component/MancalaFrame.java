@@ -46,12 +46,12 @@ public class MancalaFrame extends JFrame {
 
 			@Override
 			public void windowGainedFocus(WindowEvent e) {
-				System.out.println("Focused!");
+//				System.out.println("Focused!");
 			}
 
 			@Override
 			public void windowLostFocus(WindowEvent e) {
-				System.out.println("Unfocused! :(");
+//				System.out.println("Unfocused! :(");
 			}
 		});
 	}

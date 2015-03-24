@@ -92,7 +92,7 @@ public class Mancala implements Runnable {
 			fps = frameCount;
 			frameCount = 0;
 			
-			System.out.println("Ticks: " + ticks + " FPS: " + fps);
+//			System.out.println("Ticks: " + ticks + " FPS: " + fps);
 			ticks = 0;
 		}
 	}
@@ -139,23 +139,23 @@ public class Mancala implements Runnable {
 		System.out.println("STARTING PLAYER: " + currentPlayer);
 		
 		//CURRENTLY WORKING ON THIS PLEASE LEAVE ALL LOGIC ALONE
-//		while(continueGame()) {
-//			playerTurn();
-//		}
+		while (continueGame()) {
+			playerTurn();
+		}
 		
-//		if (compareGoals() == null) {
-//			System.out.println("TIE!");
-//			//TODO: call methods to display tie message!
-//		}
-//		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
-//			//TODO: call methods to display player1 winning message!
-//		}
-//		else {
-//			//TODO: call methods to display player2 winning message!
-//		}
-//		
-//		resetGame();
-//		System.out.println(mancalaBoard);
+		if (compareGoals() == null) {
+			System.out.println("TIE!");
+			//TODO: call methods to display tie message!
+		}
+		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
+			//TODO: call methods to display player1 winning message!
+		}
+		else {
+			//TODO: call methods to display player2 winning message!
+		}
+		
+		resetGame();
+		System.out.println(mancalaBoard);
 	}
 	
 	public void openRules() {
@@ -175,9 +175,11 @@ public class Mancala implements Runnable {
 		//BUTTON ADD STONES TO THE PLAYERS HAND THAT WAS IN THAT PILE AND SETS PILE TO NULL BY CALLING THE PICKUP BOARD FUNCTION
 		if (mancalaBoard.getSlotArray()[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() > 0) {
 			mancalaBoard.pickUpStones(currentPlayer);
+			System.out.println(currentPlayer + " picked up " + currentPlayer.getHandAmount() + " stones.");
 		}
 		else {
 			playerTurn();
+			System.out.println(currentPlayer + ": Invalid move, go again!");
 		}
 		
 		int initialHandAmount = currentPlayer.getHandAmount();

@@ -55,6 +55,22 @@ public class RenderGraphics {
 			startX = (int)(gamePanel.getWidth() - ResourceLoader.MANCALA_BOARD.getWidth()) / 2;
 			startY = (int)(gamePanel.getHeight() - ResourceLoader.MANCALA_SHADOW.getHeight()) / 2;
 			
+			Start.getMancala().getGamePanel().player1Goal.setLocation(startX + 33, startY + 33);
+			Start.getMancala().getGamePanel().topSlot1.setLocation(startX + 155, startY + 33);
+			Start.getMancala().getGamePanel().topSlot2.setLocation(startX + 275, startY + 33);
+			Start.getMancala().getGamePanel().topSlot3.setLocation(startX + 395, startY + 33);
+			Start.getMancala().getGamePanel().topSlot4.setLocation(startX + 515, startY + 33);
+			Start.getMancala().getGamePanel().topSlot5.setLocation(startX + 635, startY + 33);
+			Start.getMancala().getGamePanel().topSlot6.setLocation(startX + 754, startY + 33);
+			
+			Start.getMancala().getGamePanel().player2Goal.setLocation(startX + 873, startY + 33);
+			Start.getMancala().getGamePanel().bottomSlot1.setLocation(startX + 155, startY + 172);
+			Start.getMancala().getGamePanel().bottomSlot2.setLocation(startX + 275, startY + 172);
+			Start.getMancala().getGamePanel().bottomSlot3.setLocation(startX + 395, startY + 172);
+			Start.getMancala().getGamePanel().bottomSlot4.setLocation(startX + 515, startY + 172);
+			Start.getMancala().getGamePanel().bottomSlot5.setLocation(startX + 635, startY + 172);
+			Start.getMancala().getGamePanel().bottomSlot6.setLocation(startX + 754, startY + 172);
+			
 //			g2D.drawImage(ResourceLoader.MANCALA_BOARD, startX, startY, (int)scaledX, (int)scaledY, null);
 //			maxScaledX = scaledX;
 //			maxScaledY = scaledY;
