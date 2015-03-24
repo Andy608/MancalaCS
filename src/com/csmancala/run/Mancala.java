@@ -185,8 +185,8 @@ public class Mancala implements Runnable {
 			System.out.println(currentPlayer + " picked up " + currentPlayer.getHandAmount() + " stones.");
 		}
 		else {
-			playerTurn();
 			System.out.println(currentPlayer + ": Invalid move, go again!");
+			return;
 		}
 		
 		int initialHandAmount = currentPlayer.getHandAmount();

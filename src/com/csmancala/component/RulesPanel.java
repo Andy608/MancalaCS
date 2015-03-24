@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.file.ResourceLoader;
+import com.csmancala.run.Start;
 
 public class RulesPanel extends JPanel implements ActionListener {
 
@@ -47,12 +48,15 @@ public class RulesPanel extends JPanel implements ActionListener {
 		this.add(mancalaLogo);
 //		instructionsLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.add(instructionsLabel);
+		returnButton.addActionListener(this);
 		this.add(returnButton);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == returnButton) {
+			Start.getMancala().returnToMenu();
+		}
 	}
 
 }

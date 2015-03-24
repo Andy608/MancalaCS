@@ -127,6 +127,10 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			return;
 		}
 		
+		if (player1Name.equals(player2Name)) {
+			player2Name += "_2";
+		}
+		
 		Start.getMancala().initBoard(player1Name, player2Name);
 		Start.getMancala().startGame();
 	}
@@ -152,6 +156,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		if (player1Name != null && !player1Name.isEmpty()) {
 			return player1Name;
 		}
+		System.out.println("You can't enter no name... Returning to main menu.");
 		Start.getMancala().returnToMenu();
 		return null;
 	}
@@ -161,6 +166,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		if (player2Name != null && !player2Name.isEmpty()) {
 			return player2Name;
 		}
+		System.out.println("You can't enter no name... Returning to main menu.");
 		Start.getMancala().returnToMenu();
 		return null;
 	}
