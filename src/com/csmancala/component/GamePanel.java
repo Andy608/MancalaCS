@@ -3,6 +3,8 @@ package com.csmancala.component;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -13,6 +15,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.Board;
@@ -24,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6954435685287527912L;
 
+	public JLabel player1Name = new JLabel();
 	public JButton player1Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
 	public JButton topSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	public JButton topSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
@@ -32,6 +36,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public JButton topSlot5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	public JButton topSlot6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	
+	public JLabel player2Name = new JLabel();
 	public JButton player2Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
 	public JButton bottomSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	public JButton bottomSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
@@ -63,6 +68,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		setAlpha(bottomSlot5);
 		setAlpha(bottomSlot6);
 		
+		this.player1Name.setText("Player 1");
+		this.player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+		FontMetrics fm = this.player1Name.getFontMetrics(this.player1Name.getFont());
+		this.player1Name.setSize(new Dimension(fm.stringWidth(this.player1Name.getText()), fm.getHeight()));
 		this.player1Goal.setSize(new Dimension(ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight()));
 		this.topSlot1.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		this.topSlot2.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
@@ -70,6 +79,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.topSlot4.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		this.topSlot5.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		this.topSlot6.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
+		
 		
 		this.player2Goal.setSize(new Dimension(ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight()));
 		this.bottomSlot1.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
@@ -79,6 +89,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.bottomSlot5.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		this.bottomSlot6.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		
+		this.add(player1Name);
 		this.add(player1Goal);
 		this.add(this.topSlot1);
 		this.add(this.topSlot2);

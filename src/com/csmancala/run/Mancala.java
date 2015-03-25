@@ -384,4 +384,8 @@ public class Mancala implements Runnable {
 	public MainMenuPanel getMenuPanel() {
 		return menuPanel;
 	}
+	
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
 }

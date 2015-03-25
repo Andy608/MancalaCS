@@ -1,7 +1,11 @@
 package com.csmancala.core;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.component.GamePanel;
@@ -50,6 +54,17 @@ public class RenderGraphics {
 			startX = (int)(gamePanel.getWidth() - ResourceLoader.MANCALA_BOARD.getWidth()) / 2;
 			startY = (int)(gamePanel.getHeight() - ResourceLoader.MANCALA_SHADOW.getHeight()) / 2;
 			
+			if (Start.getMancala().getCurrentPlayer() != null && !Start.getMancala().getCurrentPlayer().getName().equals(Start.getMancala().getGamePanel().player1Name.getText())) {
+				String name = Start.getMancala().getCurrentPlayer().getName();
+				JLabel nameLabel = Start.getMancala().getGamePanel().player1Name;
+				nameLabel.setText(name);
+				nameLabel.setFont(new Font("Montserrat", Font.BOLD, 48));
+				FontMetrics fm = nameLabel.getFontMetrics(nameLabel.getFont());
+				nameLabel.setSize(new Dimension(fm.stringWidth(nameLabel.getText()), fm.getHeight()));
+				
+			}
+			
+			Start.getMancala().getGamePanel().player1Name.setLocation(startX, startY - 70);
 			Start.getMancala().getGamePanel().player1Goal.setLocation(startX + 33, startY + 33);
 			Start.getMancala().getGamePanel().topSlot1.setLocation(startX + 155, startY + 33);
 			Start.getMancala().getGamePanel().topSlot2.setLocation(startX + 275, startY + 33);
