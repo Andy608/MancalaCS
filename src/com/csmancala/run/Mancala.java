@@ -183,6 +183,10 @@ public class Mancala implements Runnable {
 	//Never call this method unless it is from the button listeners!
 	private void playerTurn() {
 		
+		//Will fix on wednesday please text me if you find a solution! (I'm going to look this over again tomorrow in the car.)
+		//Glitch with capture
+		//Glitch when player is about to win
+		
 		Slot[][] slotArray = mancalaBoard.getSlotArray();
 		
 		//Pick up stones from a pile.
@@ -191,7 +195,7 @@ public class Mancala implements Runnable {
 			System.out.println("There's no stones in that pile! Pick another one.");
 			return;
 		}
-		else if (mancalaBoard.isCorrectSide(currentPlayer)) {
+		else if (!mancalaBoard.isCorrectSide(currentPlayer)) {
 			System.out.println("YO BUB, YOU TRYIN'A BREAK THE GAME? PLEASE PICK AGAIN.");
 			return;
 		}
@@ -220,6 +224,7 @@ public class Mancala implements Runnable {
 		}
 		else if (mancalaBoard.isCorrectSide(currentPlayer) && slotArray[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() == 0) {
 			//THIS NEEDS TO BE TESTED!
+			System.out.println("CAPTURE!!");
 			mancalaBoard.captureStones(currentPlayer);
 		}
 		

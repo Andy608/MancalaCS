@@ -1,12 +1,7 @@
 package com.csmancala.core;
 
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.csmancala.component.GamePanel;
@@ -70,6 +65,8 @@ public class RenderGraphics {
 			Start.getMancala().getGamePanel().bottomSlot4.setLocation(startX + 515, startY + 172);
 			Start.getMancala().getGamePanel().bottomSlot5.setLocation(startX + 635, startY + 172);
 			Start.getMancala().getGamePanel().bottomSlot6.setLocation(startX + 754, startY + 172);
+			
+			updateButtonText();
 			
 //			g2D.drawImage(ResourceLoader.MANCALA_BOARD, startX, startY, (int)scaledX, (int)scaledY, null);
 //			maxScaledX = scaledX;
@@ -147,6 +144,24 @@ public class RenderGraphics {
 		
 		
 		
+	}
+	
+	public static void updateButtonText() {
+		Start.getMancala().getGamePanel().player1Goal.setText(Integer.toString(Start.getMancala().getBoard().getPlayer1().getGoal().getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot1.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[1][0].getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot2.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[2][0].getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot3.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[3][0].getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot4.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[4][0].getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot5.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[5][0].getStoneAmount()));
+		Start.getMancala().getGamePanel().topSlot6.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[6][0].getStoneAmount()));
+		
+		Start.getMancala().getGamePanel().player2Goal.setText(Integer.toString(Start.getMancala().getBoard().getPlayer2().getGoal().getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot1.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[1][1].getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot2.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[2][1].getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot3.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[3][1].getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot4.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[4][1].getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot5.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[5][1].getStoneAmount()));
+		Start.getMancala().getGamePanel().bottomSlot6.setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[6][1].getStoneAmount()));
 	}
 	
 //	private static BufferedImage scaleImage(BufferedImage image, double scaledX, double scaledY) {

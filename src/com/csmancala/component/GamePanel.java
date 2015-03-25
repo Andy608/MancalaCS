@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -43,7 +42,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public GamePanel() {
 		super();
-		this.setLayout(null);
+//		this.setLayout(null);
 		this.setupSlots();
 	}
 	
@@ -64,7 +63,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		setAlpha(bottomSlot5);
 		setAlpha(bottomSlot6);
 		
-//		RenderGraphics.paintMancalaSlots();
 		this.player1Goal.setSize(new Dimension(ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight()));
 		this.topSlot1.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
 		this.topSlot2.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
@@ -108,7 +106,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				 public void mouseEntered(MouseEvent e) {
 					 ((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND));
 					 c.setSize(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth(), ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight());
-					 c.setCursor(ResourceLoader.CURSOR_OPEN_HAND);
+					 c.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				 }
 
 				 @Override
@@ -119,9 +117,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				 }
 				 
 				 @Override
-				 public void mousePressed(MouseEvent e) {
-					 c.setCursor(ResourceLoader.CURSOR_GRABBING_HAND);
-				 }
+				 public void mousePressed(MouseEvent e) {}
 			 });
 		 }
 		 return super.add(c);

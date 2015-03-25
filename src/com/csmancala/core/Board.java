@@ -106,7 +106,7 @@ public class Board {
 	
 	public boolean isCorrectSide(Player currentPlayer) {
 		
-		if ((currentPlayer.equals(player1) && currentSlotLocation[1] == 1) || (currentPlayer.equals(player2) && currentSlotLocation[1] == 0)) {
+		if ((currentPlayer.equals(player1) && currentSlotLocation[1] == 0) || (currentPlayer.equals(player2) && currentSlotLocation[1] == 1)) {
 			return true;
 		}
 		return false;
@@ -152,7 +152,6 @@ public class Board {
 	}
 	
 	public void captureStones(Player currentPlayer) {
-		System.out.println("CAPTURE!!");
 		int y = 0;
 		if (currentSlotLocation[1] == 0) y = 1;
 		
