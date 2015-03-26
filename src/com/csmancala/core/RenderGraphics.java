@@ -148,7 +148,7 @@ public class RenderGraphics {
 	
 	private static void updatePlayerNames() {
 		JLabel p1Name = gamePanel.player1Name;
-		JLabel p2Name = gamePanel.player1Name;
+		JLabel p2Name = gamePanel.player2Name;
 		Player p1 = Start.getMancala().getBoard().getPlayer1();
 		Player p2 = Start.getMancala().getBoard().getPlayer2();
 		Player currentPlayer = Start.getMancala().getCurrentPlayer();
