@@ -57,7 +57,7 @@ public class ResourceLoader {
 			GOAL_HIGHLIGHT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
 			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
 			SLOT_HIGHLIGHT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
-			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board_full.png");
+			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
 			MANCALA_SHADOW = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_shadow.png");
 		}
 		else {

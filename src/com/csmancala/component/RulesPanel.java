@@ -4,19 +4,16 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
-import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 
 public class RulesPanel extends JPanel implements ActionListener {

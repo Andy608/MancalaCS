@@ -39,12 +39,12 @@ public class Board {
 				}
 				else if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
 //					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
-//						/**/	System.out.println("ADDING STONE");
-//						slotArray[x][y] = new Slot(new Stone[1]);
+//						/**/System.out.println("ADDING STONE");
+//						/**/slotArray[x][y] = new Slot(new Stone[2]);
 					slotArray[x][y] = new Slot(new Stone[4]);
 //						/**/}
 //					/**/else {
-//						/**/	slotArray[x][y] = new Slot();
+//						/**/slotArray[x][y] = new Slot();
 //						/**/}
 				}
 			}
@@ -165,7 +165,8 @@ public class Board {
 			if (currentPlayer.equals(player1)) setCurrentSlot(0, 0);
 			else setCurrentSlot(7, 1);
 			
-			addStoneToNewPile(currentPlayer);
+			while (currentPlayer.getHandAmount() > 0)
+				addStoneToNewPile(currentPlayer);
 			
 			if (i == 0)
 				setCurrentSlot(oppositeSlot[0], oppositeSlot[1]);

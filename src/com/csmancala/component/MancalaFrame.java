@@ -21,12 +21,12 @@ public class MancalaFrame extends JFrame {
 
 	public MancalaFrame(String title) {
 		super.setTitle(title);
-//		super.setMinimumSize(minimumSize);
-//		super.setMaximumSize(maximumSize);
-		super.setMinimumSize(new Dimension(1280, 720));
+		super.setMinimumSize(minimumSize);
+		super.setMaximumSize(maximumSize);
+//		super.setMinimumSize(new Dimension(1280, 720));
 		
 		super.setLocationRelativeTo(null);
-		super.setResizable(false);
+		super.setResizable(true);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.addWindowListeners();
 		super.pack();

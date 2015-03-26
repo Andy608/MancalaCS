@@ -13,14 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
-import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -28,119 +26,103 @@ public class GamePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 6954435685287527912L;
 
 	public JLabel player1Name = new JLabel();
-	public JButton player1Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
-	public JButton topSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton topSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton topSlot3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton topSlot4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton topSlot5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton topSlot6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	
 	public JLabel player2Name = new JLabel();
-	public JButton player2Goal = new JButton(new ImageIcon(ResourceLoader.GOAL_BACKGROUND));
-	public JButton bottomSlot1 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton bottomSlot2 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton bottomSlot3 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton bottomSlot4 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton bottomSlot5 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-	public JButton bottomSlot6 = new JButton(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
 	
+	public JButton[][] boardButtons;
+	
+//	public JButton player1Goal;
+//	public JButton player2Goal;
+//	
+//	public JButton topSlot1;
+//	public JButton topSlot2;
+//	public JButton topSlot3;
+//	public JButton topSlot4;
+//	public JButton topSlot5;
+//	public JButton topSlot6;
+//
+//	public JButton bottomSlot1;
+//	public JButton bottomSlot2;
+//	public JButton bottomSlot3;
+//	public JButton bottomSlot4;
+//	public JButton bottomSlot5;
+//	public JButton bottomSlot6;
+
 	public GamePanel() {
 		super();
-//		this.setLayout(null);
+		this.setLayout(null);
 		this.setupSlots();
 	}
-	
+
 	private void setupSlots() {
-		
-		setAlpha(player1Goal);
-		setAlpha(topSlot1);
-		setAlpha(topSlot2);
-		setAlpha(topSlot3);
-		setAlpha(topSlot4);
-		setAlpha(topSlot5);
-		setAlpha(topSlot6);
-		setAlpha(player2Goal);
-		setAlpha(bottomSlot1);
-		setAlpha(bottomSlot2);
-		setAlpha(bottomSlot3);
-		setAlpha(bottomSlot4);
-		setAlpha(bottomSlot5);
-		setAlpha(bottomSlot6);
-		
+
+		boardButtons = new JButton[8][2];
+		for (int y = 0; y < boardButtons[0].length; y++) {
+			for (int x = 0; x < boardButtons.length; x++) {
+				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					boardButtons[x][y] = configureButton();
+				}
+			}
+		}
+
 		this.player1Name.setText("Player 1");
 		this.player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
 		FontMetrics fm = this.player1Name.getFontMetrics(this.player1Name.getFont());
 		this.player1Name.setSize(new Dimension(fm.stringWidth(this.player1Name.getText()), fm.getHeight()));
-		this.player1Goal.setSize(new Dimension(ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight()));
-		this.topSlot1.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.topSlot2.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.topSlot3.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.topSlot4.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.topSlot5.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.topSlot6.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		
-		
-		this.player2Goal.setSize(new Dimension(ResourceLoader.GOAL_BACKGROUND.getWidth(), ResourceLoader.GOAL_BACKGROUND.getHeight()));
-		this.bottomSlot1.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.bottomSlot2.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.bottomSlot3.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.bottomSlot4.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.bottomSlot5.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		this.bottomSlot6.setSize(new Dimension(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight()));
-		
+
 		this.add(player1Name);
-		this.add(player1Goal);
-		this.add(this.topSlot1);
-		this.add(this.topSlot2);
-		this.add(this.topSlot3);
-		this.add(this.topSlot4);
-		this.add(this.topSlot5);
-		this.add(this.topSlot6);
 		
-		this.add(player2Goal);
-		this.add(this.bottomSlot1);
-		this.add(this.bottomSlot2);
-		this.add(this.bottomSlot3);
-		this.add(this.bottomSlot4);
-		this.add(this.bottomSlot5);
-		this.add(this.bottomSlot6);
+		for (int y = 0; y < boardButtons[0].length; y++) {
+			for (int x = 0; x < boardButtons.length; x++) {
+				
+				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					this.add(boardButtons[x][y]);
+				}
+			}
+		}
 	}
-	
+
 	@Override
 	public Component add(final Component c) {
-		 if (c instanceof JButton && c != this.player1Goal && c != this.player2Goal) {
-			 ((JButton) c).addActionListener(this);
-			 c.addMouseListener(new MouseAdapter() {
+		if (c instanceof JButton && c != boardButtons[0][0] && c != boardButtons[7][1]) {
+			((JButton) c).addActionListener(this);
 
-				 @Override
-				 public void mouseEntered(MouseEvent e) {
-					 ((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND));
-					 c.setSize(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth(), ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight());
-					 c.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				 }
+			((JButton) c).addMouseListener(new MouseAdapter() {
 
-				 @Override
-				 public void mouseExited(MouseEvent e) {
-					 ((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-					 c.setSize(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight());
-					 c.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-				 }
-				 
-				 @Override
-				 public void mousePressed(MouseEvent e) {}
-			 });
-		 }
-		 return super.add(c);
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+					//((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND));
+					//c.setSize(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth(), ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight());
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					
+					//((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
+					//c.setSize(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight());
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {}
+			});
+		}
+		return super.add(c);
 	}
-	
-	private void setAlpha(JButton b) {
+
+	private JButton configureButton() {
+		JButton b = new JButton();
 		b.setBorderPainted(false);
 		b.setContentAreaFilled(false);
 		b.setFocusPainted(false);
 		b.setOpaque(false);
+		
+		b.setHorizontalTextPosition(JButton.CENTER);
+		b.setVerticalTextPosition(JButton.CENTER);
+		return b;
 	}
-	
+
 	/**
 	 * This method overrides the super.paint(g) method.
 	 * It is called in the Mancala class every frame to force refresh the display.
@@ -150,58 +132,54 @@ public class GamePanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		
+
 		RenderGraphics.paintBackground(this, g2D);
 		RenderGraphics.paintMancalaBoard(g2D);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == topSlot1) {
+
+		if (e.getSource() == boardButtons[1][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(1, 0);
 		}
-		else if (e.getSource() == topSlot2) {
+		else if (e.getSource() == boardButtons[2][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(2, 0);
 		}
-		else if (e.getSource() == topSlot3) {
+		else if (e.getSource() == boardButtons[3][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(3, 0);
 		}
-		else if (e.getSource() == topSlot4) {
+		else if (e.getSource() == boardButtons[4][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(4, 0);
 		}
-		else if (e.getSource() == topSlot5) {
+		else if (e.getSource() == boardButtons[5][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(5, 0);
 		}
-		else if (e.getSource() == topSlot6) {
+		else if (e.getSource() == boardButtons[6][0]) {
 			Start.getMancala().getBoard().setCurrentSlot(6, 0);
 		}
-		else if (e.getSource() == bottomSlot1) {
+		else if (e.getSource() == boardButtons[1][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(1, 1);
 		}
-		else if (e.getSource() == bottomSlot2) {
+		else if (e.getSource() == boardButtons[2][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(2, 1);
 		}
-		else if (e.getSource() == bottomSlot3) {
+		else if (e.getSource() == boardButtons[3][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(3, 1);
 		}
-		else if (e.getSource() == bottomSlot4) {
+		else if (e.getSource() == boardButtons[4][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(4, 1);
 		}
-		else if (e.getSource() == bottomSlot5) {
+		else if (e.getSource() == boardButtons[5][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(5, 1);
 		}
-		else if (e.getSource() == bottomSlot6) {
+		else if (e.getSource() == boardButtons[6][1]) {
 			Start.getMancala().getBoard().setCurrentSlot(6, 1);
 		}
-		
+
 		Board logBoard = Start.getMancala().getBoard();
 		int x = logBoard.getCurrentSlotX(), y = logBoard.getCurrentSlotY();
 		System.out.println("Clicked Slot: " + x + ", " + y + " | Pits in slot: " + logBoard.getSlotArray()[x][y].getStoneAmount());
 		Start.getMancala().progressGame();
-	}
-	
-	public JButton getPlayer1Goal() {
-		return player1Goal;
 	}
 }
