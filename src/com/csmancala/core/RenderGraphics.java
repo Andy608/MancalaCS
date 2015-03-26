@@ -152,6 +152,8 @@ public class RenderGraphics {
 		Player p1 = Start.getMancala().getBoard().getPlayer1();
 		Player p2 = Start.getMancala().getBoard().getPlayer2();
 		Player currentPlayer = Start.getMancala().getCurrentPlayer();
+		
+		
 		if (p1 != null && !p1Name.equals(p1.getName())) {
 			p1Name.setText(p1.getName());
 			int style = Font.PLAIN;
@@ -160,8 +162,6 @@ public class RenderGraphics {
 			}
 			p1Name.setFont(new Font(p1Name.getText(), style, (int)(72 * multiplier)));
 		}
-		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
-		p1Name.setLocation(startX, startY - (int)(70 * multiplier));
 		
 		if (p2 != null && !p2Name.equals(p2.getName())) {
 			p2Name.setText(p2.getName());
@@ -171,6 +171,21 @@ public class RenderGraphics {
 			}
 			p2Name.setFont(new Font(p2Name.getText(), style, (int)(72 * multiplier)));
 		}
+		
+		
+			if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer1()) {
+					p1Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+					p2Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+				}
+			else if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer2()) {
+					p2Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+					p1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+				}
+		
+		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
+		p1Name.setLocation(startX, startY - (int)(70 * multiplier));
+		/*
+		*/
 		p2Name.setSize(new Dimension(p2Name.getFontMetrics(p2Name.getFont()).stringWidth(p2Name.getText()), p2Name.getFontMetrics(p2Name.getFont()).getHeight()));
 		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), startY + scaledHeight + (int)(70 * multiplier));
 		
