@@ -20,7 +20,7 @@ public class Mancala implements Runnable {
 	protected GamePanel gamePanel;
 	protected RulesPanel rulesPanel;
 	protected JPanel displayedPanel;
-	protected JPanel winPanel;
+	protected WinPanel winPanel;
 	
 	private Board mancalaBoard;
 	private Player currentPlayer;
@@ -172,7 +172,7 @@ public class Mancala implements Runnable {
 			System.out.println(mancalaBoard.getPlayer2() + " Wins!");
 		}
 		
-		openWinScreen(whoWins);
+		openWinScreen();
 		resetGame();
 	}
 	
@@ -188,8 +188,8 @@ public class Mancala implements Runnable {
 		displayedPanel = menuPanel;
 	}
 	
-	public void openWinScreen(int winningPlayer) {
-		System.out.println("SWAPPING SCREENS");
+	public void openWinScreen() {
+		//System.out.println("SWAPPING SCREENS");
 		frameInstance.remove(gamePanel);
 		frameInstance.add(winPanel);
 		displayedPanel = winPanel;
