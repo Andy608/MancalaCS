@@ -8,6 +8,7 @@ import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
 import com.csmancala.component.RulesPanel;
+import com.csmancala.component.WinPanel;
 import com.csmancala.core.Board;
 import com.csmancala.core.Player;
 import com.csmancala.core.Slot;
@@ -19,6 +20,7 @@ public class Mancala implements Runnable {
 	protected GamePanel gamePanel;
 	protected RulesPanel rulesPanel;
 	protected JPanel displayedPanel;
+	protected JPanel winPanel;
 	
 	private Board mancalaBoard;
 	private Player currentPlayer;
@@ -34,6 +36,7 @@ public class Mancala implements Runnable {
 	int ticks;
 	int frameCount;
 	int fps;
+	private int whoWins;
 	double elapsedSeconds;
 	
 	public Mancala() {
@@ -113,6 +116,7 @@ public class Mancala implements Runnable {
 		gamePanel = new GamePanel();
 		rulesPanel = new RulesPanel();
 		menuPanel = new MainMenuPanel();
+		winPanel = new WinPanel();
 		displayedPanel = menuPanel;
 	}
 	
@@ -154,17 +158,21 @@ public class Mancala implements Runnable {
 		
 		if (compareGoals() == null) {
 			//TODO: call methods to display tie message!
+			whoWins = 0;
 			System.out.println("It's a tie!");
 		}
 		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
 			//TODO: call methods to display player1 winning message!
+			whoWins = 1;
 			System.out.println(mancalaBoard.getPlayer1() + " Wins!");
 		}
 		else {
 			//TODO: call methods to display player2 winning message!
+			whoWins = 2;
 			System.out.println(mancalaBoard.getPlayer2() + " Wins!");
 		}
 		
+		openWinScreen(whoWins);
 		resetGame();
 	}
 	
@@ -178,6 +186,13 @@ public class Mancala implements Runnable {
 		frameInstance.remove(displayedPanel);
 		frameInstance.add(menuPanel);
 		displayedPanel = menuPanel;
+	}
+	
+	public void openWinScreen(int winningPlayer) {
+		System.out.println("SWAPPING SCREENS");
+		frameInstance.remove(gamePanel);
+		frameInstance.add(winPanel);
+		displayedPanel = winPanel;
 	}
 	
 	//Never call this method unless it is from the button listeners!
@@ -361,5 +376,9 @@ public class Mancala implements Runnable {
 	
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
+	}
+	
+	public int getWhoWins() {
+		return whoWins;
 	}
 }
