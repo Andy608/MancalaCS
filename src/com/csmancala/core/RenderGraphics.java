@@ -206,6 +206,15 @@ public class RenderGraphics {
 				gamePanel.boardButtons[x][y].setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[x][y].getStoneAmount()));
 			}
 		}
+		
+		if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer1()) {
+			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+		}
+		else if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer2()) {
+			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+		}
 	}
 	
 	//Thanks to http://scaleimagesjava.blogspot.com/2011/09/scale-images-in-java.html for the amazing scaling method.
