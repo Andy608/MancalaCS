@@ -12,11 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
@@ -29,23 +27,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	public JLabel player2Name = new JLabel();
 	
 	public JButton[][] boardButtons;
-	
-//	public JButton player1Goal;
-//	public JButton player2Goal;
-//	
-//	public JButton topSlot1;
-//	public JButton topSlot2;
-//	public JButton topSlot3;
-//	public JButton topSlot4;
-//	public JButton topSlot5;
-//	public JButton topSlot6;
-//
-//	public JButton bottomSlot1;
-//	public JButton bottomSlot2;
-//	public JButton bottomSlot3;
-//	public JButton bottomSlot4;
-//	public JButton bottomSlot5;
-//	public JButton bottomSlot6;
 
 	public GamePanel() {
 		super();
@@ -84,24 +65,36 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public Component add(final Component c) {
 		if (c instanceof JButton && c != boardButtons[0][0] && c != boardButtons[7][1]) {
-			((JButton) c).addActionListener(this);
-
-			((JButton) c).addMouseListener(new MouseAdapter() {
+			final JButton b = (JButton)c;
+			b.addActionListener(this);
+			b.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-					//((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND));
-					//c.setSize(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth(), ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight());
+					for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
+						for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
+							if (b.equals(boardButtons[x][y])) {
+								Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
+								break;
+							}
+						}
+					}
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
 					c.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					
-					//((JButton) c).setIcon(new ImageIcon(ResourceLoader.SLOT_BACKGROUND));
-					//c.setSize(ResourceLoader.SLOT_BACKGROUND.getWidth(), ResourceLoader.SLOT_BACKGROUND.getHeight());
+					for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
+						for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
+							if (b.equals(boardButtons[x][y])) {
+								Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(false);
+								break;
+							}
+						}
+					}
 				}
 
 				@Override
@@ -140,41 +133,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == boardButtons[1][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(1, 0);
-		}
-		else if (e.getSource() == boardButtons[2][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(2, 0);
-		}
-		else if (e.getSource() == boardButtons[3][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(3, 0);
-		}
-		else if (e.getSource() == boardButtons[4][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(4, 0);
-		}
-		else if (e.getSource() == boardButtons[5][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(5, 0);
-		}
-		else if (e.getSource() == boardButtons[6][0]) {
-			Start.getMancala().getBoard().setCurrentSlot(6, 0);
-		}
-		else if (e.getSource() == boardButtons[1][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(1, 1);
-		}
-		else if (e.getSource() == boardButtons[2][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(2, 1);
-		}
-		else if (e.getSource() == boardButtons[3][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(3, 1);
-		}
-		else if (e.getSource() == boardButtons[4][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(4, 1);
-		}
-		else if (e.getSource() == boardButtons[5][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(5, 1);
-		}
-		else if (e.getSource() == boardButtons[6][1]) {
-			Start.getMancala().getBoard().setCurrentSlot(6, 1);
+		for (int y = 0; y < boardButtons[0].length; y++) {
+			for (int x = 1; x < 7; x++) {
+				if (e.getSource() == boardButtons[x][y]) {
+					Start.getMancala().getBoard().setCurrentSlot(x, y);
+				}
+			}
 		}
 
 		Board logBoard = Start.getMancala().getBoard();

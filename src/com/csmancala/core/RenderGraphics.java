@@ -9,6 +9,7 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -56,51 +57,129 @@ public class RenderGraphics {
 	
 	private static void updateButtons() {
 		
+		gamePanel.player1Name.setLocation(startX, startY - 70);
+		
+		Slot[][] board = Start.getMancala().getBoard().getSlotArray();
+		
+		for (int y = 0; y < board[0].length; y++) {
+			for (int x = 0; x < board.length; x++) {
+				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					if (board[x][y].isHovered) setButtonProperties(gamePanel.boardButtons[x][y], true);
+					else setButtonProperties(gamePanel.boardButtons[x][y], false);
+				}
+			}
+		}
+		
+//		gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[1][0].setLocation((int)(startX + 242 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[2][0].setLocation((int)(startX + 422 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[3][0].setLocation((int)(startX + 602 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[4][0].setLocation((int)(startX + 782 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[5][0].setLocation((int)(startX + 962 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[6][0].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 50 * multiplier));
+//		
+//		gamePanel.boardButtons[7][1].setLocation((int)(startX + 1320 * multiplier), (int)(startY + 50 * multiplier));
+//		gamePanel.boardButtons[1][1].setLocation((int)(startX + 242 * multiplier), (int)(startY + 258 * multiplier));
+//		gamePanel.boardButtons[2][1].setLocation((int)(startX + 422 * multiplier), (int)(startY + 258 * multiplier));
+//		gamePanel.boardButtons[3][1].setLocation((int)(startX + 602 * multiplier), (int)(startY + 258 * multiplier));
+//		gamePanel.boardButtons[4][1].setLocation((int)(startX + 782 * multiplier), (int)(startY + 258 * multiplier));
+//		gamePanel.boardButtons[5][1].setLocation((int)(startX + 962 * multiplier), (int)(startY + 258 * multiplier));
+//		gamePanel.boardButtons[6][1].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 258 * multiplier));
+		
+		
+//		gamePanel.boardButtons[0][0].setIcon(goalIcon);
+//		gamePanel.boardButtons[7][1].setIcon(goalIcon);
+//		
+//		for (int y = 0; y < 2; y++) {
+//			for (int x = 1; x < 7; x++) {
+//				gamePanel.boardButtons[x][y].setIcon(slotIcon);
+//			}
+//		}
+//		
+//		gamePanel.boardButtons[0][0].setSize(goalSize);
+//		gamePanel.boardButtons[7][1].setSize(goalSize);
+//		
+//		for (int y = 0; y < 2; y++) {
+//			for (int x = 1; x < 7; x++) {
+//				gamePanel.boardButtons[x][y].setSize(slotSize);
+//			}
+//		}
+	}
+	
+	private static void setButtonProperties(JButton b, boolean hovered) {
 		
 		BufferedImage goalImage = scaleImage(ResourceLoader.GOAL_BACKGROUND, (int) (ResourceLoader.GOAL_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		BufferedImage slotImage = scaleImage(ResourceLoader.SLOT_BACKGROUND, (int) (ResourceLoader.SLOT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		
+		BufferedImage goalHoveredImage = scaleImage(ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND, (int) (ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage slotHoveredImage = scaleImage(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND, (int) (ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+
 		Dimension goalSize = new Dimension(goalImage.getWidth(), goalImage.getHeight());
 		Dimension slotSize = new Dimension(slotImage.getWidth(), slotImage.getHeight());
+		
+		Dimension goalHoveredSize = new Dimension(goalHoveredImage.getWidth(), goalHoveredImage.getHeight());
+		Dimension slotHoveredSize = new Dimension(slotHoveredImage.getWidth(), slotHoveredImage.getHeight());
 		
 		ImageIcon goalIcon = new ImageIcon(goalImage);
 		ImageIcon slotIcon = new ImageIcon(slotImage);
 		
-		gamePanel.player1Name.setLocation(startX, startY - 70);
+		ImageIcon goalHoveredIcon = new ImageIcon(goalHoveredImage);
+		ImageIcon slotHoveredIcon = new ImageIcon(slotHoveredImage);
 		
-		
-		gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[1][0].setLocation((int)(startX + 242 * multiplier), (int)(startY + 50* multiplier));
-		gamePanel.boardButtons[2][0].setLocation((int)(startX + 422 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[3][0].setLocation((int)(startX + 602 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[4][0].setLocation((int)(startX + 782 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[5][0].setLocation((int)(startX + 962 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[6][0].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 50 * multiplier));
-		
-		gamePanel.boardButtons[7][1].setLocation((int)(startX + 1320 * multiplier), (int)(startY + 50 * multiplier));
-		gamePanel.boardButtons[1][1].setLocation((int)(startX + 242 * multiplier), (int)(startY + 258 * multiplier));
-		gamePanel.boardButtons[2][1].setLocation((int)(startX + 422 * multiplier), (int)(startY + 258 * multiplier));
-		gamePanel.boardButtons[3][1].setLocation((int)(startX + 602 * multiplier), (int)(startY + 258 * multiplier));
-		gamePanel.boardButtons[4][1].setLocation((int)(startX + 782 * multiplier), (int)(startY + 258 * multiplier));
-		gamePanel.boardButtons[5][1].setLocation((int)(startX + 962 * multiplier), (int)(startY + 258 * multiplier));
-		gamePanel.boardButtons[6][1].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 258 * multiplier));
-		
-		
-		gamePanel.boardButtons[0][0].setIcon(goalIcon);
-		gamePanel.boardButtons[7][1].setIcon(goalIcon);
-		
-		for (int y = 0; y < 2; y++) {
-			for (int x = 1; x < 7; x++) {
-				gamePanel.boardButtons[x][y].setIcon(slotIcon);
+		if (b.equals(gamePanel.boardButtons[0][0])) {
+			if (hovered) {
+				gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 - 7.5 * multiplier), (int)(startY + 50 - 7.5 * multiplier));
+				gamePanel.boardButtons[0][0].setIcon(goalHoveredIcon);
+				gamePanel.boardButtons[0][0].setSize(goalHoveredSize);
+			}
+			else {
+				gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
+				gamePanel.boardButtons[0][0].setIcon(goalIcon);
+				gamePanel.boardButtons[0][0].setSize(goalSize);
+			}
+		}
+		else if (b.equals(gamePanel.boardButtons[7][1])) {
+			if (hovered) {
+				gamePanel.boardButtons[7][1].setLocation((int)(startX + 1320 - 7.5 * multiplier), (int)(startY + 50 - 7.5 * multiplier));
+				gamePanel.boardButtons[7][1].setIcon(goalHoveredIcon);
+				gamePanel.boardButtons[7][1].setSize(goalHoveredSize);
+			}
+			else {
+				gamePanel.boardButtons[7][1].setLocation((int)(startX + 1320 * multiplier), (int)(startY + 50 * multiplier));
+				gamePanel.boardButtons[7][1].setIcon(goalIcon);
+				gamePanel.boardButtons[7][1].setSize(goalSize);
 			}
 		}
 		
-		gamePanel.boardButtons[0][0].setSize(goalSize);
-		gamePanel.boardButtons[7][1].setSize(goalSize);
-		
 		for (int y = 0; y < 2; y++) {
 			for (int x = 1; x < 7; x++) {
-				gamePanel.boardButtons[x][y].setSize(slotSize);
+				if (b.equals(gamePanel.boardButtons[x][y])) {
+					
+					if (y == 0) {
+						if (hovered) {
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7.5) * multiplier), (int)(startY + ((50 - 7.5) * multiplier)));
+							gamePanel.boardButtons[x][y].setIcon(slotHoveredIcon);
+							gamePanel.boardButtons[x][y].setSize(slotHoveredSize);
+						}
+						else {
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242) * multiplier), (int)(startY + (50 * multiplier)));
+							gamePanel.boardButtons[x][y].setIcon(slotIcon);
+							gamePanel.boardButtons[x][y].setSize(slotSize);
+						}
+					}
+					else {
+						if (hovered) {
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7.5) * multiplier), (int)(startY + ((258 - 7.5) * multiplier)));
+							gamePanel.boardButtons[x][y].setIcon(slotHoveredIcon);
+							gamePanel.boardButtons[x][y].setSize(slotHoveredSize);
+						}
+						else {
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242) * multiplier), (int)(startY + 258 * multiplier));
+							gamePanel.boardButtons[x][y].setIcon(slotIcon);
+							gamePanel.boardButtons[x][y].setSize(slotSize);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -116,14 +195,6 @@ public class RenderGraphics {
 			nameLabel.setSize(new Dimension(fm.stringWidth(nameLabel.getText()), fm.getHeight()));
 		}
 	}
-	
-//	private static void paintMancalaBoardShadow(Graphics2D g2D) {
-//		
-//		startX = (int)(gamePanel.getWidth() - ResourceLoader.MANCALA_SHADOW.getWidth()) / 2;
-//		startY = (int)(gamePanel.getHeight() - ResourceLoader.MANCALA_BOARD.getHeight()) / 2;
-//
-//		g2D.drawImage(ResourceLoader.MANCALA_SHADOW, startX, startY, null);
-//	}
 	
 	public static void updateButtonText() {
 		

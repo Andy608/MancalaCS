@@ -11,10 +11,12 @@ public class Slot extends JButton {
 	
 	protected BufferedImage slotImage;
 	protected List<Stone> stones;
+	protected boolean isHovered;
 	
 	public Slot() {
 		super.setEnabled(false);
 		stones = new ArrayList<>();
+		isHovered = false;
 	}
 	
 	public Slot(Stone... defaultStones) {
@@ -54,6 +56,14 @@ public class Slot extends JButton {
 			s.add(stones.remove(i));
 		}
 		return s;
+	}
+	
+	public boolean isHovered() {
+		return isHovered;
+	}
+	
+	public void setHovered(boolean b) {
+		isHovered = b;
 	}
 	
 	@Override

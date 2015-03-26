@@ -33,7 +33,6 @@ public class ResourceLoader {
 	public static BufferedImage SLOT_HIGHLIGHT_BACKGROUND;
 
 	public static BufferedImage MANCALA_BOARD;
-	public static BufferedImage MANCALA_SHADOW;
 	
 	public static BufferedImage MANCALA_INSTRUCTIONS;
 	
@@ -58,7 +57,6 @@ public class ResourceLoader {
 			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
 			SLOT_HIGHLIGHT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
 			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
-			MANCALA_SHADOW = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_shadow.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");
