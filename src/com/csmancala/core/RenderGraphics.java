@@ -69,8 +69,8 @@ public class RenderGraphics {
 		Start.getMancala().getGamePanel().player1Name.setText(Start.getMancala().getBoard().getPlayer1().getName());
 		Start.getMancala().getGamePanel().player2Name.setText(Start.getMancala().getBoard().getPlayer2().getName());
 		
-		gamePanel.player1Name.setLocation(startX + 350, startY - 70);
-		gamePanel.player2Name.setLocation(startX + 350, startY + 370);
+		gamePanel.player1Name.setLocation((int)(startX + 800 * multiplier), (int)(startY - 110 * multiplier));
+		gamePanel.player2Name.setLocation((int)(startX + 800 * multiplier), (int)(startY + 550 * multiplier));
 		
 		gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
 		gamePanel.boardButtons[1][0].setLocation((int)(startX + 242 * multiplier), (int)(startY + 50* multiplier));
