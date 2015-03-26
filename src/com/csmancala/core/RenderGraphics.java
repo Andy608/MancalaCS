@@ -69,41 +69,6 @@ public class RenderGraphics {
 				}
 			}
 		}
-		
-//		gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[1][0].setLocation((int)(startX + 242 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[2][0].setLocation((int)(startX + 422 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[3][0].setLocation((int)(startX + 602 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[4][0].setLocation((int)(startX + 782 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[5][0].setLocation((int)(startX + 962 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[6][0].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 50 * multiplier));
-//		
-//		gamePanel.boardButtons[7][1].setLocation((int)(startX + 1320 * multiplier), (int)(startY + 50 * multiplier));
-//		gamePanel.boardButtons[1][1].setLocation((int)(startX + 242 * multiplier), (int)(startY + 258 * multiplier));
-//		gamePanel.boardButtons[2][1].setLocation((int)(startX + 422 * multiplier), (int)(startY + 258 * multiplier));
-//		gamePanel.boardButtons[3][1].setLocation((int)(startX + 602 * multiplier), (int)(startY + 258 * multiplier));
-//		gamePanel.boardButtons[4][1].setLocation((int)(startX + 782 * multiplier), (int)(startY + 258 * multiplier));
-//		gamePanel.boardButtons[5][1].setLocation((int)(startX + 962 * multiplier), (int)(startY + 258 * multiplier));
-//		gamePanel.boardButtons[6][1].setLocation((int)(startX + 1142 * multiplier), (int)(startY + 258 * multiplier));
-		
-		
-//		gamePanel.boardButtons[0][0].setIcon(goalIcon);
-//		gamePanel.boardButtons[7][1].setIcon(goalIcon);
-//		
-//		for (int y = 0; y < 2; y++) {
-//			for (int x = 1; x < 7; x++) {
-//				gamePanel.boardButtons[x][y].setIcon(slotIcon);
-//			}
-//		}
-//		
-//		gamePanel.boardButtons[0][0].setSize(goalSize);
-//		gamePanel.boardButtons[7][1].setSize(goalSize);
-//		
-//		for (int y = 0; y < 2; y++) {
-//			for (int x = 1; x < 7; x++) {
-//				gamePanel.boardButtons[x][y].setSize(slotSize);
-//			}
-//		}
 	}
 	
 	private static void setButtonProperties(JButton b, boolean hovered) {
