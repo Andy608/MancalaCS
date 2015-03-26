@@ -68,8 +68,14 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
 		FontMetrics fm = this.player1Name.getFontMetrics(this.player1Name.getFont());
 		this.player1Name.setSize(new Dimension(fm.stringWidth(this.player1Name.getText()), fm.getHeight()));
+		
+		this.player2Name.setText("Player 2");
+		this.player2Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+		FontMetrics fm2 = this.player2Name.getFontMetrics(this.player2Name.getFont());
+		this.player2Name.setSize(new Dimension(fm2.stringWidth(this.player2Name.getText()), fm2.getHeight()));
 
 		this.add(player1Name);
+		this.add(player2Name);
 		
 		for (int y = 0; y < boardButtons[0].length; y++) {
 			for (int x = 0; x < boardButtons.length; x++) {

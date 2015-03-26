@@ -66,8 +66,11 @@ public class RenderGraphics {
 		ImageIcon goalIcon = new ImageIcon(goalImage);
 		ImageIcon slotIcon = new ImageIcon(slotImage);
 		
-		gamePanel.player1Name.setLocation(startX, startY - 70);
+		Start.getMancala().getGamePanel().player1Name.setText(Start.getMancala().getBoard().getPlayer1().getName());
+		Start.getMancala().getGamePanel().player2Name.setText(Start.getMancala().getBoard().getPlayer2().getName());
 		
+		gamePanel.player1Name.setLocation(startX + 350, startY - 70);
+		gamePanel.player2Name.setLocation(startX + 350, startY + 370);
 		
 		gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 * multiplier), (int)(startY + 50 * multiplier));
 		gamePanel.boardButtons[1][0].setLocation((int)(startX + 242 * multiplier), (int)(startY + 50* multiplier));
@@ -134,6 +137,15 @@ public class RenderGraphics {
 			for (int x = 1; x < 7; x++) {
 				gamePanel.boardButtons[x][y].setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[x][y].getStoneAmount()));
 			}
+		}
+		
+		if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer1()) {
+			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
+		}
+		else if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer2()) {
+			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.BOLD, 48));
+			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
 		}
 	}
 	
