@@ -2,7 +2,6 @@ package com.csmancala.core;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
@@ -35,7 +34,6 @@ public class RenderGraphics {
 	
 	public static void paintMancalaBoard(Graphics2D g2D) {
 //		paintMancalaBoardShadow(g2D);
-		paintPlayerNames();
 		
 		multiplier = (double)(gamePanel.getWidth() / (double)1920);
 	
@@ -51,13 +49,12 @@ public class RenderGraphics {
 		BufferedImage scaledImage = scaleImage(ResourceLoader.MANCALA_BOARD, scaledWidth, scaledHeight, RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		
 		g2D.drawImage(scaledImage, startX, startY, null);
+		updatePlayerNames();
 		updateButtons();
 		updateButtonText();
 	}
 	
 	private static void updateButtons() {
-		
-		gamePanel.player1Name.setLocation(startX, startY - 70);
 		
 		Slot[][] board = Start.getMancala().getBoard().getSlotArray();
 		
@@ -149,16 +146,34 @@ public class RenderGraphics {
 		}
 	}
 	
-	private static void paintPlayerNames() {
-		
-		if (Start.getMancala().getCurrentPlayer() != null && !Start.getMancala().getCurrentPlayer().getName().equals(Start.getMancala().getGamePanel().player1Name.getText())) {
-			String name = Start.getMancala().getCurrentPlayer().getName();
-			JLabel nameLabel = Start.getMancala().getGamePanel().player1Name;
-			nameLabel.setText(name);
-			nameLabel.setFont(new Font("Montserrat", Font.BOLD, 48));
-			FontMetrics fm = nameLabel.getFontMetrics(nameLabel.getFont());
-			nameLabel.setSize(new Dimension(fm.stringWidth(nameLabel.getText()), fm.getHeight()));
+	private static void updatePlayerNames() {
+		JLabel p1Name = gamePanel.player1Name;
+		JLabel p2Name = gamePanel.player1Name;
+		Player p1 = Start.getMancala().getBoard().getPlayer1();
+		Player p2 = Start.getMancala().getBoard().getPlayer2();
+		Player currentPlayer = Start.getMancala().getCurrentPlayer();
+		if (p1 != null && !p1Name.equals(p1.getName())) {
+			p1Name.setText(p1.getName());
+			int style = Font.PLAIN;
+			if (p1Name.equals(currentPlayer.getName())) {
+				style = Font.BOLD;
+			}
+			p1Name.setFont(new Font(p1Name.getText(), style, (int)(72 * multiplier)));
 		}
+		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
+		p1Name.setLocation(startX, startY - (int)(70 * multiplier));
+		
+		if (p2 != null && !p2Name.equals(p2.getName())) {
+			p2Name.setText(p2.getName());
+			int style = Font.PLAIN;
+			if (p2Name.equals(currentPlayer.getName())) {
+				style = Font.BOLD;
+			}
+			p2Name.setFont(new Font(p2Name.getText(), style, (int)(72 * multiplier)));
+		}
+		p2Name.setSize(new Dimension(p2Name.getFontMetrics(p2Name.getFont()).stringWidth(p2Name.getText()), p2Name.getFontMetrics(p2Name.getFont()).getHeight()));
+		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), startY + scaledHeight + (int)(70 * multiplier));
+		
 	}
 	
 	public static void updateButtonText() {
@@ -170,15 +185,6 @@ public class RenderGraphics {
 			for (int x = 1; x < 7; x++) {
 				gamePanel.boardButtons[x][y].setText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[x][y].getStoneAmount()));
 			}
-		}
-		
-		if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer1()) {
-			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.BOLD, 48));
-			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
-		}
-		else if(Start.getMancala().getCurrentPlayer() == Start.getMancala().getBoard().getPlayer2()) {
-			Start.getMancala().getGamePanel().player2Name.setFont(new Font("Montserrat", Font.BOLD, 48));
-			Start.getMancala().getGamePanel().player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
 		}
 	}
 	
