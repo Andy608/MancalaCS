@@ -45,6 +45,7 @@ public class Slot extends JButton {
 	 */
 	public void addStones(Stone... s) {
 		for (Stone stone : s) {
+			System.out.println("YO WASSUP!!!!");
 			stones.add(stone);
 		}
 	}

@@ -116,7 +116,7 @@ public class Mancala implements Runnable {
 		gamePanel = new GamePanel();
 		rulesPanel = new RulesPanel();
 		menuPanel = new MainMenuPanel();
-		winPanel = new WinPanel();
+		winPanel = new WinPanel(null);
 		displayedPanel = menuPanel;
 	}
 	
@@ -156,28 +156,21 @@ public class Mancala implements Runnable {
 	
 	public void endGame() {
 		
-		if (compareGoals() == null) {
-			//TODO: call methods to display tie message!
-			whoWins = 0;
-			System.out.println("It's a tie!");
-		}
-		else if (compareGoals().equals(mancalaBoard.getPlayer1())) {
-			//TODO: call methods to display player1 winning message!
-			whoWins = 1;
-			System.out.println(mancalaBoard.getPlayer1() + " Wins!");
+		Player winner = this.compareGoals();
+		
+		if (winner != null) {
+			System.out.println(winner.getName() + " Wins!");
 		}
 		else {
-			//TODO: call methods to display player2 winning message!
-			whoWins = 2;
-			System.out.println(mancalaBoard.getPlayer2() + " Wins!");
+			System.out.println("It's a tie!");
 		}
 		
+		this.winPanel.setWinner(winner);
 		openWinScreen();
-		resetGame();
 	}
 	
 	public void openRules() {
-		frameInstance.remove(menuPanel);
+		frameInstance.remove(displayedPanel);
 		frameInstance.add(rulesPanel);
 		displayedPanel = rulesPanel;
 	}
@@ -190,7 +183,7 @@ public class Mancala implements Runnable {
 	
 	public void openWinScreen() {
 		//System.out.println("SWAPPING SCREENS");
-		frameInstance.remove(gamePanel);
+		frameInstance.remove(displayedPanel);
 		frameInstance.add(winPanel);
 		displayedPanel = winPanel;
 	}
@@ -342,12 +335,9 @@ public class Mancala implements Runnable {
 	}
 	
 	private void resetGame() {
-		
 		menuPanel.setPlayer1Name(null);
 		menuPanel.setPlayer2Name(null);
-		frameInstance.remove(gamePanel);
-		frameInstance.add(menuPanel);
-		displayedPanel = menuPanel;
+		this.returnToMenu();
 	}
 	
 	public Board getBoard() {

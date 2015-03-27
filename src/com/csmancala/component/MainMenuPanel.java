@@ -108,7 +108,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			this.executeRulesAction();
 		}
 		else if (e.getSource() == creditsButton) {
-			System.out.println("lol credits.");
+			Start.getMancala().openWinScreen();
 		}
 		else if (e.getSource() == quitButton) {
 			executeQuitAction();
