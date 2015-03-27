@@ -68,10 +68,9 @@ public class WinPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mainMenuButton) {
+			Start.getMancala().resetGame();
 			Start.getMancala().returnToMenu();
 		}
-		
-		
 	}
 	
 	public void initComp() {

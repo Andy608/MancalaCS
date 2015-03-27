@@ -36,7 +36,6 @@ public class Mancala implements Runnable {
 	int ticks;
 	int frameCount;
 	int fps;
-	private int whoWins;
 	double elapsedSeconds;
 	
 	public Mancala() {
@@ -175,17 +174,19 @@ public class Mancala implements Runnable {
 		displayedPanel = rulesPanel;
 	}
 	
-	public void returnToMenu() {
+	public void switchPanel(JPanel newPanel) {
 		frameInstance.remove(displayedPanel);
-		frameInstance.add(menuPanel);
-		displayedPanel = menuPanel;
+		frameInstance.add(newPanel);
+		displayedPanel = newPanel;
+	}
+	
+	public void returnToMenu() {
+		switchPanel(menuPanel);
 	}
 	
 	public void openWinScreen() {
 		//System.out.println("SWAPPING SCREENS");
-		frameInstance.remove(displayedPanel);
-		frameInstance.add(winPanel);
-		displayedPanel = winPanel;
+		switchPanel(winPanel);
 	}
 	
 	//Never call this method unless it is from the button listeners!
@@ -292,22 +293,31 @@ public class Mancala implements Runnable {
 	}
 	
 	private void addStonesToOpponent() {
-		int y = getYStatus();
 		
-		for (int x = 1; x < mancalaBoard.getSlotArray().length - 1; x++) {
+		int y = getOppositeSide();
+		Player oppositePlayer;
+		
+		if (currentPlayer.equals(mancalaBoard.getPlayer1())) oppositePlayer = mancalaBoard.getPlayer2();
+		else oppositePlayer = mancalaBoard.getPlayer1();
+		
+		for (int x = 1; x < 7; x++) {
 			
-			currentPlayer.setHand(mancalaBoard.getSlotArray()[x][y].getStones());
+			mancalaBoard.setCurrentSlot(x, y);
+			mancalaBoard.pickUpStones(oppositePlayer);
 			
-			for (int i = 0; i < currentPlayer.getHandAmount(); i++) {
-				currentPlayer.getGoal().getStones().add(currentPlayer.getHand().get(i));
-				currentPlayer.getHand().remove(i);
-				System.out.println("Player hand amount: " + currentPlayer.getHandAmount());
+			if (oppositePlayer.equals(mancalaBoard.getPlayer1())) mancalaBoard.setCurrentSlot(0, 0);
+			else mancalaBoard.setCurrentSlot(7, 1);
+			
+			int hand = oppositePlayer.getHandAmount();
+			for (int i = 0; i < hand; i++) {
+				mancalaBoard.addStoneToNewPile(oppositePlayer);
 			}
 		}
 	}
 	
-	private int getYStatus() {
+	private int getOppositeSide() {
 		int y = 0;
+		
 		//Set the y to the opposite player's side so they can collect their stones.
 		if (currentPlayer.equals(mancalaBoard.getPlayer1())) y = 1;
 		else y = 0;
@@ -334,10 +344,10 @@ public class Mancala implements Runnable {
 		}
 	}
 	
-	private void resetGame() {
+	public void resetGame() {
 		menuPanel.setPlayer1Name(null);
 		menuPanel.setPlayer2Name(null);
-		this.returnToMenu();
+		switchPanel(menuPanel);
 	}
 	
 	public Board getBoard() {
@@ -366,9 +376,5 @@ public class Mancala implements Runnable {
 	
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
-	}
-	
-	public int getWhoWins() {
-		return whoWins;
 	}
 }

@@ -38,14 +38,14 @@ public class Board {
 					slotArray[x][y] = player2.getGoal();
 				}
 				else if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
-					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
-						/**/System.out.println("ADDING STONE");
-						/**/slotArray[x][y] = new Slot(new Stone[5]);
-//					slotArray[x][y] = new Slot(new Stone[4]);
-						/**/}
-					/**/else {
-						/**/slotArray[x][y] = new Slot();
-						/**/}
+//					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
+//						/**/System.out.println("ADDING STONE");
+//						/**/slotArray[x][y] = new Slot(new Stone[5]);
+					slotArray[x][y] = new Slot(new Stone[4]);
+//						/**/}
+//					/**/else {
+//						/**/slotArray[x][y] = new Slot();
+//						/**/}
 				}
 			}
 		}
@@ -130,7 +130,7 @@ public class Board {
 	/**
 	 * Adds a random stone from the player's hand to the new slot and removes a stone from the player's hand.
 	 */
-	private void addStoneToNewPile(Player currentPlayer) {
+	public void addStoneToNewPile(Player currentPlayer) {
 		
 		int stoneIndex = rand.nextInt(currentPlayer.getHandAmount());
 		
