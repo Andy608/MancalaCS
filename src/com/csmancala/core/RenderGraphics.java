@@ -162,13 +162,13 @@ public class RenderGraphics {
 			p2Name.setText(p2.getName());
 		}
 		
-		if(currentPlayer == p1) {
+		if(currentPlayer.equals(p1)) {
 			p1Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
 			p2Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
 		}
-		else if(currentPlayer == p2) {
-			p2Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
+		else if(currentPlayer.equals(p2)) {
 			p1Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
+			p2Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
 		}
 
 		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
@@ -176,29 +176,6 @@ public class RenderGraphics {
 		
 		p2Name.setSize(new Dimension(p2Name.getFontMetrics(p2Name.getFont()).stringWidth(p2Name.getText()), p2Name.getFontMetrics(p2Name.getFont()).getHeight()));
 		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), (int)((startY + (70 * multiplier)) + scaledHeight));
-		
-//		if (p1 != null && !p1Name.equals(p1.getName())) {
-//			p1Name.setText(p1.getName());
-//			int style = Font.PLAIN;
-//			
-//			if (p1Name.equals(currentPlayer.getName())) {
-//				style = Font.BOLD;
-//			}
-//			p1Name.setFont(new Font(p1Name.getText(), style, (int)(72 * multiplier)));
-//		}
-//		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
-//		p1Name.setLocation(startX, startY - (int)(70 * multiplier));
-//		
-//		if (p2 != null && !p2Name.equals(p2.getName())) {
-//			p2Name.setText(p2.getName());
-//			int style = Font.PLAIN;
-//			if (p2Name.equals(currentPlayer.getName())) {
-//				style = Font.BOLD;
-//			}
-//			p2Name.setFont(new Font(p2Name.getText(), style, (int)(72 * multiplier)));
-//		}
-//		p2Name.setSize(new Dimension(p2Name.getFontMetrics(p2Name.getFont()).stringWidth(p2Name.getText()), p2Name.getFontMetrics(p2Name.getFont()).getHeight()));
-//		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), startY + scaledHeight + (int)(70 * multiplier));
 	}
 	
 	public static void updateButtonText() {
