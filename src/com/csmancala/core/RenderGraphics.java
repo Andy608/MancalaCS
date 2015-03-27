@@ -30,7 +30,7 @@ public class RenderGraphics {
 	private static int scaledHeight;
 	
 	private static double multiplier;
-	private static float maxMultiplier = 0.7f;
+	private static float maxMultiplier = 0.5f;
 	
 	public static void paintMancalaBoard(Graphics2D g2D) {
 //		paintMancalaBoardShadow(g2D);
@@ -162,20 +162,20 @@ public class RenderGraphics {
 			p2Name.setText(p2.getName());
 		}
 		
-		if (p1Name.equals(currentPlayer.getName())) {
-			p1Name.setFont(new Font(p1Name.getText(), Font.BOLD, (int)(72 * multiplier)));
-			p2Name.setFont(new Font(p2Name.getText(), Font.PLAIN, (int)(64 * multiplier)));
+		if(currentPlayer == p1) {
+			p1Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
+			p2Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
 		}
-		else {
-			p2Name.setFont(new Font(p2Name.getText(), Font.BOLD, (int)(72 * multiplier)));
-			p1Name.setFont(new Font(p1Name.getText(), Font.PLAIN, (int)(64 * multiplier)));
+		else if(currentPlayer == p2) {
+			p2Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
+			p1Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
 		}
-		
+
 		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
-		p1Name.setLocation(startX, (int)(startY - 100 * multiplier));
+		p1Name.setLocation(startX, startY - (int)(100 * multiplier));
 		
 		p2Name.setSize(new Dimension(p2Name.getFontMetrics(p2Name.getFont()).stringWidth(p2Name.getText()), p2Name.getFontMetrics(p2Name.getFont()).getHeight()));
-		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), (int)((startY + 70 * multiplier) + scaledHeight));
+		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), (int)((startY + (70 * multiplier)) + scaledHeight));
 		
 //		if (p1 != null && !p1Name.equals(p1.getName())) {
 //			p1Name.setText(p1.getName());

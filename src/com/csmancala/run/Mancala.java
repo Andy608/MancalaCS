@@ -267,6 +267,7 @@ public class Mancala implements Runnable {
 		
 		if (currentPlayer.equals(mancalaBoard.getPlayer1())) {
 			currentPlayer = mancalaBoard.getPlayer2();
+			//Start.getMancala().getGamePanel().player1Name
 		}
 		else {
 			currentPlayer = mancalaBoard.getPlayer1();

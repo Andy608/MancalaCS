@@ -60,6 +60,9 @@ public class WinPanel extends JPanel implements ActionListener {
 		name1 = Start.getMancala().getBoard().getPlayer1().getName();
 		name2 = Start.getMancala().getBoard().getPlayer2().getName();
 		
+		//how can this possibly be efficent?
+		player1Label.setText(name1 + " scored: "+Start.getMancala().getBoard().getPlayer1().getGoal().getStoneAmount());
+		player2Label.setText(name2 + " scored: "+Start.getMancala().getBoard().getPlayer2().getGoal().getStoneAmount());
 		
 		if(whoWins == 0)
 			winnerName.setText("TIE");
@@ -67,6 +70,8 @@ public class WinPanel extends JPanel implements ActionListener {
 			winnerName.setText(name1);
 		else if(whoWins == 2)
 			winnerName.setText(name2);
+		
+		
 	}
 
 }
