@@ -249,7 +249,6 @@ public class Mancala implements Runnable {
 			return;
 		}
 		else if (mancalaBoard.isCorrectSide(currentPlayer) && slotArray[mancalaBoard.getCurrentSlotX()][mancalaBoard.getCurrentSlotY()].getStoneAmount() == 1) {
-			//THIS NEEDS TO BE TESTED!
 			System.out.println("CAPTURE!!");
 			mancalaBoard.captureStones(currentPlayer);
 		}

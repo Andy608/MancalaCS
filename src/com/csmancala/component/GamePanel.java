@@ -12,9 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
@@ -23,8 +25,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6954435685287527912L;
 
-	public JLabel player1Name = new JLabel();
-	public JLabel player2Name = new JLabel();
+	public JLabel player1Name;
+	public JLabel player2Name;
 	
 	public JButton[][] boardButtons;
 
@@ -45,6 +47,9 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 		}
 
+		this.player1Name = new JLabel();
+		this.player2Name = new JLabel();
+		
 		this.player1Name.setText("Player 1");
 		this.player1Name.setFont(new Font("Montserrat", Font.PLAIN, 48));
 		FontMetrics fm = this.player1Name.getFontMetrics(this.player1Name.getFont());
