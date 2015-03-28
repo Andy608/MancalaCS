@@ -1,5 +1,6 @@
 package com.csmancala.core;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ public class Stone {
 
 	private static Random rand = new Random();
 	private BufferedImage stoneImage = ResourceLoader.BLUE_STONE;
+	private Point location = new Point(0, 0);
 	
 	public Stone() {
 		this.setRandomStoneImage();
@@ -16,6 +18,14 @@ public class Stone {
 	
 	public BufferedImage getImage() {
 		return this.stoneImage;
+	}
+	
+	public void setLocation(int x, int y) {
+		this.location = new Point(x, y);
+	}
+	
+	public Point getLocation() {
+		return this.location;
 	}
 	
 	private void setRandomStoneImage() {

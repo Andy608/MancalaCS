@@ -134,7 +134,7 @@ public class Mancala implements Runnable {
 	}
 	
 	public void startGame() {
-		frameInstance.remove(menuPanel);
+		frameInstance.remove(displayedPanel);
 		frameInstance.add(gamePanel);
 		displayedPanel = gamePanel;
 		
