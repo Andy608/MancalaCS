@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,12 +16,13 @@ import com.csmancala.core.Board;
 import com.csmancala.core.Player;
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
+import com.csmancala.util.MancalaButton;
 
 public class WinPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 9015876069663842418L;
 
-	private JButton mainMenuButton;
+	private MancalaButton mainMenuButton;
 	
 	private JLabel winnerLabelStatic;
 	private JLabel winnerName;
@@ -86,7 +86,7 @@ public class WinPanel extends JPanel implements ActionListener {
 		player2Label = new JLabel();
 		player2Label.setFont(new Font("Montserrat", Font.PLAIN, 36));
 		player2Label.setHorizontalAlignment(JLabel.CENTER);
-		mainMenuButton = new JButton("Return to Menu!");
+		mainMenuButton = new MancalaButton("Return to Menu!");
 		mainMenuButton.addActionListener(this);
 	}
 	

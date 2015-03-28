@@ -76,6 +76,15 @@ public class ResourceLoader {
 			GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
 			RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
 			YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
+			
+			PLAY_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_button.png");
+			PLAY_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_hovered_button.png");
+			RULES_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_button.png");
+			RULES_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_hovered_button.png");
+			CREDITS_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_button.png");
+			CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
+			QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
+			QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");

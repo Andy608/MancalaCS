@@ -363,6 +363,10 @@ public class Mancala implements Runnable {
 		return isRunning;
 	}
 	
+	public JPanel getDisplayedPanel() {
+		return displayedPanel;
+	}
+	
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}

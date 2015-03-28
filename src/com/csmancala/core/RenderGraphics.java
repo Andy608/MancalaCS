@@ -8,7 +8,6 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,9 +15,11 @@ import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
+import com.csmancala.util.MancalaButton;
 
 public class RenderGraphics {
 
+	private static MainMenuPanel menuPanel = Start.getMancala().getMenuPanel();
 	private static GamePanel gamePanel = Start.getMancala().getGamePanel();
 	
 	public static void paintBackground(JPanel panel, Graphics2D g2D) {
@@ -36,7 +37,7 @@ public class RenderGraphics {
 	public static void paintMancalaBoard(Graphics2D g2D) {
 		
 		multiplier = (double)(gamePanel.getWidth() / (double)1920);
-	
+		
 		if (multiplier > maxMultiplier && ((double)gamePanel.getHeight() / (double)gamePanel.getWidth() <= 0.5)) {
 			multiplier = maxMultiplier;
 		}
@@ -50,14 +51,13 @@ public class RenderGraphics {
 		
 		g2D.drawImage(scaledImage, startX, startY, null);
 		updatePlayerNames();
-		updateButtons();
 	}
 	
 	public static void updateMenuText(MainMenuPanel panel) {
 		
-		multiplier = (double)(panel.getWidth() / (double)1920);
+		multiplier = (double)(menuPanel.getWidth() / (double)1920);
 		
-		if (multiplier > maxMultiplier && ((double)panel.getHeight() / (double)panel.getWidth() <= 0.5)) {
+		if (multiplier > maxMultiplier && ((double)menuPanel.getHeight() / (double)menuPanel.getWidth() <= 0.5)) {
 			multiplier = maxMultiplier;
 		}
 		
@@ -66,21 +66,27 @@ public class RenderGraphics {
 	
 	public static void updateButtons() {
 		
-		System.out.println("OMG");
-		Slot[][] board = Start.getMancala().getBoard().getSlotArray();
-		
-		for (int y = 0; y < board[0].length; y++) {
-			for (int x = 0; x < board.length; x++) {
-				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
-					if (board[x][y].isHovered) setButtonProperties(gamePanel.boardButtons[x][y], true);
-					else setButtonProperties(gamePanel.boardButtons[x][y], false);
+		if (Start.getMancala().getDisplayedPanel().equals(gamePanel)) {
+			Slot[][] board = Start.getMancala().getBoard().getSlotArray();
+			
+			for (int y = 0; y < board[0].length; y++) {
+				for (int x = 0; x < board.length; x++) {
+					if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+						setButtonProperties(gamePanel.boardButtons[x][y], board[x][y].isHovered());
+					}
 				}
 			}
+			updateButtonText();
 		}
-		updateButtonText();
+		else if (Start.getMancala().getDisplayedPanel().equals(menuPanel)) {
+			
+			for (int i = 0; i < menuPanel.menuButtons.length; i++) {
+				updateMainMenuButtons(menuPanel.menuButtons[i], menuPanel.menuButtons[i].isHovered());
+			}
+		}
 	}
 	
-	private static void setButtonProperties(JButton b, boolean hovered) {
+	private static void setButtonProperties(MancalaButton b, boolean hovered) {
 		
 		BufferedImage goalImage = scaleImage(ResourceLoader.GOAL_BACKGROUND, (int) (ResourceLoader.GOAL_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		BufferedImage slotImage = scaleImage(ResourceLoader.SLOT_BACKGROUND, (int) (ResourceLoader.SLOT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
@@ -156,6 +162,61 @@ public class RenderGraphics {
 				}
 			}
 		}
+	}
+	
+	public static void updateMainMenuButtons(MancalaButton b, boolean hovered) {
+		
+		multiplier = (double)(menuPanel.getWidth() / (double)1920);
+		
+		if (multiplier > maxMultiplier && ((double)menuPanel.getHeight() / (double)menuPanel.getWidth() <= 0.5)) {
+			multiplier = maxMultiplier;
+		}
+		
+		BufferedImage playImage = scaleImage(ResourceLoader.PLAY_BUTTON, (int) (ResourceLoader.PLAY_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.PLAY_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage playHoveredImage = scaleImage(ResourceLoader.PLAY_HOVERED_BUTTON, (int) (ResourceLoader.PLAY_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.PLAY_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage rulesImage = scaleImage(ResourceLoader.RULES_BUTTON, (int) (ResourceLoader.RULES_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RULES_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage rulesHoveredImage = scaleImage(ResourceLoader.RULES_HOVERED_BUTTON, (int) (ResourceLoader.RULES_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RULES_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage creditsImage = scaleImage(ResourceLoader.CREDITS_BUTTON, (int) (ResourceLoader.CREDITS_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.CREDITS_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage creditsHoveredImage = scaleImage(ResourceLoader.CREDITS_HOVERED_BUTTON, (int) (ResourceLoader.CREDITS_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.CREDITS_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage quitImage = scaleImage(ResourceLoader.QUIT_BUTTON, (int) (ResourceLoader.QUIT_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.QUIT_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage quitHoveredImage = scaleImage(ResourceLoader.QUIT_HOVERED_BUTTON, (int) (ResourceLoader.QUIT_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.QUIT_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(playImage.getWidth(), playImage.getHeight());
+		
+		ImageIcon playIcon = new ImageIcon(playImage);
+		ImageIcon playHoveredIcon = new ImageIcon(playHoveredImage);
+		ImageIcon rulesIcon = new ImageIcon(rulesImage);
+		ImageIcon rulesHoveredIcon = new ImageIcon(rulesHoveredImage);
+		ImageIcon creditsIcon = new ImageIcon(creditsImage);
+		ImageIcon creditsHoveredIcon = new ImageIcon(creditsHoveredImage);
+		ImageIcon quitIcon = new ImageIcon(quitImage);
+		ImageIcon quitHoveredIcon = new ImageIcon(quitHoveredImage);
+		
+		for (int i = 0; i < menuPanel.menuButtons.length; i++) {
+			menuPanel.menuButtons[i].setSize(buttonSize);
+		}
+		
+		if (b.equals(menuPanel.menuButtons[0])) {
+			b.setLocation((int)((menuPanel.getWidth() - playImage.getWidth()) / 2), (int)(startY + 300 * multiplier));
+			if (hovered) b.setIcon(playHoveredIcon);
+			else b.setIcon(playIcon);
+		}
+		else if (b.equals(menuPanel.menuButtons[1])) {
+			b.setLocation((int)((menuPanel.getWidth() - playImage.getWidth()) / 2), (int)(startY + 450 * multiplier));
+			if (hovered) b.setIcon(rulesHoveredIcon);
+			else b.setIcon(rulesIcon);
+		}
+		else if (b.equals(menuPanel.menuButtons[2])) {
+			b.setLocation((int)((menuPanel.getWidth() - playImage.getWidth()) / 2), (int)(startY + 600 * multiplier));
+			if (hovered) b.setIcon(creditsHoveredIcon);
+			else b.setIcon(creditsIcon);
+		}
+		else if (b.equals(menuPanel.menuButtons[3])) {
+			b.setLocation((int)((menuPanel.getWidth() - playImage.getWidth()) / 2), (int)(startY + 750 * multiplier));
+			if (hovered) b.setIcon(quitHoveredIcon);
+			else b.setIcon(quitIcon);
+		}
+		
 	}
 	
 	private static void updatePlayerNames() {
@@ -262,7 +323,7 @@ public class RenderGraphics {
 		
 		for (int y = 0; y < panel.boardButtons[0].length; y++) {
 			for (int x = 0; x < panel.boardButtons.length; x++) {
-				JButton button = panel.boardButtons[x][y];
+				MancalaButton button = panel.boardButtons[x][y];
 				if (button != null) {
 					Slot slot = board.getSlotArray()[x][y];
 					for (int i = 0; i < slot.getStones().size(); i++) {
@@ -270,7 +331,7 @@ public class RenderGraphics {
 						if (currentStone != null) {
 							BufferedImage stoneScaled = scaleImage(currentStone.getImage(), (int) (currentStone.getImage().getWidth() * multiplier), (int) (currentStone.getImage().getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 							if (!(slot instanceof Goal)) {
-								if (slot.isHovered) {
+								if (slot.isHovered()) {
 									g2d.drawImage(stoneScaled, button.getX() + (int)(7.5 * multiplier), button.getY() + (int)(7.5 * multiplier), null);
 								}
 								else {

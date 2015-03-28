@@ -1,38 +1,39 @@
 package com.csmancala.component;
 
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
+import com.csmancala.util.MancalaButton;
 
 public class MainMenuPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 5504065348067609290L;
 
-	public JLabel mancalaLogo = new JLabel("Mancala"); 
-	private JButton playButton = new JButton("Play!");
-	private JButton rulesButton = new JButton("Rules");
-	private JButton creditsButton = new JButton("Credits");
-	private JButton quitButton = new JButton("Quit");
+	public JLabel mancalaLogo = new JLabel("Mancala");
+	
+	public MancalaButton[] menuButtons = new MancalaButton[4];
 	
 	private String player1Name;
 	private String player2Name;
 	
 	public MainMenuPanel() {
 		super();
-		this.addGridAndComponents();
+		this.setLayout(getLayout());
+		this.setUpMenu();
 	}
 	
 	@Override
@@ -42,54 +43,32 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		RenderGraphics.paintBackground(this, g2D);
+		RenderGraphics.updateButtons();
 		RenderGraphics.updateMenuText(this);
 	}
 	
-	private void addGridAndComponents() {
-		this.addListeners();
-		this.setLayout(new GridLayout(10, 3));
+	private void setUpMenu() {
 		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
+		for (int i = 0; i < menuButtons.length; i++) {
+			menuButtons[i] = initButtons();
+		}
 		
-		this.add(Box.createGlue());
 		mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, 72));
 		mancalaLogo.setHorizontalAlignment(JLabel.CENTER);
 		this.add(mancalaLogo);
-		this.add(Box.createGlue());
 		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(playButton);
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(rulesButton);
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(creditsButton);
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(quitButton);
-		this.add(Box.createGlue());
+		for (MancalaButton b : menuButtons) {
+			add(b);
+		}
+	}
+	
+	private MancalaButton initButtons() {
+		MancalaButton b = new MancalaButton();
+		b.setBorderPainted(false);
+		b.setContentAreaFilled(false);
+		b.setFocusPainted(false);
+		b.setOpaque(false);
+		return b;
 	}
 
 	public String getPlayer1Name(){
@@ -102,16 +81,16 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == playButton) {
+		if(e.getSource().equals(menuButtons[0])) {
 			executePlayAction();
 		}
-		else if (e.getSource() == rulesButton) {
+		else if (e.getSource().equals(menuButtons[1])) {
 			executeRulesAction();
 		}
-		else if (e.getSource() == creditsButton) {
+		else if (e.getSource().equals(menuButtons[2])) {
 			System.out.println("Lol credits");
 		}
-		else if (e.getSource() == quitButton) {
+		else if (e.getSource().equals(menuButtons[3])) {
 			executeQuitAction();
 		}
 	}
@@ -145,11 +124,27 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		System.exit(0);
 	}
 	
-	private void addListeners() {
-		playButton.addActionListener(this);
-		rulesButton.addActionListener(this);
-		creditsButton.addActionListener(this);
-		quitButton.addActionListener(this);
+	@Override
+	public Component add(final Component c) {
+		if (c instanceof MancalaButton) {
+			final MancalaButton b = (MancalaButton)c;
+			b.addActionListener(this);
+			b.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					b.setHovered(true);
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					b.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					b.setHovered(false);
+				}
+			});
+		}
+		return super.add(c);
 	}
 	
 	public String getPlayer1NameInput() {
