@@ -41,7 +41,12 @@ public class Board {
 //					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
 //						/**/System.out.println("ADDING STONE");
 //						/**/slotArray[x][y] = new Slot(new Stone[5]);
-					slotArray[x][y] = new Slot(new Stone[4]);
+					Stone[] stones = new Stone[4];
+					for (int s = 0; s < stones.length; s++) {
+						stones[s] = new Stone();
+					}
+					
+					slotArray[x][y] = new Slot(stones);
 //						/**/}
 //					/**/else {
 //						/**/slotArray[x][y] = new Slot();

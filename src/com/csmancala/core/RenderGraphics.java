@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.component.GamePanel;
+import com.csmancala.component.MainMenuPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 
@@ -52,6 +53,17 @@ public class RenderGraphics {
 		updatePlayerNames();
 		updateButtons();
 		updateButtonText();
+	}
+	
+	public static void updateMenuText(MainMenuPanel panel) {
+		
+		multiplier = (double)(panel.getWidth() / (double)1920);
+		
+		if (multiplier > maxMultiplier && ((double)panel.getHeight() / (double)panel.getWidth() <= 0.5)) {
+			multiplier = maxMultiplier;
+		}
+		
+		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
 	}
 	
 	public static void updateButtons() {
@@ -243,5 +255,35 @@ public class RenderGraphics {
 		} while (w != targetWidth || h != targetHeight);
 
 		return ret;
+	}
+
+	public static void paintForeground(GamePanel panel, Graphics2D g2d) {
+		Board board = Start.getMancala().getBoard();
+		
+		for (int y = 0; y < panel.boardButtons[0].length; y++) {
+			for (int x = 0; x < panel.boardButtons.length; x++) {
+				JButton button = panel.boardButtons[x][y];
+				if (button != null) {
+					Slot slot = board.getSlotArray()[x][y];
+					for (int i = 0; i < slot.getStones().size(); i++) {
+						Stone currentStone = slot.getStones().get(i);
+						if (currentStone != null) {
+							BufferedImage stoneScaled = scaleImage(currentStone.getImage(), (int) (currentStone.getImage().getWidth() * multiplier), (int) (currentStone.getImage().getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+							if (!(slot instanceof Goal)) {
+								if (slot.isHovered) {
+									g2d.drawImage(stoneScaled, button.getX() + (int)(7.5 * multiplier), button.getY() + (int)(7.5 * multiplier), null);
+								}
+								else {
+									g2d.drawImage(stoneScaled, button.getX(), button.getY(), null);
+								}
+							}
+							else {
+								g2d.drawImage(stoneScaled, button.getX(), button.getY(), null);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
