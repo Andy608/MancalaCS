@@ -21,7 +21,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 5504065348067609290L;
 
-	private JLabel mancalaLogo = new JLabel("Mancala"); 
+	public JLabel mancalaLogo = new JLabel("Mancala"); 
 	private JButton playButton = new JButton("Play!");
 	private JButton rulesButton = new JButton("Rules");
 	private JButton creditsButton = new JButton("Credits");
@@ -42,6 +42,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		RenderGraphics.paintBackground(this, g2D);
+		RenderGraphics.updateMenuText(this);
 	}
 	
 	private void addGridAndComponents() {

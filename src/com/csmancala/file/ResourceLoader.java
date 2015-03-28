@@ -32,6 +32,11 @@ public class ResourceLoader {
 	public static BufferedImage SLOT_BACKGROUND;
 	public static BufferedImage SLOT_HOVERED_BACKGROUND;
 
+	public static BufferedImage BLUE_STONE;
+	public static BufferedImage GREEN_STONE;
+	public static BufferedImage RED_STONE;
+	public static BufferedImage YELLOW_STONE;
+	
 	public static BufferedImage MANCALA_BOARD;
 	
 	public static BufferedImage PLAY_BUTTON;
@@ -66,6 +71,11 @@ public class ResourceLoader {
 			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
 			SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
 			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
+			
+			BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
+			GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
+			RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
+			YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");

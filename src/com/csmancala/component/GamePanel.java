@@ -126,9 +126,18 @@ public class GamePanel extends JPanel implements ActionListener {
 		b.setVerticalTextPosition(JButton.CENTER);
 		return b;
 	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2D = (Graphics2D) g;
+		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		
+		RenderGraphics.paintForeground(this, g2D);
+	}
 
 	/**
-	 * This method overrides the super.paint(g) method.
+	 * This method overrides the super.paintComponent(g) method.
 	 * It is called in the Mancala class every frame to force refresh the display.
 	 */
 	@Override

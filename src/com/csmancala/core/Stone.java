@@ -1,22 +1,31 @@
 package com.csmancala.core;
 
-import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import com.csmancala.file.ResourceLoader;
 
 public class Stone {
 
 	private static Random rand = new Random();
-	
-	//TODO: The stone texture.
-//	public static BufferedImage stoneTexture;
-	
-	private Color stoneColor;
+	private BufferedImage stoneImage = ResourceLoader.BLUE_STONE;
 	
 	public Stone() {
-		stoneColor = new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+		this.setRandomStoneImage();
 	}
 	
-	public Color getColor() {
-		return stoneColor;
+	public BufferedImage getImage() {
+		return this.stoneImage;
+	}
+	
+	private void setRandomStoneImage() {
+		BufferedImage[] stones = new BufferedImage[] {
+				ResourceLoader.BLUE_STONE,
+				ResourceLoader.GREEN_STONE,
+				ResourceLoader.RED_STONE,
+				ResourceLoader.YELLOW_STONE
+		};
+		
+		this.stoneImage = stones[rand.nextInt(4)];
 	}
 }
