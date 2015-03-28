@@ -164,6 +164,9 @@ public class RenderGraphics {
 		JLabel p1Name = gamePanel.player1Name;
 		JLabel p2Name = gamePanel.player2Name;
 		
+		String stringOfName1 = Start.getMancala().getBoard().getPlayer1().getName();
+		String stringOfName2 = Start.getMancala().getBoard().getPlayer2().getName();
+		
 		Player p1 = Start.getMancala().getBoard().getPlayer1();
 		Player p2 = Start.getMancala().getBoard().getPlayer2();
 		Player currentPlayer = Start.getMancala().getCurrentPlayer();
@@ -177,10 +180,14 @@ public class RenderGraphics {
 		}
 		
 		if(currentPlayer.equals(p1)) {
+			p1Name.setText("Your Turn: "+stringOfName1);
+			p2Name.setText(stringOfName2);
 			p1Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
 			p2Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
 		}
 		else if(currentPlayer.equals(p2)) {
+			p1Name.setText(stringOfName1);
+			p2Name.setText("Your Turn: "+stringOfName2);
 			p1Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
 			p2Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
 		}
