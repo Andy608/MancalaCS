@@ -138,6 +138,7 @@ public class Board {
 		System.out.println(currentSlotLocation[0] + ", " + currentSlotLocation[1] + ": " + slotArray[currentSlotLocation[0]][currentSlotLocation[1]]);
 		currentPlayer.getHand().remove(stoneIndex);
 		System.out.println("Stones in hand: " + currentPlayer.getHandAmount());
+		RenderGraphics.updateButtons();
 	}
 	
 	public boolean isInGoal(Player currentPlayer) {

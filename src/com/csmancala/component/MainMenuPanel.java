@@ -62,32 +62,32 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
 		this.add(playButton);
 		this.add(Box.createGlue());
-		this.add(Box.createGlue());
 		
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
 		this.add(rulesButton);
 		this.add(Box.createGlue());
-		this.add(Box.createGlue());
 		
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
 		this.add(creditsButton);
 		this.add(Box.createGlue());
-		this.add(Box.createGlue());
 		
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 		
+		this.add(Box.createGlue());
 		this.add(quitButton);
-		this.add(Box.createGlue());
 		this.add(Box.createGlue());
 	}
 
@@ -105,10 +105,10 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			executePlayAction();
 		}
 		else if (e.getSource() == rulesButton) {
-			this.executeRulesAction();
+			executeRulesAction();
 		}
 		else if (e.getSource() == creditsButton) {
-			Start.getMancala().openWinScreen();
+			System.out.println("Lol credits");
 		}
 		else if (e.getSource() == quitButton) {
 			executeQuitAction();

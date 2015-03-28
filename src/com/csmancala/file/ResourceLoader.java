@@ -28,11 +28,20 @@ public class ResourceLoader {
 	public static BufferedImage TABLE_BACKGROUND;
 	
 	public static BufferedImage GOAL_BACKGROUND;
-	public static BufferedImage GOAL_HIGHLIGHT_BACKGROUND;
+	public static BufferedImage GOAL_HOVERED_BACKGROUND;
 	public static BufferedImage SLOT_BACKGROUND;
-	public static BufferedImage SLOT_HIGHLIGHT_BACKGROUND;
+	public static BufferedImage SLOT_HOVERED_BACKGROUND;
 
 	public static BufferedImage MANCALA_BOARD;
+	
+	public static BufferedImage PLAY_BUTTON;
+	public static BufferedImage PLAY_HOVERED_BUTTON;
+	public static BufferedImage RULES_BUTTON;
+	public static BufferedImage RULES_HOVERED_BUTTON;
+	public static BufferedImage CREDITS_BUTTON;
+	public static BufferedImage CREDITS_HOVERED_BUTTON;
+	public static BufferedImage QUIT_BUTTON;
+	public static BufferedImage QUIT_HOVERED_BUTTON;
 	
 	public static BufferedImage MANCALA_INSTRUCTIONS;
 	
@@ -53,9 +62,9 @@ public class ResourceLoader {
 			MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");
 			
 			GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal.png");
-			GOAL_HIGHLIGHT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
+			GOAL_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
 			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
-			SLOT_HIGHLIGHT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
+			SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
 			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
 		}
 		else {

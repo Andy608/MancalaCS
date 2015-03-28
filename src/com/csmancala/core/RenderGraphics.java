@@ -33,7 +33,6 @@ public class RenderGraphics {
 	private static float maxMultiplier = 0.5f;
 	
 	public static void paintMancalaBoard(Graphics2D g2D) {
-//		paintMancalaBoardShadow(g2D);
 		
 		multiplier = (double)(gamePanel.getWidth() / (double)1920);
 	
@@ -51,11 +50,11 @@ public class RenderGraphics {
 		g2D.drawImage(scaledImage, startX, startY, null);
 		updatePlayerNames();
 		updateButtons();
-		updateButtonText();
 	}
 	
 	public static void updateButtons() {
 		
+		System.out.println("OMG");
 		Slot[][] board = Start.getMancala().getBoard().getSlotArray();
 		
 		for (int y = 0; y < board[0].length; y++) {
@@ -66,6 +65,7 @@ public class RenderGraphics {
 				}
 			}
 		}
+		updateButtonText();
 	}
 	
 	private static void setButtonProperties(JButton b, boolean hovered) {
@@ -73,8 +73,8 @@ public class RenderGraphics {
 		BufferedImage goalImage = scaleImage(ResourceLoader.GOAL_BACKGROUND, (int) (ResourceLoader.GOAL_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		BufferedImage slotImage = scaleImage(ResourceLoader.SLOT_BACKGROUND, (int) (ResourceLoader.SLOT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		
-		BufferedImage goalHoveredImage = scaleImage(ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND, (int) (ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_HIGHLIGHT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-		BufferedImage slotHoveredImage = scaleImage(ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND, (int) (ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_HIGHLIGHT_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage goalHoveredImage = scaleImage(ResourceLoader.GOAL_HOVERED_BACKGROUND, (int) (ResourceLoader.GOAL_HOVERED_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.GOAL_HOVERED_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage slotHoveredImage = scaleImage(ResourceLoader.SLOT_HOVERED_BACKGROUND, (int) (ResourceLoader.SLOT_HOVERED_BACKGROUND.getWidth() * multiplier), (int) (ResourceLoader.SLOT_HOVERED_BACKGROUND.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 
 		Dimension goalSize = new Dimension(goalImage.getWidth(), goalImage.getHeight());
 		Dimension slotSize = new Dimension(slotImage.getWidth(), slotImage.getHeight());
