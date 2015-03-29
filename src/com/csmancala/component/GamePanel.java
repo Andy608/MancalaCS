@@ -30,11 +30,21 @@ public class GamePanel extends JPanel implements ActionListener {
 	public JLabel player2Name;
 	
 	public MancalaButton[][] boardButtons;
+	public MancalaButton returnButton = new MancalaButton();
 
 	public GamePanel() {
 		super();
 		this.setLayout(null);
 		this.setupSlots();
+		this.initButtons();
+	}
+	
+	public void initButtons() {
+		returnButton.setBorderPainted(false);
+		returnButton.setContentAreaFilled(false);
+		returnButton.setFocusPainted(false);
+		returnButton.setOpaque(false);
+		this.add(returnButton);
 	}
 
 	private void setupSlots() {
@@ -84,17 +94,22 @@ public class GamePanel extends JPanel implements ActionListener {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
+					System.out.println("I'VE BEEN TOUCHED!");
 					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	
-						for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
-							for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
-								if (b.equals(boardButtons[x][y])) {
-									Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
-									addToolTipText();
-									break;
-								}
+					for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
+						for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
+							if (b.equals(boardButtons[x][y])) {
+								Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
+								addToolTipText();
+								break;
 							}
 						}
+					}
+					
+					if (b.equals(returnButton)) {
+						b.setHovered(true);
+					}
 				}
 
 				@Override
@@ -108,6 +123,25 @@ public class GamePanel extends JPanel implements ActionListener {
 								break;
 							}
 						}
+					}
+					
+					if (b.equals(returnButton)) {
+						b.setHovered(false);
+					}
+				}
+			});
+			
+			b.addMouseMotionListener(new MouseAdapter() {
+				
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					
+					if (b.getLocationOnScreen().x < e.getLocationOnScreen().x && b.getLocationOnScreen().x + b.getWidth() > e.getLocationOnScreen().x &&
+						b.getLocationOnScreen().y < e.getLocationOnScreen().y && b.getLocationOnScreen().y + b.getHeight() > e.getLocationOnScreen().y) {
+						b.setHovered(true);
+					}
+					else {
+						b.setHovered(false);
 					}
 				}
 			});
@@ -164,6 +198,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		if(e.getSource() == returnButton) {
+			returnButton.setHovered(false);
+			Start.getMancala().returnToMenu();
+			return;
+		}
+		
 		for (int y = 0; y < boardButtons[0].length; y++) {
 			for (int x = 1; x < 7; x++) {
 				if (e.getSource() == boardButtons[x][y]) {

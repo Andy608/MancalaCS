@@ -141,7 +141,7 @@ public class RenderGraphics {
 					if (y == 0) {
 						if (hovered) {
 							gamePanel.boardButtons[x][y].setIcon(slotHoveredIcon);
-							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7.5) * multiplier), (int)(startY + ((50 - 7.5) * multiplier)));
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7) * multiplier), (int)(startY + ((50 - 7) * multiplier)));
 							gamePanel.boardButtons[x][y].setSize(slotHoveredSize);
 						}
 						else {
@@ -153,7 +153,7 @@ public class RenderGraphics {
 					else {
 						if (hovered) {
 							gamePanel.boardButtons[x][y].setIcon(slotHoveredIcon);
-							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7.5) * multiplier), (int)(startY + ((258 - 7.5) * multiplier)));
+							gamePanel.boardButtons[x][y].setLocation((int)(startX + (((x - 1) * 180) + 242 - 7) * multiplier), (int)(startY + ((258 - 7) * multiplier)));
 							gamePanel.boardButtons[x][y].setSize(slotHoveredSize);
 						}
 						else {
@@ -165,6 +165,20 @@ public class RenderGraphics {
 				}
 			}
 		}
+		
+		BufferedImage returnToMenuImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage returnToMenuHoveredImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(returnToMenuImage.getWidth(), returnToMenuImage.getHeight());
+		
+		ImageIcon returnToMenuIcon = new ImageIcon(returnToMenuImage);
+		ImageIcon returnToMenuHoveredIcon = new ImageIcon(returnToMenuHoveredImage);
+		
+		gamePanel.returnButton.setSize(buttonSize);
+		
+		gamePanel.returnButton.setLocation((int)(((gamePanel.getWidth() - returnToMenuImage.getWidth()) / 2) - (600 * multiplier)), (int)(((gamePanel.getHeight() - returnToMenuImage.getHeight()) / 2) + (380 * multiplier)));
+		if (gamePanel.returnButton.isHovered()) gamePanel.returnButton.setIcon(returnToMenuHoveredIcon);
+		else gamePanel.returnButton.setIcon(returnToMenuIcon);
 	}
 	
 	public static void updateMainMenuButtons(MancalaButton b, boolean hovered) {
@@ -257,8 +271,9 @@ public class RenderGraphics {
 	
 	public static void updateButtonText() {
 		
-		gamePanel.boardButtons[0][0].setText(Integer.toString(Start.getMancala().getBoard().getPlayer1().getGoal().getStoneAmount()));
-		gamePanel.boardButtons[7][1].setText(Integer.toString(Start.getMancala().getBoard().getPlayer2().getGoal().getStoneAmount()));
+		//IF YOU'D LIKE TO SEE THE AMOUNT OF STONES IN EACH GOAL, UNCOMMENT THIS - I'M TALKIN' TO YOU MR. K
+//		gamePanel.boardButtons[0][0].setText(Integer.toString(Start.getMancala().getBoard().getPlayer1().getGoal().getStoneAmount()));
+//		gamePanel.boardButtons[7][1].setText(Integer.toString(Start.getMancala().getBoard().getPlayer2().getGoal().getStoneAmount()));
 		
 		for (int y = 0; y < 2; y++) {
 			for (int x = 1; x < 7; x++) {
@@ -319,6 +334,21 @@ public class RenderGraphics {
 		
 		BufferedImage mainLogo = TransformImage.scaleImage(ResourceLoader.MANCALA_LOGO, (int) (ResourceLoader.MANCALA_LOGO.getWidth() * multiplier * 0.5), (int) (ResourceLoader.MANCALA_LOGO.getHeight() * multiplier * 0.5), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		g2D.drawImage(mainLogo, (panel.getWidth() - mainLogo.getWidth()) / 2, (int) ((panel.getHeight() - mainLogo.getHeight()) / 2 - (400 * multiplier)), null);
+		
+		BufferedImage returnToMenuImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage returnToMenuHoveredImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(returnToMenuImage.getWidth(), returnToMenuImage.getHeight());
+		
+		ImageIcon returnToMenuIcon = new ImageIcon(returnToMenuImage);
+		ImageIcon returnToMenuHoveredIcon = new ImageIcon(returnToMenuHoveredImage);
+		
+		panel.returnButton.setSize(buttonSize);
+		
+		panel.returnButton.setLocation((int)((panel.getWidth() - returnToMenuImage.getWidth()) / 6), (int)(5 * ((panel.getHeight() - returnToMenuImage.getHeight()) / 6) + (25 * multiplier)));
+		if (panel.returnButton.isHovered()) panel.returnButton.setIcon(returnToMenuHoveredIcon);
+		else panel.returnButton.setIcon(returnToMenuIcon);
+		
 	}
 	
 	public static void paintCredits(CreditsPanel panel, Graphics2D g2D) {
@@ -334,5 +364,19 @@ public class RenderGraphics {
 		
 		BufferedImage creditsNames = TransformImage.scaleImage(ResourceLoader.CREDITS_NAMES, (int) (ResourceLoader.CREDITS_NAMES.getWidth() * multiplier), (int) (ResourceLoader.CREDITS_NAMES.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		g2D.drawImage(creditsNames, (panel.getWidth() - creditsNames.getWidth()) / 2, (int) ((panel.getHeight() - creditsNames.getHeight()) / 2 + (100 * multiplier)), null);
+	
+		BufferedImage returnToMenuImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage returnToMenuHoveredImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(returnToMenuImage.getWidth(), returnToMenuImage.getHeight());
+		
+		ImageIcon returnToMenuIcon = new ImageIcon(returnToMenuImage);
+		ImageIcon returnToMenuHoveredIcon = new ImageIcon(returnToMenuHoveredImage);
+		
+		panel.returnButton.setSize(buttonSize);
+		
+		panel.returnButton.setLocation((int)(((panel.getWidth() - returnToMenuImage.getWidth()) / 2) - (600 * multiplier)), (int)(((panel.getHeight() - returnToMenuImage.getHeight()) / 2) + (300 * multiplier)));
+		if (panel.returnButton.isHovered()) panel.returnButton.setIcon(returnToMenuHoveredIcon);
+		else panel.returnButton.setIcon(returnToMenuIcon);
 	}
 }

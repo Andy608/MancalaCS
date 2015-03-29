@@ -51,6 +51,8 @@ public class ResourceLoader {
 	public static BufferedImage CREDITS_HOVERED_BUTTON;
 	public static BufferedImage QUIT_BUTTON;
 	public static BufferedImage QUIT_HOVERED_BUTTON;
+	public static BufferedImage RETURN_TO_MENU_BUTTON;
+	public static BufferedImage RETURN_TO_MENU_HOVERED_BUTTON;
 	
 	public static BufferedImage MANCALA_INSTRUCTIONS;
 	
@@ -93,6 +95,8 @@ public class ResourceLoader {
 			CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
 			QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
 			QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
+			RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
+			RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");
