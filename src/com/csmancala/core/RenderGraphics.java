@@ -274,25 +274,32 @@ public class RenderGraphics {
 		
 		for (int y = 0; y < panel.boardButtons[0].length; y++) {
 			for (int x = 0; x < panel.boardButtons.length; x++) {
+				
 				MancalaButton button = panel.boardButtons[x][y];
+				
 				if (button != null) {
+					
 					Slot slot = board.getSlotArray()[x][y];
+					
 					for (int i = 0; i < slot.getStones().size(); i++) {
+						
 						Stone currentStone = slot.getStones().get(i);
+						
 						if (currentStone != null) {
 							BufferedImage stoneScaled = TransformImage.scaleImage(currentStone.getImage(), (int) (currentStone.getImage().getWidth() * multiplier), (int) (currentStone.getImage().getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 //							currentStone.setImage(stoneScaled);
+							
 							if (currentStone.getLocation() == null) {
 								currentStone.updateStone(x, y);
 							}
-//							BufferedImage finalStone = TransformImage.rotateImage(stoneScaled, Start.getMancala().getTicks() % 360);
+							
 							currentStone.setLocation((int)(button.getX() + currentStone.getOffset().x), (int)(button.getY() + currentStone.getOffset().y));
 							
 							if (slot.isHovered()) {
-								g2d.drawImage(stoneScaled, (int)(currentStone.getOffset().x + 7.5 * multiplier), (int)(currentStone.getOffset().y + 7.5 * multiplier), null);
+								g2d.drawImage(stoneScaled, (int)(currentStone.getLocation().x + 7.5 * multiplier), (int)(currentStone.getLocation().y + 7.5 * multiplier), null);
 							}
 							else {
-								g2d.drawImage(stoneScaled, currentStone.getOffset().x, currentStone.getOffset().y, null);
+								g2d.drawImage(stoneScaled, currentStone.getLocation().x, currentStone.getLocation().y, null);
 							}
 						}
 					}
