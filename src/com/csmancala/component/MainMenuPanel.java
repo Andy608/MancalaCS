@@ -43,7 +43,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		RenderGraphics.paintBackground(this, g2D);
-		RenderGraphics.updateMenuText(this);
+		RenderGraphics.updateMenuText(this, g2D);
 		RenderGraphics.updateButtons();
 	}
 	
