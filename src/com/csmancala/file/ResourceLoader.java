@@ -26,6 +26,8 @@ public class ResourceLoader {
 
 	//Images
 	public static BufferedImage MANCALA_LOGO;
+	public static BufferedImage CREDITS_LOGO;
+	public static BufferedImage CREDITS_NAMES;
 	
 	public static BufferedImage TABLE_BACKGROUND;
 	
@@ -66,6 +68,8 @@ public class ResourceLoader {
 	private static void loadImages() {
 		if (Start.getMancala() == null || !Start.getMancala().isRunning()) {
 			MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
+			CREDITS_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_logo.png");
+			CREDITS_NAMES = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_names.png");
 			
 			TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "table_background.png");
 			MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");

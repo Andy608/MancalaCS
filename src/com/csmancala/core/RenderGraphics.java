@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.csmancala.component.CreditsPanel;
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.RulesPanel;
@@ -63,15 +64,7 @@ public class RenderGraphics {
 		}
 		
 		BufferedImage mainLogo = TransformImage.scaleImage(ResourceLoader.MANCALA_LOGO, (int) (ResourceLoader.MANCALA_LOGO.getWidth() * multiplier), (int) (ResourceLoader.MANCALA_LOGO.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-		
 		g2D.drawImage(mainLogo, (panel.getWidth() - mainLogo.getWidth()) / 2, (int) ((panel.getHeight() - mainLogo.getHeight()) / 2 - (300 * multiplier)), null);
-		
-//		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
-//		
-//		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!
-//		panel.mancalaLogo.setSize(500, 200);
-//		
-//		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (250 * multiplier)));
 	}
 	
 	public static void updateButtons() {
@@ -313,7 +306,7 @@ public class RenderGraphics {
 		}
 	}
 
-	public static void paintRules(RulesPanel panel, Graphics2D g2d) {
+	public static void paintRules(RulesPanel panel, Graphics2D g2D) {
 		
 		multiplier = (double)(panel.getWidth() / (double)1920);
 		
@@ -322,12 +315,24 @@ public class RenderGraphics {
 		}
 		
 		BufferedImage scaledInstructions = TransformImage.scaleImage(ResourceLoader.MANCALA_INSTRUCTIONS, (int) (ResourceLoader.MANCALA_INSTRUCTIONS.getWidth() * multiplier * 1.3), (int) (ResourceLoader.MANCALA_INSTRUCTIONS.getHeight() * multiplier * 1.3), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-		g2d.drawImage(scaledInstructions, (panel.getWidth() - scaledInstructions.getWidth()) / 2, (panel.getHeight() - scaledInstructions.getHeight()) / 2, null);
-		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
+		g2D.drawImage(scaledInstructions, (panel.getWidth() - scaledInstructions.getWidth()) / 2, (panel.getHeight() - scaledInstructions.getHeight()) / 2, null);
 		
-		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!
-		panel.mancalaLogo.setSize(500, 200);
+		BufferedImage mainLogo = TransformImage.scaleImage(ResourceLoader.MANCALA_LOGO, (int) (ResourceLoader.MANCALA_LOGO.getWidth() * multiplier * 0.5), (int) (ResourceLoader.MANCALA_LOGO.getHeight() * multiplier * 0.5), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		g2D.drawImage(mainLogo, (panel.getWidth() - mainLogo.getWidth()) / 2, (int) ((panel.getHeight() - mainLogo.getHeight()) / 2 - (400 * multiplier)), null);
+	}
+	
+	public static void paintCredits(CreditsPanel panel, Graphics2D g2D) {
 		
-		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (400 * multiplier)));
+		multiplier = (double)(panel.getWidth() / (double)1920);
+		
+		if (multiplier > maxMultiplier && ((double)panel.getHeight() / (double)panel.getWidth() <= 0.5)) {
+			multiplier = maxMultiplier;
+		}
+		
+		BufferedImage creditsLogo = TransformImage.scaleImage(ResourceLoader.CREDITS_LOGO, (int) (ResourceLoader.CREDITS_LOGO.getWidth() * multiplier), (int) (ResourceLoader.CREDITS_LOGO.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		g2D.drawImage(creditsLogo, (panel.getWidth() - creditsLogo.getWidth()) / 2, (int) ((panel.getHeight() - creditsLogo.getHeight()) / 2 - (350 * multiplier)), null);
+		
+		BufferedImage creditsNames = TransformImage.scaleImage(ResourceLoader.CREDITS_NAMES, (int) (ResourceLoader.CREDITS_NAMES.getWidth() * multiplier), (int) (ResourceLoader.CREDITS_NAMES.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		g2D.drawImage(creditsNames, (panel.getWidth() - creditsNames.getWidth()) / 2, (int) ((panel.getHeight() - creditsNames.getHeight()) / 2 + (100 * multiplier)), null);
 	}
 }

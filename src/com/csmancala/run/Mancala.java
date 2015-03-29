@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import com.csmancala.component.CreditsPanel;
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.MancalaFrame;
@@ -19,6 +20,7 @@ public class Mancala implements Runnable {
 	protected MainMenuPanel menuPanel;
 	protected GamePanel gamePanel;
 	protected RulesPanel rulesPanel;
+	protected CreditsPanel creditsPanel;
 	protected JPanel displayedPanel;
 	protected WinPanel winPanel;
 	
@@ -113,6 +115,7 @@ public class Mancala implements Runnable {
 	private void initPanels() {
 		gamePanel = new GamePanel();
 		rulesPanel = new RulesPanel();
+		creditsPanel = new CreditsPanel();
 		menuPanel = new MainMenuPanel();
 		winPanel = new WinPanel(null);
 		displayedPanel = menuPanel;
@@ -168,15 +171,17 @@ public class Mancala implements Runnable {
 	}
 	
 	public void openRules() {
-		frameInstance.remove(displayedPanel);
-		frameInstance.add(rulesPanel);
-		displayedPanel = rulesPanel;
+		switchPanel(rulesPanel);
 	}
 	
 	public void switchPanel(JPanel newPanel) {
 		frameInstance.remove(displayedPanel);
 		frameInstance.add(newPanel);
 		displayedPanel = newPanel;
+	}
+	
+	public void openCredits() {
+		switchPanel(creditsPanel);
 	}
 	
 	public void returnToMenu() {

@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
@@ -17,8 +16,6 @@ public class RulesPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 695443524538627912L;
 	
-	public JLabel mancalaLogo = new JLabel("Mancala");
-	//private JLabel instructionsLabel = new JLabel(new ImageIcon(ResourceLoader.MANCALA_INSTRUCTIONS));
 	private MancalaButton returnButton = new MancalaButton("Return to Main Menu");
 	
 	public RulesPanel() {
@@ -41,8 +38,6 @@ public class RulesPanel extends JPanel implements ActionListener {
 		
 		//PLEASE MAKE THE NEW RULES IMAGE OVERLAY THE BACKGROUND. PLEASE ADD THE BUTTON AND TITLE BACK ON OVER THE PANEL ASWELL!!
 		//this.instructionsPanel.add(instructionsLabel);
-		mancalaLogo.setHorizontalAlignment(JLabel.CENTER);
-		this.add(mancalaLogo);
 		
 //		returnButton.addActionListener(this);
 //		this.add(returnButton);

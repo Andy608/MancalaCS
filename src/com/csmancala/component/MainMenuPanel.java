@@ -2,7 +2,6 @@ package com.csmancala.component;
 
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -92,7 +91,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			executeRulesAction();
 		}
 		else if (e.getSource().equals(menuButtons[2])) {
-			System.out.println("Lol credits");
+			executeCreditsAction();
 		}
 		else if (e.getSource().equals(menuButtons[3])) {
 			executeQuitAction();
@@ -121,6 +120,10 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	private void executeRulesAction() {
 		Start.getMancala().openRules();
+	}
+	
+	private void executeCreditsAction() {
+		Start.getMancala().openCredits();
 	}
 	
 	private void executeQuitAction() {
