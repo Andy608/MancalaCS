@@ -14,6 +14,7 @@ import com.csmancala.component.CreditsPanel;
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.RulesPanel;
+import com.csmancala.component.WinPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 import com.csmancala.util.MancalaButton;
@@ -79,7 +80,7 @@ public class RenderGraphics {
 					}
 				}
 			}
-			updateButtonText();
+			//updateButtonText();
 		}
 		else if (Start.getMancala().getDisplayedPanel().equals(menuPanel)) {
 			
@@ -269,6 +270,7 @@ public class RenderGraphics {
 		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), (int)((startY + (70 * multiplier)) + scaledHeight));
 	}
 	
+	/*
 	public static void updateButtonText() {
 		
 		//IF YOU'D LIKE TO SEE THE AMOUNT OF STONES IN EACH GOAL, UNCOMMENT THIS - I'M TALKIN' TO YOU MR. K
@@ -281,7 +283,7 @@ public class RenderGraphics {
 			}
 		}
 	}
-	
+	*/
 	public static void paintForeground(GamePanel panel, Graphics2D g2d) {
 		Board board = Start.getMancala().getBoard();
 		
