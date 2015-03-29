@@ -61,6 +61,12 @@ public class RenderGraphics {
 			multiplier = maxMultiplier;
 		}
 		
+		BufferedImage mainLogo = TransformImage.scaleImage(ResourceLoader.MANCALA_LOGO, (int) (ResourceLoader.MANCALA_LOGO.getWidth() * multiplier), (int) (ResourceLoader.MANCALA_LOGO.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		Dimension buttonSize = new Dimension(mainLogo.getWidth(), mainLogo.getHeight());
+		ImageIcon playIcon = new ImageIcon(mainLogo);
+		
+		
+		
 		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
 		
 		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!

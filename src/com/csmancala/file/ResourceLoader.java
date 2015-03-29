@@ -25,6 +25,8 @@ import com.csmancala.run.Start;
 public class ResourceLoader {
 
 	//Images
+	public static BufferedImage MANCALA_LOGO;
+	
 	public static BufferedImage TABLE_BACKGROUND;
 	
 	public static BufferedImage GOAL_BACKGROUND;
@@ -63,6 +65,8 @@ public class ResourceLoader {
 	
 	private static void loadImages() {
 		if (Start.getMancala() == null || !Start.getMancala().isRunning()) {
+			MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
+			
 			TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "table_background.png");
 			MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");
 			
