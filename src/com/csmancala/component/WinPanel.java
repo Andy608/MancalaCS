@@ -105,7 +105,6 @@ public class WinPanel extends JPanel implements ActionListener {
 			name1 = board.getPlayer1().getName();
 			name2 = board.getPlayer2().getName();
 			
-			System.out.println(Start.getMancala().getBoard().getPlayer1().getGoal().getStoneAmount());
 			player1Label.setText(name1 + " scored: "+ board.getPlayer1().getGoal().getStoneAmount());
 			player2Label.setText(name2 + " scored: "+ board.getPlayer2().getGoal().getStoneAmount());
 			

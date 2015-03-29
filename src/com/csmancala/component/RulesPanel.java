@@ -56,7 +56,6 @@ public class RulesPanel extends JPanel implements ActionListener {
 				
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					System.out.println("I'VE BEEN TOUCHED!");
 					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					b.setHovered(true);
 				}
