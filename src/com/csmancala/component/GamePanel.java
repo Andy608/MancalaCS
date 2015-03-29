@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		super();
 		this.setLayout(null);
 		this.setupSlots();
+		this.addingToolTipText();
 	}
 
 	private void setupSlots() {
@@ -124,6 +125,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		b.setHorizontalTextPosition(JButton.CENTER);
 		b.setVerticalTextPosition(JButton.CENTER);
 		return b;
+	}
+	
+	private void addingToolTipText(){
+		for (int y = 0; y < boardButtons[0].length; y++) {
+			for (int x = 0; x < boardButtons.length; x++) {
+				
+				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					this.boardButtons[x][y].setToolTipText("number of stones");
+				}
+			}
+		}
 	}
 	
 	@Override
