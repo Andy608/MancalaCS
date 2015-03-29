@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
+import com.csmancala.component.RulesPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 import com.csmancala.util.MancalaButton;
@@ -287,7 +288,10 @@ public class RenderGraphics {
 							}
 //							BufferedImage finalStone = TransformImage.rotateImage(stoneScaled, Start.getMancala().getTicks() % 360);
 							if (!(slot instanceof Goal)) {
-								currentStone.setLocation(button.getX() + (int)((currentStone.getLocation().x - currentStone.getStoneButton().getX())), button.getY() + (int)((currentStone.getLocation().y - currentStone.getStoneButton().getY())));
+								System.out.println(button.getX() + " " + button.getY());
+								if (button.getX() != currentStone.getStoneButton().getX() || button.getY() != currentStone.getStoneButton().getY()) {
+									currentStone.setLocation(button.getX() + (int)((currentStone.getLocation().x - currentStone.getStoneButton().getX()) * multiplier), button.getY() + (int)((currentStone.getLocation().y - currentStone.getStoneButton().getY()) * multiplier), button);
+								}
 								if (slot.isHovered()) {
 									g2d.drawImage(stoneScaled, currentStone.getLocation().x + (int)(7.5 * multiplier), currentStone.getLocation().y + (int)(7.5 * multiplier), null);
 								}
@@ -303,5 +307,23 @@ public class RenderGraphics {
 				}
 			}
 		}
+	}
+
+	public static void paintRules(RulesPanel panel, Graphics2D g2d) {
+		
+		multiplier = (double)(panel.getWidth() / (double)1920);
+		
+		if (multiplier > maxMultiplier && ((double)panel.getHeight() / (double)panel.getWidth() <= 0.5)) {
+			multiplier = maxMultiplier;
+		}
+		
+		BufferedImage scaledInstructions = TransformImage.scaleImage(ResourceLoader.MANCALA_INSTRUCTIONS, (int) (ResourceLoader.MANCALA_INSTRUCTIONS.getWidth() * multiplier * 1.3), (int) (ResourceLoader.MANCALA_INSTRUCTIONS.getHeight() * multiplier * 1.3), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		g2d.drawImage(scaledInstructions, (panel.getWidth() - scaledInstructions.getWidth()) / 2, (panel.getHeight() - scaledInstructions.getHeight()) / 2, null);
+		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
+		
+		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!
+		panel.mancalaLogo.setSize(500, 200);
+		
+		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (400 * multiplier)));
 	}
 }

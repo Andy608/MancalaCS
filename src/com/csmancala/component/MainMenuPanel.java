@@ -53,7 +53,6 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			menuButtons[i] = initButtons();
 		}
 		
-		mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, 72));
 		mancalaLogo.setHorizontalAlignment(JLabel.CENTER);
 		this.add(mancalaLogo);
 		
