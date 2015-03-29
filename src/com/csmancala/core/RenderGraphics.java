@@ -107,7 +107,6 @@ public class RenderGraphics {
 				gamePanel.boardButtons[0][0].setIcon(goalHoveredIcon);
 				gamePanel.boardButtons[0][0].setLocation((int)(startX + 60 - 7.5 * multiplier), (int)(startY + 50 - 7.5 * multiplier));
 				gamePanel.boardButtons[0][0].setSize(goalHoveredSize);
-				gamePanel.boardButtons[0][0].setToolTipText("Some number");
 			}
 			else {
 				gamePanel.boardButtons[0][0].setIcon(goalIcon);
