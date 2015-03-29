@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import com.csmancala.core.Board;
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
+import com.csmancala.util.MancalaButton;
 
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -28,17 +29,18 @@ public class GamePanel extends JPanel implements ActionListener {
 	public JLabel player1Name;
 	public JLabel player2Name;
 	
-	public JButton[][] boardButtons;
+	public MancalaButton[][] boardButtons;
 
 	public GamePanel() {
 		super();
 		this.setLayout(null);
 		this.setupSlots();
+		this.addingToolTipText();
 	}
 
 	private void setupSlots() {
 
-		boardButtons = new JButton[8][2];
+		boardButtons = new MancalaButton[8][2];
 		for (int y = 0; y < boardButtons[0].length; y++) {
 			for (int x = 0; x < boardButtons.length; x++) {
 				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
@@ -75,23 +77,24 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	public Component add(final Component c) {
-		if (c instanceof JButton && c != boardButtons[0][0] && c != boardButtons[7][1]) {
-			final JButton b = (JButton)c;
+		if (c instanceof MancalaButton && c != boardButtons[0][0] && c != boardButtons[7][1]) {
+			final MancalaButton b = (MancalaButton)c;
 			b.addActionListener(this);
+			
 			b.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-					for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
-						for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
-							if (b.equals(boardButtons[x][y])) {
-								Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
-								break;
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	
+						for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
+							for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
+								if (b.equals(boardButtons[x][y])) {
+									Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
+									break;
+								}
 							}
 						}
-					}
 				}
 
 				@Override
@@ -107,16 +110,13 @@ public class GamePanel extends JPanel implements ActionListener {
 						}
 					}
 				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {}
 			});
 		}
 		return super.add(c);
 	}
 
-	private JButton configureButton() {
-		JButton b = new JButton();
+	private MancalaButton configureButton() {
+		MancalaButton b = new MancalaButton();
 		b.setBorderPainted(false);
 		b.setContentAreaFilled(false);
 		b.setFocusPainted(false);
@@ -125,6 +125,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		b.setHorizontalTextPosition(JButton.CENTER);
 		b.setVerticalTextPosition(JButton.CENTER);
 		return b;
+	}
+	
+	private void addingToolTipText(){
+		for (int y = 0; y < boardButtons[0].length; y++) {
+			for (int x = 0; x < boardButtons.length; x++) {
+				
+				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
+					this.boardButtons[x][y].setToolTipText("number of stones");
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -148,6 +159,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		RenderGraphics.paintBackground(this, g2D);
 		RenderGraphics.paintMancalaBoard(g2D);
+		RenderGraphics.updateButtons();
 	}
 
 	@Override

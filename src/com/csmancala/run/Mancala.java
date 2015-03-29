@@ -94,7 +94,6 @@ public class Mancala implements Runnable {
 		if (ticks % 60 == 0) {
 			fps = frameCount;
 			frameCount = 0;
-			
 //			System.out.println("Ticks: " + ticks + " FPS: " + fps);
 //			ticks = 0;
 		}
@@ -225,9 +224,7 @@ public class Mancala implements Runnable {
 		
 		//while there are still stones in the players hand, continue to remove a stone from the players hand and place it in the next spot.
 		while (currentPlayer.getHandAmount() > 0) {
-			System.out.println("HELLO");
 			mancalaBoard.advanceSlot(currentPlayer);
-			System.out.println(currentPlayer + "'s Hand: " + currentPlayer.getHandAmount());
 		}
 		
 		//if the current slot is equal to the players goal, then return.
@@ -364,6 +361,10 @@ public class Mancala implements Runnable {
 
 	public boolean isRunning() {
 		return isRunning;
+	}
+	
+	public JPanel getDisplayedPanel() {
+		return displayedPanel;
 	}
 	
 	public GamePanel getGamePanel() {

@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
 import com.csmancala.run.Start;
+import com.csmancala.util.MancalaButton;
 
 public class RulesPanel extends JPanel implements ActionListener {
 
@@ -23,7 +23,7 @@ public class RulesPanel extends JPanel implements ActionListener {
 	private JPanel instructionsPanel = new JPanel();
 	private JLabel mancalaLogo = new JLabel("Mancala Remove White space!!!");
 	//private JLabel instructionsLabel = new JLabel(new ImageIcon(ResourceLoader.MANCALA_INSTRUCTIONS));
-	private JButton returnButton = new JButton("Return to Main Menu");
+	private MancalaButton returnButton = new MancalaButton("Return to Main Menu");
 	private JLabel instructionsLabelObject = new JLabel();
 	private JLabel instructionsLabelHowPlay = new JLabel();
 	private JLabel instructionsLabelHowWin = new JLabel();

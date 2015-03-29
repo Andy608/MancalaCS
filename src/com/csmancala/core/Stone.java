@@ -16,6 +16,7 @@ public class Stone {
 	private static Random rand = new Random();
 	private BufferedImage stoneImage = ResourceLoader.BLUE_STONE;
 	private Point location = null;
+	private JButton button;
 	
 	public Stone() {
 		this.setRandomStoneImage();
@@ -31,7 +32,7 @@ public class Stone {
 	
 	public void updateStone(int x, int y) {
 		BufferedImage stoneScaled = TransformImage.scaleImage(this.getImage(), (int) (this.getImage().getWidth() * RenderGraphics.multiplier), (int) (this.getImage().getHeight() * RenderGraphics.multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-		JButton button = Start.getMancala().getGamePanel().boardButtons[x][y];
+		this.button = Start.getMancala().getGamePanel().boardButtons[x][y];
 		this.setLocation(button.getX() + rand.nextInt(button.getWidth() - stoneScaled.getWidth()), button.getY() + rand.nextInt(button.getHeight() - stoneScaled.getHeight()));
 	}
 	
@@ -39,8 +40,17 @@ public class Stone {
 		this.location = new Point(x, y);
 	}
 	
+	public void setLocation(int x, int y, JButton stoneButton) {
+		this.location = new Point(x, y);
+		this.button = stoneButton;
+	}
+	
 	public Point getLocation() {
 		return this.location;
+	}
+	
+	public JButton getStoneButton() {
+		return this.button;
 	}
 	
 	private void setRandomStoneImage() {

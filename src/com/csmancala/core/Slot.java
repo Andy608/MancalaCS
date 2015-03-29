@@ -4,19 +4,17 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
+import com.csmancala.util.MancalaButton;
 
-public class Slot extends JButton {
+public class Slot extends MancalaButton {
 	private static final long serialVersionUID = 824551522813339680L;
 	
 	protected BufferedImage slotImage;
 	protected List<Stone> stones;
-	protected boolean isHovered;
 	
 	public Slot() {
 		super.setEnabled(false);
 		stones = new ArrayList<>();
-		isHovered = false;
 	}
 	
 	public Slot(Stone... defaultStones) {
@@ -45,7 +43,6 @@ public class Slot extends JButton {
 	 */
 	public void addStones(Stone... s) {
 		for (Stone stone : s) {
-			System.out.println("YO WASSUP!!!!");
 			stones.add(stone);
 		}
 	}
@@ -57,14 +54,6 @@ public class Slot extends JButton {
 			s.add(stones.remove(i));
 		}
 		return s;
-	}
-	
-	public boolean isHovered() {
-		return isHovered;
-	}
-	
-	public void setHovered(boolean b) {
-		isHovered = b;
 	}
 	
 	@Override
