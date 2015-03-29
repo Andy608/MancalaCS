@@ -139,7 +139,9 @@ public class Board {
 		
 		int stoneIndex = rand.nextInt(currentPlayer.getHandAmount());
 		
-		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentPlayer.getHand().get(stoneIndex));
+		Stone currentStone = currentPlayer.getHand().get(stoneIndex);
+		currentStone.updateStone(currentSlotLocation[0], currentSlotLocation[1]);
+		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentStone);
 		System.out.println(currentSlotLocation[0] + ", " + currentSlotLocation[1] + ": " + slotArray[currentSlotLocation[0]][currentSlotLocation[1]]);
 		currentPlayer.getHand().remove(stoneIndex);
 		System.out.println("Stones in hand: " + currentPlayer.getHandAmount());
