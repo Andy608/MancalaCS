@@ -79,11 +79,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		if (c instanceof MancalaButton && c != boardButtons[0][0] && c != boardButtons[7][1]) {
 			final MancalaButton b = (MancalaButton)c;
 			b.addActionListener(this);
+			
 			b.addMouseListener(new MouseAdapter() {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	
 						for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
 							for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
@@ -97,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					b.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					
 					for (int y = 0; y < Start.getMancala().getBoard().getSlotArray()[0].length; y++) {
 						for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {

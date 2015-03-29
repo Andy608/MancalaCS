@@ -32,7 +32,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	public MainMenuPanel() {
 		super();
-		this.setLayout(getLayout());
+		this.setLayout(null);
 		this.setUpMenu();
 	}
 	
@@ -43,8 +43,8 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		RenderGraphics.paintBackground(this, g2D);
-		RenderGraphics.updateButtons();
 		RenderGraphics.updateMenuText(this);
+		RenderGraphics.updateButtons();
 	}
 	
 	private void setUpMenu() {
@@ -81,6 +81,11 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		for (MancalaButton b : menuButtons) {
+			b.setHovered(false);
+		}
+		
 		if(e.getSource().equals(menuButtons[0])) {
 			executePlayAction();
 		}
@@ -129,18 +134,35 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		if (c instanceof MancalaButton) {
 			final MancalaButton b = (MancalaButton)c;
 			b.addActionListener(this);
+			
 			b.addMouseListener(new MouseAdapter() {
-
+				
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					System.out.println("I'VE BEEN TOUCHED!");
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					b.setHovered(true);
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
-					b.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					b.setHovered(false);
+				}
+			});
+			
+			b.addMouseMotionListener(new MouseAdapter() {
+				
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					
+					if (b.getLocationOnScreen().x < e.getLocationOnScreen().x && b.getLocationOnScreen().x + b.getWidth() > e.getLocationOnScreen().x &&
+						b.getLocationOnScreen().y < e.getLocationOnScreen().y && b.getLocationOnScreen().y + b.getHeight() > e.getLocationOnScreen().y) {
+						b.setHovered(true);
+					}
+					else {
+						b.setHovered(false);
+					}
 				}
 			});
 		}
