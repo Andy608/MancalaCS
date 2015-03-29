@@ -331,5 +331,19 @@ public class RenderGraphics {
 		panel.mancalaLogo.setSize(500, 200);
 		
 		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (400 * multiplier)));
+		
+		BufferedImage returnToMenuImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage returnToMenuHoveredImage = TransformImage.scaleImage(ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON, (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.RETURN_TO_MENU_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(returnToMenuImage.getWidth(), returnToMenuImage.getHeight());
+		
+		ImageIcon returnToMenuIcon = new ImageIcon(returnToMenuImage);
+		ImageIcon returnToMenuHoveredIcon = new ImageIcon(returnToMenuHoveredImage);
+		
+		panel.returnButton.setSize(buttonSize);
+		
+		panel.returnButton.setLocation((int)((panel.getWidth() - returnToMenuImage.getWidth()) / 6), (int)(5 * ((panel.getHeight() - returnToMenuImage.getHeight()) / 6) + (25 * multiplier)));
+		if (panel.returnButton.isHovered()) panel.returnButton.setIcon(returnToMenuHoveredIcon);
+		else panel.returnButton.setIcon(returnToMenuIcon);
 	}
 }
