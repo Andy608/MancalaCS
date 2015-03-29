@@ -54,7 +54,7 @@ public class RenderGraphics {
 		updatePlayerNames();
 	}
 	
-	public static void updateMenuText(MainMenuPanel panel) {
+	public static void updateMenuText(MainMenuPanel panel, Graphics2D g2D) {
 		
 		multiplier = (double)(panel.getWidth() / (double)1920);
 		
@@ -63,17 +63,15 @@ public class RenderGraphics {
 		}
 		
 		BufferedImage mainLogo = TransformImage.scaleImage(ResourceLoader.MANCALA_LOGO, (int) (ResourceLoader.MANCALA_LOGO.getWidth() * multiplier), (int) (ResourceLoader.MANCALA_LOGO.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-		Dimension buttonSize = new Dimension(mainLogo.getWidth(), mainLogo.getHeight());
-		ImageIcon playIcon = new ImageIcon(mainLogo);
 		
+		g2D.drawImage(mainLogo, (panel.getWidth() - mainLogo.getWidth()) / 2, (int) ((panel.getHeight() - mainLogo.getHeight()) / 2 - (300 * multiplier)), null);
 		
-		
-		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
-		
-		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!
-		panel.mancalaLogo.setSize(500, 200);
-		
-		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (250 * multiplier)));
+//		panel.mancalaLogo.setFont(new Font("Montserrat", Font.BOLD, (int)(112 * multiplier)));
+//		
+//		//THIS WILL BE REPLACED WITH AN IMAGE. THIS IS TEMPORARY!
+//		panel.mancalaLogo.setSize(500, 200);
+//		
+//		panel.mancalaLogo.setLocation((panel.getWidth() - panel.mancalaLogo.getWidth()) / 2, (int) ((panel.getHeight() - panel.mancalaLogo.getHeight()) / 2 - (250 * multiplier)));
 	}
 	
 	public static void updateButtons() {
