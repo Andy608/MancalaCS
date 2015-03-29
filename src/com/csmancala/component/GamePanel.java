@@ -35,7 +35,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		super();
 		this.setLayout(null);
 		this.setupSlots();
-		this.addingToolTipText();
 	}
 
 	private void setupSlots() {
@@ -91,6 +90,7 @@ public class GamePanel extends JPanel implements ActionListener {
 							for (int x = 0; x < Start.getMancala().getBoard().getSlotArray().length; x++) {
 								if (b.equals(boardButtons[x][y])) {
 									Start.getMancala().getBoard().getSlotArray()[x][y].setHovered(true);
+									addToolTipText();
 									break;
 								}
 							}
@@ -127,12 +127,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		return b;
 	}
 	
-	private void addingToolTipText(){
+	private void addToolTipText() {
 		for (int y = 0; y < boardButtons[0].length; y++) {
-			for (int x = 0; x < boardButtons.length; x++) {
-				
-				if (!(x == 0 && y == 1) && !(x == 7 && y == 0)) {
-					this.boardButtons[x][y].setToolTipText("number of stones");
+			for (int x = 1; x < boardButtons.length - 1; x++) {
+				if (this.boardButtons[x][y] != null) {
+					this.boardButtons[x][y].setToolTipText(Integer.toString(Start.getMancala().getBoard().getSlotArray()[x][y].getStoneAmount()));
 				}
 			}
 		}

@@ -15,7 +15,8 @@ public class Stone {
 
 	private static Random rand = new Random();
 	private BufferedImage stoneImage = ResourceLoader.BLUE_STONE;
-	private Point location = null;
+	private Point location;
+	private Point offset;
 	private JButton button;
 	
 	public Stone() {
@@ -33,7 +34,11 @@ public class Stone {
 	public void updateStone(int x, int y) {
 		BufferedImage stoneScaled = TransformImage.scaleImage(this.getImage(), (int) (this.getImage().getWidth() * RenderGraphics.multiplier), (int) (this.getImage().getHeight() * RenderGraphics.multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 		this.button = Start.getMancala().getGamePanel().boardButtons[x][y];
-		this.setLocation(button.getX() + rand.nextInt(button.getWidth() - stoneScaled.getWidth()), button.getY() + rand.nextInt(button.getHeight() - stoneScaled.getHeight()));
+		this.setOffset(rand.nextInt(button.getWidth() - stoneScaled.getWidth()), rand.nextInt(button.getHeight() - stoneScaled.getHeight()));
+	}
+	
+	public void setOffset(int x, int y) {
+		this.offset = new Point(x, y);
 	}
 	
 	public void setLocation(int x, int y) {
@@ -46,7 +51,11 @@ public class Stone {
 	}
 	
 	public Point getLocation() {
-		return this.location;
+		return location;
+	}
+	
+	public Point getOffset() {
+		return offset;
 	}
 	
 	public JButton getStoneButton() {

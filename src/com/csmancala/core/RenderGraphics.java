@@ -275,29 +275,29 @@ public class RenderGraphics {
 		
 		for (int y = 0; y < panel.boardButtons[0].length; y++) {
 			for (int x = 0; x < panel.boardButtons.length; x++) {
+				
 				MancalaButton button = panel.boardButtons[x][y];
+				
 				if (button != null) {
+					
 					Slot slot = board.getSlotArray()[x][y];
+					
 					for (int i = 0; i < slot.getStones().size(); i++) {
+						
 						Stone currentStone = slot.getStones().get(i);
+						
 						if (currentStone != null) {
 							BufferedImage stoneScaled = TransformImage.scaleImage(currentStone.getImage(), (int) (currentStone.getImage().getWidth() * multiplier), (int) (currentStone.getImage().getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
 //							currentStone.setImage(stoneScaled);
+							
 							if (currentStone.getLocation() == null) {
 								currentStone.updateStone(x, y);
 							}
-//							BufferedImage finalStone = TransformImage.rotateImage(stoneScaled, Start.getMancala().getTicks() % 360);
-							if (!(slot instanceof Goal)) {
-								System.out.println(button.getX() + " " + button.getY());
-								if (button.getX() != currentStone.getStoneButton().getX() || button.getY() != currentStone.getStoneButton().getY()) {
-									currentStone.setLocation(button.getX() + (int)((currentStone.getLocation().x - currentStone.getStoneButton().getX()) * multiplier), button.getY() + (int)((currentStone.getLocation().y - currentStone.getStoneButton().getY()) * multiplier), button);
-								}
-								if (slot.isHovered()) {
-									g2d.drawImage(stoneScaled, currentStone.getLocation().x + (int)(7.5 * multiplier), currentStone.getLocation().y + (int)(7.5 * multiplier), null);
-								}
-								else {
-									g2d.drawImage(stoneScaled, currentStone.getLocation().x, currentStone.getLocation().y, null);
-								}
+							
+							currentStone.setLocation((int)(button.getX() + currentStone.getOffset().x), (int)(button.getY() + currentStone.getOffset().y));
+							
+							if (slot.isHovered()) {
+								g2d.drawImage(stoneScaled, (int)(currentStone.getLocation().x + 7.5 * multiplier), (int)(currentStone.getLocation().y + 7.5 * multiplier), null);
 							}
 							else {
 								g2d.drawImage(stoneScaled, currentStone.getLocation().x, currentStone.getLocation().y, null);
