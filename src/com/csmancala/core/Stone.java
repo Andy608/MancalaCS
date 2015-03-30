@@ -62,10 +62,10 @@ public class Stone {
 		}
 		
 		if (RenderGraphics.getMultiplier() == 0.0) {
-			this.setOffset(rand.nextInt((int)(buttonSize.width - (stoneImage.getWidth() * getDefaultMultiplier()))), rand.nextInt((int)(buttonSize.height - (stoneImage.getHeight() * getDefaultMultiplier()))));
+			this.setOffset(rand.nextInt(Math.abs((int)(buttonSize.width - (stoneImage.getWidth() * getDefaultMultiplier())))), rand.nextInt(Math.abs((int)(buttonSize.height - (stoneImage.getHeight() * getDefaultMultiplier())))));
 		}
 		else {
-			this.setOffset(rand.nextInt((int)(buttonSize.width - (stoneImage.getWidth() * RenderGraphics.getMultiplier()))), rand.nextInt((int)(buttonSize.height - (stoneImage.getHeight() * RenderGraphics.getMultiplier()))));
+			this.setOffset(rand.nextInt(Math.abs((int)(buttonSize.width - (stoneImage.getWidth() * RenderGraphics.getMultiplier())))), rand.nextInt(Math.abs((int)(buttonSize.height - (stoneImage.getHeight() * RenderGraphics.getMultiplier())))));
 		}
 		TransformImage.rotateImage(stoneImage, rand.nextInt(361));
 	}

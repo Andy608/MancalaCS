@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 
 import com.csmancala.core.RenderGraphics;
 
+/**
+ * WILL BE USED IN A FUTURE UPDATE. THIS PANEL WILL ASK THE USERS FOR THEIR NAMES, HOW MANY STONES TO START OUT WITH IN EACH PILE, AND THE GAME DIFFICULTY.
+ */
 public class OptionsPanel extends JPanel {
 
 	private static final long serialVersionUID = 2926968015424719601L;

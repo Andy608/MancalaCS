@@ -1,5 +1,6 @@
 package com.csmancala.file;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import com.csmancala.run.Start;
 
@@ -7,6 +8,7 @@ public class ResourceLoader {
 
 	//Images
 	public static BufferedImage MANCALA_LOGO;
+	public static BufferedImage WINNER_LOGO;
 	public static BufferedImage CREDITS_LOGO;
 	public static BufferedImage CREDITS_NAMES;
 	
@@ -35,12 +37,18 @@ public class ResourceLoader {
 	public static BufferedImage CREDITS_HOVERED_BUTTON;
 	public static BufferedImage QUIT_BUTTON;
 	public static BufferedImage QUIT_HOVERED_BUTTON;
+	public static BufferedImage WIN_TO_MENU_BUTTON;
+	public static BufferedImage WIN_TO_MENU_HOVERED_BUTTON;
 	public static BufferedImage RETURN_TO_MENU_BUTTON;
 	public static BufferedImage RETURN_TO_MENU_HOVERED_BUTTON;
 	
 	public static BufferedImage MANCALA_INSTRUCTIONS;
 	
 	public static BufferedImage HIGHLIGHT_TIP;
+	
+	//Colors
+	public static final Color GOLDEN = new Color(0xE7D065);
+	public static final Color DARK_BROWN = new Color(0x2E251B);
 	
 	////////////////////////////////////////////////
 	
@@ -55,6 +63,7 @@ public class ResourceLoader {
 	
 	private static void loadImages() {
 		MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
+		WINNER_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "winner_logo.png");
 		CREDITS_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_logo.png");
 		CREDITS_NAMES = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_names.png");
 		
@@ -83,6 +92,8 @@ public class ResourceLoader {
 		CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
 		QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
 		QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
+		WIN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "menu_button.png");
+		WIN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "menu_hovered_button.png");
 		RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
 		RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
 		

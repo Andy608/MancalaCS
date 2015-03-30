@@ -87,7 +87,7 @@ public class RulesPanel extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == returnButton) {
+		if(e.getSource().equals(returnButton)) {
 			returnButton.setHovered(false);
 			Start.getMancala().returnToMenu();
 		}

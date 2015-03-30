@@ -116,7 +116,7 @@ public class Mancala implements Runnable {
 		rulesPanel = new RulesPanel();
 		creditsPanel = new CreditsPanel();
 		menuPanel = new MainMenuPanel();
-		winPanel = new WinPanel(null);
+		winPanel = new WinPanel();
 		displayedPanel = menuPanel;
 	}
 	

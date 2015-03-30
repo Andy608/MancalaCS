@@ -14,6 +14,7 @@ import com.csmancala.component.CreditsPanel;
 import com.csmancala.component.GamePanel;
 import com.csmancala.component.MainMenuPanel;
 import com.csmancala.component.RulesPanel;
+import com.csmancala.component.WinPanel;
 import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 import com.csmancala.util.MancalaButton;
@@ -257,13 +258,17 @@ public class RenderGraphics {
 			p1Name.setText("Your Turn: " + stringOfName1);
 			p2Name.setText(stringOfName2);
 			p1Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
+			p1Name.setForeground(ResourceLoader.GOLDEN);
 			p2Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
+			p2Name.setForeground(ResourceLoader.DARK_BROWN);
 		}
 		else if (currentPlayer.equals(p2)) {
 			p1Name.setText(stringOfName1);
 			p2Name.setText("Your Turn: " + stringOfName2);
 			p1Name.setFont(new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier)));
+			p1Name.setForeground(ResourceLoader.DARK_BROWN);
 			p2Name.setFont(new Font("Montserrat", Font.BOLD, (int)(72 * multiplier)));
+			p2Name.setForeground(ResourceLoader.GOLDEN);
 		}
 
 		p1Name.setSize(new Dimension(p1Name.getFontMetrics(p1Name.getFont()).stringWidth(p1Name.getText()), p1Name.getFontMetrics(p1Name.getFont()).getHeight()));
@@ -346,7 +351,6 @@ public class RenderGraphics {
 		panel.returnButton.setLocation((int)((panel.getWidth() - returnToMenuImage.getWidth()) / 6), (int)(5 * ((panel.getHeight() - returnToMenuImage.getHeight()) / 6) + (25 * multiplier)));
 		if (panel.returnButton.isHovered()) panel.returnButton.setIcon(returnToMenuHoveredIcon);
 		else panel.returnButton.setIcon(returnToMenuIcon);
-		
 	}
 	
 	public static void paintCredits(CreditsPanel panel, Graphics2D g2D) {
@@ -376,6 +380,52 @@ public class RenderGraphics {
 		panel.returnButton.setLocation((int)(((panel.getWidth() - returnToMenuImage.getWidth()) / 2) - (600 * multiplier)), (int)(((panel.getHeight() - returnToMenuImage.getHeight()) / 2) + (300 * multiplier)));
 		if (panel.returnButton.isHovered()) panel.returnButton.setIcon(returnToMenuHoveredIcon);
 		else panel.returnButton.setIcon(returnToMenuIcon);
+	}
+	
+	public static void paintWinScreen(WinPanel panel, Graphics2D g2D) {
+		
+		multiplier = (double)(panel.getWidth() / (double)1920);
+		
+		if (multiplier > maxMultiplier && ((double)panel.getHeight() / (double)panel.getWidth() <= 0.5)) {
+			multiplier = maxMultiplier;
+		}
+		
+		BufferedImage winnerLogo = TransformImage.scaleImage(ResourceLoader.WINNER_LOGO, (int) (ResourceLoader.WINNER_LOGO.getWidth() * multiplier), (int) (ResourceLoader.WINNER_LOGO.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		g2D.drawImage(winnerLogo, (panel.getWidth() - winnerLogo.getWidth()) / 2, (int) ((panel.getHeight() - winnerLogo.getHeight()) / 2 - (350 * multiplier)), null);
+		
+		JLabel winner = panel.getWinnerLabel();
+		JLabel p1Label = panel.getPlayer1Label();
+		JLabel p2Label = panel.getPlayer2Label();
+		Font playerFont = new Font("Montserrat", Font.PLAIN, (int)(64 * multiplier));
+		
+		winner.setFont(new Font("Montserrat", Font.BOLD, (int)(96 * multiplier)));
+		p1Label.setFont(playerFont);
+		p2Label.setFont(playerFont);
+		
+		panel.setLabelsToText();
+		
+		winner.setSize(new Dimension(winner.getFontMetrics(winner.getFont()).stringWidth(winner.getText()), winner.getFontMetrics(winner.getFont()).getHeight()));
+		winner.setLocation((int)((panel.getWidth() - winner.getWidth()) / 2 ), (int)(((panel.getHeight() - winner.getHeight()) / 2)  - (int)(50 * multiplier)));
+		
+		p1Label.setSize(new Dimension(p1Label.getFontMetrics(p1Label.getFont()).stringWidth(p1Label.getText()), p1Label.getFontMetrics(p1Label.getFont()).getHeight()));
+		p1Label.setLocation((int)(((panel.getWidth() - p1Label.getWidth()) / 2) - (int) 500 * multiplier), (int)(((panel.getHeight() - p1Label.getHeight()) / 2) + (int) 150 * multiplier));
+		
+		p2Label.setSize(new Dimension(p2Label.getFontMetrics(p2Label.getFont()).stringWidth(p2Label.getText()), p2Label.getFontMetrics(p2Label.getFont()).getHeight()));
+		p2Label.setLocation((int)(((panel.getWidth() - p2Label.getWidth()) / 2) + (int) 500 * multiplier), (int)(((panel.getHeight() - p2Label.getHeight()) / 2) + (int) 150 * multiplier));
+		
+		BufferedImage menuImage = TransformImage.scaleImage(ResourceLoader.WIN_TO_MENU_BUTTON, (int) (ResourceLoader.WIN_TO_MENU_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.WIN_TO_MENU_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		BufferedImage menuHoveredImage = TransformImage.scaleImage(ResourceLoader.WIN_TO_MENU_HOVERED_BUTTON, (int) (ResourceLoader.WIN_TO_MENU_HOVERED_BUTTON.getWidth() * multiplier), (int) (ResourceLoader.WIN_TO_MENU_HOVERED_BUTTON.getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
+		
+		Dimension buttonSize = new Dimension(menuImage.getWidth(), menuImage.getHeight());
+		
+		ImageIcon returnToMenuIcon = new ImageIcon(menuImage);
+		ImageIcon returnToMenuHoveredIcon = new ImageIcon(menuHoveredImage);
+		
+		panel.menuButton.setSize(buttonSize);
+		
+		panel.menuButton.setLocation((int)((panel.getWidth() - menuImage.getWidth()) / 2), (int)(((panel.getHeight() - menuImage.getHeight()) / 2) + (350 * multiplier)));
+		if (panel.menuButton.isHovered()) panel.menuButton.setIcon(returnToMenuHoveredIcon);
+		else panel.menuButton.setIcon(returnToMenuIcon);
 	}
 	
 	public static double getMultiplier() {

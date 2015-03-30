@@ -1,20 +1,22 @@
 package com.csmancala.component;
 
-import java.awt.Font;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.csmancala.core.Board;
 import com.csmancala.core.Player;
 import com.csmancala.core.RenderGraphics;
+import com.csmancala.file.ResourceLoader;
 import com.csmancala.run.Start;
 import com.csmancala.util.MancalaButton;
 
@@ -22,42 +24,27 @@ public class WinPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 9015876069663842418L;
 
-	private MancalaButton mainMenuButton;
+	public MancalaButton menuButton;
 	
-	private JLabel winnerLabelStatic;
 	private JLabel winnerName;
 	private JLabel player1Label;
 	private JLabel player2Label;
 	
-	private String name1;
-	private String name2;
-	
 	private Player winner;
 	
-	public WinPanel(Player playerWinner) { 
+	public WinPanel() { 
 		super();
-		this.winner = playerWinner;
+		this.setLayout(null);
 		this.initComp();
-		this.setLayout(new GridLayout(5, 3));
-		this.add(Box.createGlue());
-		this.add(winnerLabelStatic);
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(winnerName);
-		this.add(Box.createGlue());
-		
-		this.add(player1Label);
-		this.add(Box.createGlue());
-		this.add(player2Label);
-		
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		this.add(Box.createGlue());
-		
-		this.add(Box.createGlue());
-		this.add(mainMenuButton);
-		this.add(Box.createGlue());
+		this.initButtons();
+	}
+	
+	public void initButtons() {
+		menuButton.setBorderPainted(false);
+		menuButton.setContentAreaFilled(false);
+		menuButton.setFocusPainted(false);
+		menuButton.setOpaque(false);
+		this.add(menuButton);
 	}
 
 	public void setWinner(Player playerWinner) {
@@ -67,27 +54,65 @@ public class WinPanel extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mainMenuButton) {
-			Start.getMancala().resetGame();
+		if(e.getSource().equals(menuButton)) {
+			menuButton.setHovered(false);
 			Start.getMancala().returnToMenu();
 		}
 	}
 	
 	public void initComp() {
-		winnerLabelStatic = new JLabel("WINNER!");
-		winnerLabelStatic.setFont(new Font("Montserrat", Font.BOLD, 72));
-		winnerLabelStatic.setHorizontalAlignment(JLabel.CENTER);
 		winnerName = new JLabel();
-		winnerName.setFont(new Font("Montserrat", Font.PLAIN, 64));
-		winnerName.setHorizontalAlignment(JLabel.CENTER);
+		winnerName.setForeground(ResourceLoader.GOLDEN);
+		
 		player1Label = new JLabel();
-		player1Label.setFont(new Font("Montserrat", Font.PLAIN, 36));
-		player1Label.setHorizontalAlignment(JLabel.CENTER);
+		player1Label.setForeground(ResourceLoader.DARK_BROWN);
+		
 		player2Label = new JLabel();
-		player2Label.setFont(new Font("Montserrat", Font.PLAIN, 36));
-		player2Label.setHorizontalAlignment(JLabel.CENTER);
-		mainMenuButton = new MancalaButton("Return to Menu!");
-		mainMenuButton.addActionListener(this);
+		player2Label.setForeground(ResourceLoader.DARK_BROWN);
+
+		menuButton = new MancalaButton();
+		add(winnerName);
+		add(player1Label);
+		add(player2Label);
+	}
+	
+	@Override
+	public Component add(final Component c) {
+		if (c instanceof MancalaButton) {
+			final MancalaButton b = (MancalaButton)c;
+			b.addActionListener(this);
+			
+			b.addMouseListener(new MouseAdapter() {
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					b.setHovered(true);
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					c.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					b.setHovered(false);
+				}
+			});
+			
+			b.addMouseMotionListener(new MouseAdapter() {
+				
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					
+					if (b.getLocationOnScreen().x < e.getLocationOnScreen().x && b.getLocationOnScreen().x + b.getWidth() > e.getLocationOnScreen().x &&
+						b.getLocationOnScreen().y < e.getLocationOnScreen().y && b.getLocationOnScreen().y + b.getHeight() > e.getLocationOnScreen().y) {
+						b.setHovered(true);
+					}
+					else {
+						b.setHovered(false);
+					}
+				}
+			});
+		}
+		return super.add(c);
 	}
 	
 	public void setLabelsToText() {
@@ -102,25 +127,9 @@ public class WinPanel extends JPanel implements ActionListener {
 				winnerName.setText("TIE!");
 			}
 			
-			name1 = board.getPlayer1().getName();
-			name2 = board.getPlayer2().getName();
-			
-			player1Label.setText(name1 + " scored: "+ board.getPlayer1().getGoal().getStoneAmount());
-			player2Label.setText(name2 + " scored: "+ board.getPlayer2().getGoal().getStoneAmount());
-			
-			
+			player1Label.setText(board.getPlayer1().getName() + " scored: "+ board.getPlayer1().getGoal().getStoneAmount());
+			player2Label.setText(board.getPlayer2().getName() + " scored: "+ board.getPlayer2().getGoal().getStoneAmount());
 		}
-//		else {
-//			name1 = "Test1";
-//			name2 = "Test2";
-//			
-//			player1Label.setText(name1 + " scored: 5");
-//			player2Label.setText(name2 + " scored: 7");
-//			
-//			winnerName.setText(name2);
-//		}
-		
-		
 	}
 	
 	@Override
@@ -130,6 +139,18 @@ public class WinPanel extends JPanel implements ActionListener {
 		g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		RenderGraphics.paintBackground(this, g2D);
+		RenderGraphics.paintWinScreen(this, g2D);
 	}
-
+	
+	public JLabel getWinnerLabel() {
+		return winnerName;
+	}
+	
+	public JLabel getPlayer1Label() {
+		return player1Label;
+	}
+	
+	public JLabel getPlayer2Label() {
+		return player2Label;
+	}
 }
