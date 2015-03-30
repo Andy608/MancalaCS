@@ -97,7 +97,6 @@ public class Mancala implements Runnable {
 			fps = frameCount;
 			frameCount = 0;
 //			System.out.println("Ticks: " + ticks + " FPS: " + fps);
-//			ticks = 0;
 		}
 	}
 	
@@ -175,6 +174,7 @@ public class Mancala implements Runnable {
 	}
 	
 	public void switchPanel(JPanel newPanel) {
+		//System.out.println("SWAPPING SCREENS");
 		frameInstance.remove(displayedPanel);
 		frameInstance.add(newPanel);
 		displayedPanel = newPanel;
@@ -189,7 +189,6 @@ public class Mancala implements Runnable {
 	}
 	
 	public void openWinScreen() {
-		//System.out.println("SWAPPING SCREENS");
 		switchPanel(winPanel);
 	}
 	

@@ -273,7 +273,6 @@ public class RenderGraphics {
 		p2Name.setLocation(startX + scaledWidth - p2Name.getWidth(), (int)((startY + (70 * multiplier)) + scaledHeight));
 	}
 	
-	/*
 	public static void updateButtonText() {
 		
 		//IF YOU'D LIKE TO SEE THE AMOUNT OF STONES IN EACH GOAL, UNCOMMENT THIS - I'M TALKIN' TO YOU MR. K
@@ -286,44 +285,8 @@ public class RenderGraphics {
 			}
 		}
 	}
-	*/
+	
 	public static void paintForeground(GamePanel panel, Graphics2D g2D) {
-//		Board board = Start.getMancala().getBoard();
-//		
-//		for (int y = 0; y < panel.boardButtons[0].length; y++) {
-//			for (int x = 0; x < panel.boardButtons.length; x++) {
-//				
-//				MancalaButton button = panel.boardButtons[x][y];
-//				
-//				if (button != null) {
-//					
-//					Slot slot = board.getSlotArray()[x][y];
-//					
-//					for (int i = 0; i < slot.getStones().size(); i++) {
-//						
-//						Stone currentStone = slot.getStones().get(i);
-//						
-//						if (currentStone != null) {
-//							BufferedImage stoneScaled = TransformImage.scaleImage(currentStone.getImage(), (int) (currentStone.getImage().getWidth() * multiplier), (int) (currentStone.getImage().getHeight() * multiplier), RenderingHints.VALUE_INTERPOLATION_BILINEAR, true);
-////							currentStone.setImage(stoneScaled);
-//							
-//							if (currentStone.getLocation() == null) {
-//								currentStone.updateStone((int)(x * multiplier), (int)(y * multiplier));
-//							}
-//							
-//							currentStone.setLocation((int)(button.getX() + currentStone.getOffset().x), (int)(button.getY() + currentStone.getOffset().y));
-//							
-//							if (slot.isHovered()) {
-//								g2d.drawImage(stoneScaled, (int)(currentStone.getLocation().x + 7.5 * multiplier), (int)(currentStone.getLocation().y + 7.5 * multiplier), null);
-//							}
-//							else {
-//								g2d.drawImage(stoneScaled, currentStone.getLocation().x, currentStone.getLocation().y, null);
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
 		
 		Board board = Start.getMancala().getBoard();
 		
@@ -354,7 +317,6 @@ public class RenderGraphics {
 				}
 			}
 		}
-		
 	}
 
 	public static void paintRules(RulesPanel panel, Graphics2D g2D) {

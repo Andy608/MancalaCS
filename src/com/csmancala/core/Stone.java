@@ -61,8 +61,6 @@ public class Stone {
 			this.updateSize((int)(ResourceLoader.SLOT_BACKGROUND.getWidth() * getDefaultMultiplier()), (int)(ResourceLoader.SLOT_BACKGROUND.getHeight()  * getDefaultMultiplier()));
 		}
 		
-		System.out.println(RenderGraphics.getMultiplier());
-		
 		if (RenderGraphics.getMultiplier() == 0.0) {
 			this.setOffset(rand.nextInt((int)(buttonSize.width - (stoneImage.getWidth() * getDefaultMultiplier()))), rand.nextInt((int)(buttonSize.height - (stoneImage.getHeight() * getDefaultMultiplier()))));
 		}

@@ -54,43 +54,38 @@ public class ResourceLoader {
 	}
 	
 	private static void loadImages() {
-		if (Start.getMancala() == null || !Start.getMancala().isRunning()) {
-			MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
-			CREDITS_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_logo.png");
-			CREDITS_NAMES = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_names.png");
-			
-			TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "table_background.png");
-			MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");
-			
-			GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal.png");
-			GOAL_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
-			SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
-			SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
-			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
-			
-			RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
-			ORANGE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "orange_stone.png");
-			YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
-			GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
-			BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
-			PURPLE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "purple_stone.png");
-			GRAY_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "gray_stone.png");
-			
-			PLAY_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_button.png");
-			PLAY_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_hovered_button.png");
-			RULES_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_button.png");
-			RULES_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_hovered_button.png");
-			CREDITS_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_button.png");
-			CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
-			QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
-			QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
-			RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
-			RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
-			
-			HIGHLIGHT_TIP = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "highlight_tip.png");
-		}
-		else {
-			System.out.println("Resources can only be loaded before the game starts. Derp");
-		}
+		MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
+		CREDITS_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_logo.png");
+		CREDITS_NAMES = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_names.png");
+		
+		TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "table_background.png");
+		MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");
+		
+		GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal.png");
+		GOAL_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
+		SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
+		SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
+		MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
+		
+		RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
+		ORANGE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "orange_stone.png");
+		YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
+		GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
+		BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
+		PURPLE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "purple_stone.png");
+		GRAY_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "gray_stone.png");
+		
+		PLAY_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_button.png");
+		PLAY_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_hovered_button.png");
+		RULES_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_button.png");
+		RULES_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_hovered_button.png");
+		CREDITS_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_button.png");
+		CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
+		QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
+		QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
+		RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
+		RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
+		
+		HIGHLIGHT_TIP = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "highlight_tip.png");
 	}
 }
