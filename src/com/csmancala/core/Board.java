@@ -2,6 +2,8 @@ package com.csmancala.core;
 
 import java.util.Random;
 
+import com.csmancala.run.Start;
+
 
 public class Board {
 
@@ -17,6 +19,7 @@ public class Board {
 	private Player player2;
 	
 	private Slot slotArray[][];
+	public Stone[] stones;
 	private int[] currentSlotLocation;
 	
 	public Board(String player1Name, String player2Name) {
@@ -41,7 +44,7 @@ public class Board {
 //					/**/if ((x == 1 && y == 0) || (x == 6 && y == 1)) {
 //						/**/System.out.println("ADDING STONE");
 //						/**/slotArray[x][y] = new Slot(new Stone[5]);
-					Stone[] stones = new Stone[4];
+					stones = new Stone[4];
 					for (int s = 0; s < stones.length; s++) {
 						stones[s] = new Stone();
 					}
@@ -140,9 +143,14 @@ public class Board {
 		int stoneIndex = rand.nextInt(currentPlayer.getHandAmount());
 		
 		Stone currentStone = currentPlayer.getHand().get(stoneIndex);
-		currentStone.updateStone(currentSlotLocation[0], currentSlotLocation[1]);
+		
+		currentStone.updateSize(Start.getMancala().getGamePanel().boardButtons[currentSlotLocation[0]][currentSlotLocation[1]].getWidth(), Start.getMancala().getGamePanel().boardButtons[currentSlotLocation[0]][currentSlotLocation[1]].getHeight());
+		currentStone.randomizeStone();
+		
 		slotArray[currentSlotLocation[0]][currentSlotLocation[1]].getStones().add(currentStone);
-		System.out.println(currentSlotLocation[0] + ", " + currentSlotLocation[1] + ": " + slotArray[currentSlotLocation[0]][currentSlotLocation[1]]);
+		
+//		System.out.println(currentSlotLocation[0] + ", " + currentSlotLocation[1] + ": " + slotArray[currentSlotLocation[0]][currentSlotLocation[1]]);
+		
 		currentPlayer.getHand().remove(stoneIndex);
 		System.out.println("Stones in hand: " + currentPlayer.getHandAmount());
 		RenderGraphics.updateButtons();

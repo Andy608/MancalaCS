@@ -1,22 +1,3 @@
-//package com.csmancala.file;
-//
-//import java.awt.image.BufferedImage;
-//
-//public class ResourceLoader {
-//
-//
-//	public static void loadResources() {
-//		//Images
-//		public static final BufferedImage TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "table_background.png");
-//		
-//		public static final BufferedImage GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "goal_background.png");
-//		public static final BufferedImage SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "slot_background.png");
-//
-//		public static final BufferedImage MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_board.png");
-//		public static final BufferedImage MANCALA_SHADOW = FileSystem.loadImageFromJar(DirectoryMaster.imagesFolder, "mancala_board_shadow.png");
-//	}
-//}
-
 package com.csmancala.file;
 
 import java.awt.image.BufferedImage;
@@ -36,10 +17,13 @@ public class ResourceLoader {
 	public static BufferedImage SLOT_BACKGROUND;
 	public static BufferedImage SLOT_HOVERED_BACKGROUND;
 
-	public static BufferedImage BLUE_STONE;
-	public static BufferedImage GREEN_STONE;
 	public static BufferedImage RED_STONE;
+	public static BufferedImage ORANGE_STONE;
 	public static BufferedImage YELLOW_STONE;
+	public static BufferedImage GREEN_STONE;
+	public static BufferedImage BLUE_STONE;
+	public static BufferedImage PURPLE_STONE;
+	public static BufferedImage GRAY_STONE;
 	
 	public static BufferedImage MANCALA_BOARD;
 	
@@ -55,6 +39,8 @@ public class ResourceLoader {
 	public static BufferedImage RETURN_TO_MENU_HOVERED_BUTTON;
 	
 	public static BufferedImage MANCALA_INSTRUCTIONS;
+	
+	public static BufferedImage HIGHLIGHT_TIP;
 	
 	////////////////////////////////////////////////
 	
@@ -82,10 +68,13 @@ public class ResourceLoader {
 			SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
 			MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
 			
-			BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
-			GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
 			RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
+			ORANGE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "orange_stone.png");
 			YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
+			GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
+			BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
+			PURPLE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "purple_stone.png");
+			GRAY_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "gray_stone.png");
 			
 			PLAY_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_button.png");
 			PLAY_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_hovered_button.png");
@@ -97,6 +86,8 @@ public class ResourceLoader {
 			QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
 			RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
 			RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
+			
+			HIGHLIGHT_TIP = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "highlight_tip.png");
 		}
 		else {
 			System.out.println("Resources can only be loaded before the game starts. Derp");

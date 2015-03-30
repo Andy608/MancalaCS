@@ -16,8 +16,8 @@ public class MancalaFrame extends JFrame {
 
 	private static final long serialVersionUID = -6158257631658504764L;
 	
-	private static Dimension minimumSize = new Dimension(MonitorSpecs.getDisplay().getWidth() / 2, MonitorSpecs.getDisplay().getHeight() / 2);
-	private static Dimension maximumSize = new Dimension(MonitorSpecs.getDisplay().getWidth(), MonitorSpecs.getDisplay().getHeight());
+	public static final Dimension minimumSize = new Dimension(MonitorSpecs.getDisplay().getWidth() / 2, MonitorSpecs.getDisplay().getHeight() / 2);
+	public static final Dimension maximumSize = new Dimension(MonitorSpecs.getDisplay().getWidth(), MonitorSpecs.getDisplay().getHeight());
 
 	public MancalaFrame(String title) {
 		super.setTitle(title);
