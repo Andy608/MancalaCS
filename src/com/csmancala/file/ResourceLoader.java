@@ -2,10 +2,10 @@ package com.csmancala.file;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
 import com.csmancala.run.Start;
 
 public class ResourceLoader {
-
 	//Images
 	public static BufferedImage MANCALA_LOGO;
 	public static BufferedImage WINNER_LOGO;
@@ -62,41 +62,41 @@ public class ResourceLoader {
 	}
 	
 	private static void loadImages() {
-		MANCALA_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_logo.png");
-		WINNER_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "winner_logo.png");
-		CREDITS_LOGO = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_logo.png");
-		CREDITS_NAMES = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "credits_names.png");
+		MANCALA_LOGO = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/mancala_logo.png");
+		WINNER_LOGO = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/winner_logo.png");
+		CREDITS_LOGO = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/credits_logo.png");
+		CREDITS_NAMES = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/credits_names.png");
 		
-		TABLE_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "table_background.png");
-		MANCALA_INSTRUCTIONS = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "mancala_rules.png");
+		TABLE_BACKGROUND = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/table_background.png");
+		MANCALA_INSTRUCTIONS = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/mancala_rules.png");
 		
-		GOAL_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal.png");
-		GOAL_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_goal_highlight.png");
-		SLOT_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot.png");
-		SLOT_HOVERED_BACKGROUND = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_slot_highlight.png");
-		MANCALA_BOARD = FileSystem.loadImageFromJar(DirectoryMaster.boardFolder, "mancala_board.png");
+		GOAL_BACKGROUND = ReadingHelper.getImageFromResourceFile("resources/images/board/mancala_goal.png");
+		GOAL_HOVERED_BACKGROUND = ReadingHelper.getImageFromResourceFile("resources/images/board/mancala_goal_highlight.png");
+		SLOT_BACKGROUND = ReadingHelper.getImageFromResourceFile("resources/images/board/mancala_slot.png");
+		SLOT_HOVERED_BACKGROUND = ReadingHelper.getImageFromResourceFile("resources/images/board/mancala_slot_highlight.png");
+		MANCALA_BOARD = ReadingHelper.getImageFromResourceFile("resources/images/board/mancala_board.png");
 		
-		RED_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "red_stone.png");
-		ORANGE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "orange_stone.png");
-		YELLOW_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "yellow_stone.png");
-		GREEN_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "green_stone.png");
-		BLUE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "blue_stone.png");
-		PURPLE_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "purple_stone.png");
-		GRAY_STONE = FileSystem.loadImageFromJar(DirectoryMaster.stonesFolder, "gray_stone.png");
+		RED_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/red_stone.png");
+		ORANGE_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/orange_stone.png");
+		YELLOW_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/yellow_stone.png");
+		GREEN_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/green_stone.png");
+		BLUE_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/blue_stone.png");
+		PURPLE_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/purple_stone.png");
+		GRAY_STONE = ReadingHelper.getImageFromResourceFile("resources/images/stones/gray_stone.png");
 		
-		PLAY_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_button.png");
-		PLAY_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "play_hovered_button.png");
-		RULES_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_button.png");
-		RULES_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "rules_hovered_button.png");
-		CREDITS_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_button.png");
-		CREDITS_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "credits_hovered_button.png");
-		QUIT_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_button.png");
-		QUIT_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "quit_hovered_button.png");
-		WIN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "menu_button.png");
-		WIN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "menu_hovered_button.png");
-		RETURN_TO_MENU_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu.png");
-		RETURN_TO_MENU_HOVERED_BUTTON = FileSystem.loadImageFromJar(DirectoryMaster.buttonsFolder, "return_to_menu_hovered.png");
+		PLAY_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/play_button.png");
+		PLAY_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/play_hovered_button.png");
+		RULES_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/rules_button.png");
+		RULES_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/rules_hovered_button.png");
+		CREDITS_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/credits_button.png");
+		CREDITS_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/credits_hovered_button.png");
+		QUIT_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/quit_button.png");
+		QUIT_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/quit_hovered_button.png");
+		WIN_TO_MENU_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/menu_button.png");
+		WIN_TO_MENU_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/menu_hovered_button.png");
+		RETURN_TO_MENU_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/return_to_menu.png");
+		RETURN_TO_MENU_HOVERED_BUTTON = ReadingHelper.getImageFromResourceFile("resources/images/buttons/return_to_menu_hovered.png");
 		
-		HIGHLIGHT_TIP = FileSystem.loadImageFromJar(DirectoryMaster.backgroundsFolder, "highlight_tip.png");
+		HIGHLIGHT_TIP = ReadingHelper.getImageFromResourceFile("resources/images/backgrounds/highlight_tip.png");
 	}
 }

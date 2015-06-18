@@ -2,6 +2,7 @@ package com.csmancala.run;
 
 import javax.swing.SwingUtilities;
 
+import com.csmancala.file.FileManager;
 import com.csmancala.file.ResourceLoader;
 
 public class Start {
@@ -14,6 +15,7 @@ public class Start {
 			
 			@Override
 			public void run() {
+				FileManager.initalizeStoragePath();
 				ResourceLoader.loadResources();
 				gameInstance = new Mancala();
 				gameInstance.start();
