@@ -21,6 +21,7 @@ public class Start {
 				} catch (UnsupportedOperatingSystemException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					return;
 				}
 				ResourceLoader.loadResources();
 				gameInstance = new Mancala();
