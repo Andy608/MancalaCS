@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import com.csmancala.file.FileManager;
 import com.csmancala.file.ResourceLoader;
+import com.csmancala.file.Errors.UnsupportedOperatingSystemException;
 
 public class Start {
 	
@@ -15,7 +16,12 @@ public class Start {
 			
 			@Override
 			public void run() {
-				FileManager.initalizeStoragePath();
+				try {
+					FileManager.initalizeStoragePath();
+				} catch (UnsupportedOperatingSystemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				ResourceLoader.loadResources();
 				gameInstance = new Mancala();
 				gameInstance.start();
