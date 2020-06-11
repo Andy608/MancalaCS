@@ -5,25 +5,59 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import com.csmancala.file.Errors.UnsupportedOperatingSystemException;
 import com.csmancala.util.MancalaLogger;
 
 public final class FileManager {
 
 	private static final String s = File.separator;
 	
-	public static void initalizeStoragePath() {
+	private enum OS {
+		WINDOWS, MAC, LINUX, UNKNOWN
+	}
+	
+	private static OS getOS() {
 		String operatingSystem = System.getProperty("os.name").toLowerCase();
-		if (operatingSystem.contains("win")) {
+		
+		if(operatingSystem.contains("win")) return OS.WINDOWS;
+		else if(operatingSystem.contains("mac")) return OS.MAC;
+		else if(operatingSystem.contains("nix") || 
+				operatingSystem.contains("nux") || 
+				operatingSystem.contains("aix")) return OS.LINUX;
+		else return OS.UNKNOWN;
+	}
+	
+	public static void initalizeStoragePath() throws UnsupportedOperatingSystemException{
+		OS operatingSystem = getOS();
+		
+		switch (operatingSystem) {
+			case WINDOWS:
+				String appData = System.getenv("APPDATA");
+				FileStructure.appDir = new Directory(appData);
+				break;
+			case MAC:
+				String appSupport = System.getProperty("user.home") + s + "Library" + s + "Application Support";
+				FileStructure.appDir = new Directory(appSupport);
+				break;
+			case LINUX:
+				String home = System.getProperty("user.home");
+				FileStructure.appDir = new Directory(home);
+				break;
+			default:
+				throw new UnsupportedOperatingSystemException("Unsupported Operating System (Windows, MacOS, Linux)");
+		}
+		
+		if (operatingSystem.equals(OS.WINDOWS)) {
 			//Windows
 			String appData = System.getenv("APPDATA");
 			FileStructure.appDir = new Directory(appData);
 		}
-		else if (operatingSystem.contains("os x")) {
+		else if (operatingSystem.equals(OS.MAC)) {
 			//Mac
 			String appSupport = System.getProperty("user.home") + s + "Library" + s + "Application Support";
 			FileStructure.appDir = new Directory(appSupport);
 		}
-		else {
+		else if(operatingSystem.equals(OS.LINUX)) {
 			//Linux, etc.
 			String home = System.getProperty("user.home");
 			FileStructure.appDir = new Directory(home);
